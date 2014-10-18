@@ -25,7 +25,7 @@
 
 (function(){
 
-    angular.module("cordovaOauth", []).factory('$cordovaOauth', ['$q', function ($q, $http) {
+    angular.module("cordovaOauth", []).factory('$cordovaOauth', ['$q', '$http', function ($q, $http) {
 
         return {
 
@@ -40,7 +40,7 @@
                 if(window.cordova) {
                     var browserRef = window.open("https://www.dropbox.com/1/oauth2/authorize?client_id=" + appKey + "&redirect_uri=http://localhost/callback" + "&response_type=token", "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
                     browserRef.addEventListener("loadstart", function(event) {
-                        if((event.url).startsWith("http://localhost/callback")) {
+                        if((event.url).indexOf("http://localhost/callback") == 0) {
                             var callbackResponse = (event.url).split("#")[1];
                             var responseParameters = (callbackResponse).split("&");
                             var parameterMap = [];
@@ -78,7 +78,7 @@
                 if(window.cordova) {
                     var browserRef = window.open("https://cloud.digitalocean.com/v1/oauth/authorize?client_id=" + clientId + "&redirect_uri=http://localhost/callback&response_type=code&scope=read%20write", "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
                     browserRef.addEventListener("loadstart", function(event) {
-                        if((event.url).startsWith("http://localhost/callback")) {
+                        if((event.url).indexOf("http://localhost/callback") == 0) {
                             var requestToken = (event.url).split("code=")[1];
                             $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
                             $http({method: "post", url: "https://cloud.digitalocean.com/v1/oauth/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=http://localhost/callback" + "&grant_type=authorization_code" + "&code=" + requestToken })
