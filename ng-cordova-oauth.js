@@ -1,5 +1,5 @@
 /*
- * Cordova Oauth
+ * Cordova AngularJS Oauth
  *
  * Created by Nic Raboy
  * http://www.nraboy.com
@@ -25,7 +25,7 @@
 
 (function(){
 
-    angular.module("cordovaOauth", []).factory('$cordovaOauth', ['$q', '$http', function ($q, $http) {
+    angular.module("ngCordovaOauth", []).factory('$cordovaOauth', ['$q', '$http', function ($q, $http) {
 
         return {
 
