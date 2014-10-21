@@ -22,6 +22,8 @@
  *    Dropbox
  *    Digital Ocean
  *    Google
+ *    GitHub
+ *    Facebook
  */
 
 (function(){
@@ -154,6 +156,43 @@
                                 .error(function(data, status) {
                                     deferred.reject("Problem authenticating");
                                 });
+                            browserRef.close();
+                        }
+                    });
+                } else {
+                    deferred.reject("Cannot authenticate via a web browser");
+                }
+                return deferred.promise;
+            },
+
+            /*
+             * Sign into the Facebook service
+             *
+             * @param    string clientId
+             * @param    array appScope
+             * @return   promise
+             */
+            facebook: function(clientId, appScope) {
+                var deferred = $q.defer();
+                if(window.cordova) {
+                    var browserRef = window.open('https://www.facebook.com/dialog/oauth?client_id=' + clientId + '&redirect_uri=http://localhost/callback&response_type=token&scope=' + appScope.join(","), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                    browserRef.addEventListener('loadstart', function(event) {
+                        if((event.url).indexOf("http://localhost/callback") == 0) {
+                            var callbackResponse = (event.url).split("#")[1];
+                            var responseParameters = (callbackResponse).split("&");
+                            var parameterMap = [];
+                            for(var i = 0; i < responseParameters.length; i++) {
+                                parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
+                            }
+                            if(parameterMap["access_token"] !== undefined && parameterMap["access_token"] !== null) {
+                                var promiseResponse = {
+                                    access_token: parameterMap["access_token"],
+                                    expires_in: parameterMap["expires_in"]
+                                }
+                                deferred.resolve(promiseResponse);
+                            } else {
+                                deferred.reject("Problem authenticating");
+                            }
                             browserRef.close();
                         }
                     });
