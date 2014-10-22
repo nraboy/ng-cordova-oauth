@@ -25,6 +25,7 @@
  *    GitHub
  *    Facebook
  *    LinkedIn
+ *    Instagram
  */
 
 (function(){
@@ -227,6 +228,42 @@
                                 .error(function(data, status) {
                                     deferred.reject("Problem authenticating");
                                 });
+                            browserRef.close();
+                        }
+                    });
+                } else {
+                    deferred.reject("Cannot authenticate via a web browser");
+                }
+                return deferred.promise;
+            },
+
+            /*
+             * Sign into the Instagram service
+             *
+             * @param    string clientId
+             * @param    array appScope
+             * @return   promise
+             */
+            instagram: function(clientId, appScope) {
+                var deferred = $q.defer();
+                if(window.cordova) {
+                    var browserRef = window.open('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=http://localhost/callback&scope=' + appScope.join(" ") + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                    browserRef.addEventListener('loadstart', function(event) {
+                        if((event.url).indexOf("http://localhost/callback") == 0) {
+                            var callbackResponse = (event.url).split("#")[1];
+                            var responseParameters = (callbackResponse).split("&");
+                            var parameterMap = [];
+                            for(var i = 0; i < responseParameters.length; i++) {
+                                parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
+                            }
+                            if(parameterMap["access_token"] !== undefined && parameterMap["access_token"] !== null) {
+                                var promiseResponse = {
+                                    access_token: parameterMap["access_token"]
+                                }
+                                deferred.resolve(promiseResponse);
+                            } else {
+                                deferred.reject("Problem authenticating");
+                            }
                             browserRef.close();
                         }
                     });

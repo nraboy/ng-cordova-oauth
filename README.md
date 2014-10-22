@@ -46,6 +46,7 @@ perform tasks when this URL is found.
     $cordovaOauth.github(string clientId, string clientSecret, array appScope);
     $cordovaOauth.facebook(string clientId, array appScope);
     $cordovaOauth.linkedin(string clientId, string clientSecret, array appScope, string state);
+    $cordovaOauth.instagram(string clientId, array appScope);
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
@@ -63,6 +64,7 @@ Version History
 0.0.2 - TBA
 
 * Add LinkedIn support
+* Add Instagram support
 
 0.0.1 - October 20, 2014
 
