@@ -209,12 +209,13 @@
              * @param    string clientId
              * @param    string clientSecret
              * @param    array appScope
+             * @param    string state
              * @return   promise
              */
-            linkedin: function(clientId, clientSecret, appScope) {
+            linkedin: function(clientId, clientSecret, appScope, state) {
                 var deferred = $q.defer();
                 if(window.cordova) {
-                    var browserRef = window.open('https://www.linkedin.com/uas/oauth2/authorization?client_id=' + clientId + '&redirect_uri=http://localhost/callback&scope=' + appScope.join(" ") + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                    var browserRef = window.open('https://www.linkedin.com/uas/oauth2/authorization?client_id=' + clientId + '&redirect_uri=http://localhost/callback&scope=' + appScope.join(" ") + '&response_type=code&state=' + state, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                     browserRef.addEventListener('loadstart', function(event) {
                         if((event.url).indexOf("http://localhost/callback") == 0) {
                             requestToken = (event.url).split("code=")[1];
