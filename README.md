@@ -42,16 +42,17 @@ perform tasks when this URL is found.
 
     $cordovaOauth.dropbox(string appKey);
     $cordovaOauth.digitalOcean(string clientId, string clientSecret);
-    $cordovaOauth.google(string clientId, string clientSecret, array appScope);
+    $cordovaOauth.google(string clientId, array appScope);
     $cordovaOauth.github(string clientId, string clientSecret, array appScope);
     $cordovaOauth.facebook(string clientId, array appScope);
     $cordovaOauth.linkedin(string clientId, string clientSecret, array appScope, string state);
     $cordovaOauth.instagram(string clientId, array appScope);
+    $cordovaOauth.box(string clientId, string clientSecret, string state);
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
 
-    $cordovaOauth.google("CLIENT_ID_HERE", "CLIENT_SECRET_HERE", ["https://www.googleapis.com/auth/userinfo.email"]).then(function(result) {
+    $cordovaOauth.google("CLIENT_ID_HERE", ["https://www.googleapis.com/auth/userinfo.email"]).then(function(result) {
         console.log("Response Object -> " + JSON.stringify(result));
     }, function(error) {
         console.log("Error -> " + error);
@@ -65,6 +66,8 @@ Version History
 
 * Add LinkedIn support
 * Add Instagram support
+* Add Box support
+* Use implicit grant for Google service
 
 0.0.1 - October 20, 2014
 
