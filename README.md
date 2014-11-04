@@ -18,7 +18,7 @@ Installing ngCordovaOauth Into Your Project
 Copy the following file from this repository to your Apache Cordova project:
 
     $ cd ng-cordova-oauth
-    $ cp ng-cordova-oauth.js /path/to/project/www/js/ng-cordova-oauth.js
+    $ cp ng-cordova-oauth.js /path/to/project/www/js/ng-cordova-oauth.min.js
 
 The JavaScript library must then be added to your **index.html** file found in your projects **www**
 directory:

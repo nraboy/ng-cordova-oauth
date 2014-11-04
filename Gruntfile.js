@@ -23,6 +23,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-clean');
 
+    grunt.registerTask('test', ['jshint']);
     grunt.registerTask('default', ['clean', 'jshint', 'uglify']);
 
 };

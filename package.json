@@ -21,5 +21,8 @@
         "phonegap",
         "ionic framework"
     ],
-    "license": "MIT"
+    "license": "MIT",
+    "scripts": {
+        "test": "grunt test"
+    }
 }
