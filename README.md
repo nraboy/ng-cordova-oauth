@@ -48,6 +48,7 @@ perform tasks when this URL is found.
     $cordovaOauth.linkedin(string clientId, string clientSecret, array appScope, string state);
     $cordovaOauth.instagram(string clientId, array appScope);
     $cordovaOauth.box(string clientId, string clientSecret, string state);
+    $cordovaOauth.reddit(string clientId, string clientSecret, array appScope);
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
@@ -67,6 +68,7 @@ Version History
 * Add LinkedIn support
 * Add Instagram support
 * Add Box support
+* Add Reddit support
 * Use implicit grant for Google service
 
 0.0.1 - October 20, 2014

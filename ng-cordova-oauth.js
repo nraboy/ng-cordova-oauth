@@ -27,6 +27,7 @@
  *    LinkedIn
  *    Instagram
  *    Box
+ *    Reddit
  */
 
 (function(){
@@ -280,6 +281,39 @@
                             requestToken = (event.url).split("code=")[1];
                             $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
                             $http({method: "post", url: "https://app.box.com/api/oauth2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=http://localhost/callback" + "&grant_type=authorization_code" + "&code=" + requestToken })
+                                .success(function(data) {
+                                    deferred.resolve(data);
+                                })
+                                .error(function(data, status) {
+                                    deferred.reject("Problem authenticating");
+                                });
+                            browserRef.close();
+                        }
+                    });
+                } else {
+                    deferred.reject("Cannot authenticate via a web browser");
+                }
+                return deferred.promise;
+            },
+
+            /*
+             * Sign into the Reddit service
+             *
+             * @param    string clientId
+             * @param    string clientSecret
+             * @param    array appScope
+             * @return   promise
+             */
+            reddit: function(clientId, clientSecret, appScope) {
+                var deferred = $q.defer();
+                if(window.cordova) {
+                    var browserRef = window.open('https://ssl.reddit.com/api/v1/authorize?client_id=' + clientId + '&redirect_uri=http://localhost/callback&duration=permanent&state=ngcordovaoauth&scope=' + appScope.join(",") + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                    browserRef.addEventListener('loadstart', function(event) {
+                        if((event.url).indexOf("http://localhost/callback") === 0) {
+                            requestToken = (event.url).split("code=")[1];
+                            $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+                            $http.defaults.headers.post.Authorization = 'Basic ' + btoa(clientId + ":" + clientSecret);
+                            $http({method: "post", url: "https://ssl.reddit.com/api/v1/access_token", data: "redirect_uri=http://localhost/callback" + "&grant_type=authorization_code" + "&code=" + requestToken })
                                 .success(function(data) {
                                     deferred.resolve(data);
                                 })
