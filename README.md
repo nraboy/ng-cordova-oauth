@@ -63,7 +63,7 @@ callback will return a string.
 Version History
 -------------
 
-0.0.2 - TBA
+0.0.2 - November 4, 2014
 
 * Add LinkedIn support
 * Add Instagram support
