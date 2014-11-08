@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/nraboy/ng-cordova-oauth.svg?branch=master)](https://travis-ci.org/nraboy/ng-cordova-oauth) - Master
+
+[![Build Status](https://travis-ci.org/nraboy/ng-cordova-oauth.svg?branch=development)](https://travis-ci.org/nraboy/ng-cordova-oauth) - Development
+
 ngCordovaOauth
 ==============================
 
@@ -23,7 +27,7 @@ Copy the following file from this repository to your Apache Cordova project:
 The JavaScript library must then be added to your **index.html** file found in your projects **www**
 directory:
 
-    <script src="js/ng-cordova-oauth.js"></script>
+    <script src="js/ng-cordova-oauth.min.js"></script>
 
 Once added to your index.html file, you must inject the library into your **app.js** module.  Make your
 **app.js** file look something like the following:
@@ -49,6 +53,7 @@ perform tasks when this URL is found.
     $cordovaOauth.instagram(string clientId, array appScope);
     $cordovaOauth.box(string clientId, string clientSecret, string state);
     $cordovaOauth.reddit(string clientId, string clientSecret, array appScope);
+    $cordovaOauth.twitter(string consumerKey, string consumerSecretKey);
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
@@ -62,6 +67,10 @@ callback will return a string.
 
 Version History
 -------------
+
+0.0.3 - TBA
+
+- Add Twitter support
 
 0.0.2 - November 4, 2014
 
