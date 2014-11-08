@@ -32,7 +32,7 @@
 
 (function(){
 
-    angular.module("ngCordovaOauth", []).factory('$cordovaOauth', ['$q', '$http', function ($q, $http) {
+    angular.module("ngCordovaOauth", ['ngCordovaOauthUtility']).factory('$cordovaOauth', ['$q', '$http', '$cordovaOauthUtility', function ($q, $http, $cordovaOauthUtility) {
 
         return {
 
@@ -327,6 +327,106 @@
                     deferred.reject("Cannot authenticate via a web browser");
                 }
                 return deferred.promise;
+            },
+
+            twitter: function(clientId, clientSecret) {
+                var deferred = $q.defer();
+                if(typeof jsSHA !== "undefined") {
+                    var nonceObj = new jsSHA(Math.round((new Date()).getTime() / 1000.0), "TEXT");
+                    var oauthObject = {
+                        oauth_consumer_key: clientId,
+                        oauth_nonce: nonceObj.getHash("SHA-1", "HEX"),
+                        oauth_signature_method: "HMAC-SHA1",
+                        oauth_timestamp: Math.round((new Date()).getTime() / 1000.0),
+                        oauth_version: "1.0"
+                    };
+                    var test = $cordovaOauthUtility.createSignature("POST", "https://api.twitter.com/oauth/request_token", oauthObject,  { oauth_callback: "http://localhost/callback" }, clientSecret);
+                    $http.defaults.headers.post.Authorization = test.authorization_header;
+                    $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+                    $http({method: "post", url: "https://api.twitter.com/oauth/request_token", data: "oauth_callback=http://localhost/callback" })
+                        .success(function(requestTokenResult) {
+                            console.log("REQUEST TOKEN -> " + requestTokenResult);
+                            var requestTokenParameters = (requestTokenResult).split("&");
+                            var parameterMap = [];
+                            for(var i = 0; i < requestTokenParameters.length; i++) {
+                                if(requestTokenParameters[i].split("=")[0] === "oauth_token") {
+
+                                }
+                                parameterMap[requestTokenParameters[i].split("=")[0]] = requestTokenParameters[i].split("=")[1];
+                            }
+                            var browserRef = window.open('https://api.twitter.com/oauth/authenticate?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                            browserRef.addEventListener('loadstart', function(event) {
+                                if((event.url).indexOf("http://localhost/callback") === 0) {
+                                    var callbackResponse = (event.url).split("?")[1];
+                                    var responseParameters = (callbackResponse).split("&");
+                                    var parameterMap = [];
+                                    for(var i = 0; i < responseParameters.length; i++) {
+                                        parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
+                                    }
+                                    delete oauthObject.oauth_signature;
+                                    oauthObject.oauth_token = parameterMap.oauth_token;
+                                    var signatureObj = $cordovaOauthUtility.createSignature("POST", "https://api.twitter.com/oauth/access_token", oauthObject,  { oauth_verifier: parameterMap.oauth_verifier }, clientSecret);
+                                    $http.defaults.headers.post.Authorization = signatureObj.authorization_header;
+                                    $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+                                    $http({method: "post", url: "https://api.twitter.com/oauth/access_token", data: "oauth_verifier=" + parameterMap.oauth_verifier })
+                                        .success(function(result) {
+                                            console.log(result);
+                                        })
+                                        .error(function(error) {
+                                            deferred.reject(error);
+                                        });
+                                    browserRef.close();
+                                }
+                            });
+                        })
+                        .error(function(error) {
+                            deferred.reject(error);
+                        });
+                } else {
+                    deferred.reject("Missing jsSHA JavaScript library");
+                }
+                return deferred.promise;
+            }
+
+        };
+
+    }]);
+
+    angular.module("ngCordovaOauthUtility", []).factory('$cordovaOauthUtility', ['$q', function ($q) {
+
+        return {
+
+            createSignature: function(method, endPoint, headerParameters, bodyParameters, secretKey) {
+                if(typeof jsSHA !== "undefined") {
+                    var headerAndBodyParameters = angular.copy(headerParameters);
+                    var bodyParameterKeys = Object.keys(bodyParameters);
+                    for(var i = 0; i < bodyParameterKeys.length; i++) {
+                        headerAndBodyParameters[bodyParameterKeys[i]] = encodeURIComponent(bodyParameters[bodyParameterKeys[i]]);
+                    }
+                    var signatureBaseString = method + "&" + encodeURIComponent(endPoint) + "&";
+                    var headerAndBodyParameterKeys = (Object.keys(headerAndBodyParameters)).sort();
+                    for(i = 0; i < headerAndBodyParameterKeys.length; i++) {
+                        if(i == headerAndBodyParameterKeys.length - 1) {
+                            signatureBaseString += encodeURIComponent(headerAndBodyParameterKeys[i] + "=" + headerAndBodyParameters[headerAndBodyParameterKeys[i]]);
+                        } else {
+                            signatureBaseString += encodeURIComponent(headerAndBodyParameterKeys[i] + "=" + headerAndBodyParameters[headerAndBodyParameterKeys[i]] + "&");
+                        }
+                    }
+                    var oauthSignatureObject = new jsSHA(signatureBaseString, "TEXT");
+                    headerParameters.oauth_signature = encodeURIComponent(oauthSignatureObject.getHMAC(encodeURIComponent(secretKey) + "&", "TEXT", "SHA-1", "B64"));
+                    var headerParameterKeys = Object.keys(headerParameters);
+                    var authorizationHeader = 'OAuth ';
+                    for(i = 0; i < headerParameterKeys.length; i++) {
+                        if(i == headerParameterKeys.length - 1) {
+                            authorizationHeader += headerParameterKeys[i] + '="' + headerParameters[headerParameterKeys[i]] + '"';
+                        } else {
+                            authorizationHeader += headerParameterKeys[i] + '="' + headerParameters[headerParameterKeys[i]] + '",';
+                        }
+                    }
+                    return { signature_base_string: signatureBaseString, authorization_header: authorizationHeader };
+                } else {
+                    return "Missing jsSHA JavaScript library";
+                }
             }
 
         };
