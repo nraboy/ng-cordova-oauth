@@ -14,6 +14,7 @@ Requirements
 
 * Apache Cordova 3.5+
 * [Apache Cordova InAppBrowser Plugin](http://cordova.apache.org/docs/en/3.0.0/cordova_inappbrowser_inappbrowser.md.html)
+* [jsSHA](https://github.com/Caligatio/jsSHA) Secure Hash Library (Twitter only)
 
 
 Installing ngCordovaOauth Into Your Project
@@ -63,6 +64,9 @@ callback will return a string.
     }, function(error) {
         console.log("Error -> " + error);
     });
+
+To authenticate with Twitter an additional library is required.  Twitter requires HMAC-SHA1 signatures in their Oauth
+implementation.  Including the sha1.js component of jsSHA will accomplish this task.
 
 
 Version History
