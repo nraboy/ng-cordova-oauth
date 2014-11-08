@@ -345,7 +345,6 @@
                     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
                     $http({method: "post", url: "https://api.twitter.com/oauth/request_token", data: "oauth_callback=http://localhost/callback" })
                         .success(function(requestTokenResult) {
-                            console.log("REQUEST TOKEN -> " + requestTokenResult);
                             var requestTokenParameters = (requestTokenResult).split("&");
                             var parameterMap = [];
                             for(var i = 0; i < requestTokenParameters.length; i++) {
@@ -370,7 +369,7 @@
                                     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
                                     $http({method: "post", url: "https://api.twitter.com/oauth/access_token", data: "oauth_verifier=" + parameterMap.oauth_verifier })
                                         .success(function(result) {
-                                            console.log(result);
+                                            deferred.resolve(result);
                                         })
                                         .error(function(error) {
                                             deferred.reject(error);
