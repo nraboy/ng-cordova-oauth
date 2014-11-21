@@ -28,6 +28,7 @@
  *    Instagram
  *    Box
  *    Reddit
+ *    Twitter
  */
 
 (function(){

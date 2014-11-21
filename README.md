@@ -72,9 +72,10 @@ implementation.  Including the sha1.js component of jsSHA will accomplish this t
 Version History
 -------------
 
-0.0.3 - TBA
+0.0.3 - November 20, 2014
 
-- Add Twitter support
+* Add Twitter support
+* Check if InAppBrowser is installed
 
 0.0.2 - November 4, 2014
 
