@@ -55,6 +55,7 @@ perform tasks when this URL is found.
     $cordovaOauth.box(string clientId, string clientSecret, string state);
     $cordovaOauth.reddit(string clientId, string clientSecret, array appScope);
     $cordovaOauth.twitter(string consumerKey, string consumerSecretKey);
+    $cordovaOauth.meetup(string consumerKey);
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
