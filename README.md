@@ -73,6 +73,10 @@ implementation.  Including the sha1.js component of jsSHA will accomplish this t
 Version History
 -------------
 
+0.0.4 - November 22, 2014
+
+* Add Meetup support
+
 0.0.3 - November 20, 2014
 
 * Add Twitter support
