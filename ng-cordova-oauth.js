@@ -516,13 +516,16 @@
                         '&response_type=token&client_id='+escape(clientId)+
                         '&redirect_uri='+escape(redirectUri);
                 };
+                var startWith = function(string, str) {
+                    return (string.substr(0, str.length) === str);
+                };
                 var deferred = $q.defer();
                 if(window.cordova) {
                     var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                     if(cordovaMetadata.hasOwnProperty("org.apache.cordova.inappbrowser") === true) {
                         var browserRef = window.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
                         browserRef.addEventListener("loadstart", function(event) {
-                            if((event.url).startsWith(that.redirectUri)) {
+                            if(startWith(event.url, redirectUri)) {
                                 var oauthResponse = {};
 
                                 var fragment = (event.url).split('#')[1];
