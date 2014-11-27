@@ -510,7 +510,8 @@
              * @param    string redirectUri (callback url in connection app info)
              * @return   promise
              */
-            salesforce: function (loginUrl, clientId, redirectUri) {
+            salesforce: function (loginUrl, clientId) {
+                var redirectUri = 'http://localhost/callback';
                 var getAuthorizeUrl = function (loginUrl, clientId, redirectUri) {
                     return loginUrl+'services/oauth2/authorize?display=touch'+
                         '&response_type=token&client_id='+escape(clientId)+
