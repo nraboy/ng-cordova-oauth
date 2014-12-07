@@ -31,6 +31,7 @@
  *    Twitter
  *    Meetup
  *    Salesforce
+ *    Strava
  */
 
 (function(){
@@ -505,7 +506,7 @@
              *
              * Suggestion: use salesforce oauth with forcetk.js(as SDK)
              *
-             * @param    string loginUrl (such as: https://login.salesforce.com ; please notice community login) 
+             * @param    string loginUrl (such as: https://login.salesforce.com ; please notice community login)
              * @param    string clientId (copy from connection app info)
              * @param    string redirectUri (callback url in connection app info)
              * @return   promise
@@ -555,7 +556,45 @@
                     deferred.reject("Cannot authenticate via a web browser");
                 }
                 return deferred.promise;
+            },
+
+            /*
+            * Sign into the Strava service
+            *
+            * @param    string clientId
+            * @param    string clientSecret
+            * @param    array appScope
+            * @return   promise
+            */
+            strava: function(clientId, clientSecret, appScope) {
+                var deferred = $q.defer();
+                if(window.cordova) {
+                    var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
+                    if(cordovaMetadata.hasOwnProperty("org.apache.cordova.inappbrowser") === true) {
+                        var browserRef = window.open('https://www.strava.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=http://localhost/callback&scope=' + appScope.join(",") + '&response_type=code&approval_prompt=force', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                        browserRef.addEventListener('loadstart', function(event) {
+                            if((event.url).indexOf("http://localhost/callback") === 0) {
+                                requestToken = (event.url).split("code=")[1];
+                                $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+                                $http({method: "post", url: "https://www.strava.com/oauth/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&code=" + requestToken })
+                                .success(function(data) {
+                                    deferred.resolve(data);
+                                })
+                                .error(function(data, status) {
+                                    deferred.reject("Problem authenticating");
+                                });
+                                browserRef.close();
+                            }
+                        });
+                    } else {
+                        deferred.reject("Could not find InAppBrowser plugin");
+                    }
+                } else {
+                    deferred.reject("Cannot authenticate via a web browser");
+                }
+                return deferred.promise;
             }
+
         };
 
     }]);

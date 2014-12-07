@@ -57,6 +57,7 @@ perform tasks when this URL is found.
     $cordovaOauth.twitter(string consumerKey, string consumerSecretKey);
     $cordovaOauth.meetup(string consumerKey);
     $cordovaOauth.salesforce(string loginUrl, string clientId);
+    $cordovaOauth.strava(string clientId, string clientSecret, array appScope);
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
@@ -74,34 +75,7 @@ implementation.  Including the sha1.js component of jsSHA will accomplish this t
 Version History
 -------------
 
-0.0.5 - December 7, 2014
-
-* Add Salesfoce support
-
-0.0.4 - November 22, 2014
-
-* Add Meetup support
-
-0.0.3 - November 20, 2014
-
-* Add Twitter support
-* Check if InAppBrowser is installed
-
-0.0.2 - November 4, 2014
-
-* Add LinkedIn support
-* Add Instagram support
-* Add Box support
-* Add Reddit support
-* Use implicit grant for Google service
-
-0.0.1 - October 20, 2014
-
-* Add Digital Ocean support
-* Add Dropbox support
-* Add Google support
-* Add GitHub support
-* Add Facebook support
+[View CHANGELOG](CHANGELOG.md)
 
 
 Have a question or found a bug (compliments work too)?
