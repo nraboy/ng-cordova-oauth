@@ -56,6 +56,7 @@ perform tasks when this URL is found.
     $cordovaOauth.reddit(string clientId, string clientSecret, array appScope);
     $cordovaOauth.twitter(string consumerKey, string consumerSecretKey);
     $cordovaOauth.meetup(string consumerKey);
+    $cordovaOauth.salesforce(string loginUrl, string clientId);
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
@@ -72,6 +73,10 @@ implementation.  Including the sha1.js component of jsSHA will accomplish this t
 
 Version History
 -------------
+
+0.0.5 - December 7, 2014
+
+* Add Salesfoce support
 
 0.0.4 - November 22, 2014
 
