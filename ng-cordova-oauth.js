@@ -616,9 +616,10 @@
              * @param    object headerParameters
              * @param    object bodyParameters
              * @param    string secretKey
+             * @param    string tokenSecret (optional)
              * @return   object
              */
-            createSignature: function(method, endPoint, headerParameters, bodyParameters, secretKey) {
+            createSignature: function(method, endPoint, headerParameters, bodyParameters, secretKey, tokenSecret) {
                 if(typeof jsSHA !== "undefined") {
                     var headerAndBodyParameters = angular.copy(headerParameters);
                     var bodyParameterKeys = Object.keys(bodyParameters);
@@ -635,7 +636,13 @@
                         }
                     }
                     var oauthSignatureObject = new jsSHA(signatureBaseString, "TEXT");
-                    headerParameters.oauth_signature = encodeURIComponent(oauthSignatureObject.getHMAC(encodeURIComponent(secretKey) + "&", "TEXT", "SHA-1", "B64"));
+
+                    var encodedTokenSecret = '';
+                    if (tokenSecret) {
+                        encodedTokenSecret = encodeURIComponent(tokenSecret);
+                    }
+
+                    headerParameters.oauth_signature = encodeURIComponent(oauthSignatureObject.getHMAC(encodeURIComponent(secretKey) + "&" + encodedTokenSecret, "TEXT", "SHA-1", "B64"));
                     var headerParameterKeys = Object.keys(headerParameters);
                     var authorizationHeader = 'OAuth ';
                     for(i = 0; i < headerParameterKeys.length; i++) {
