@@ -1,6 +1,6 @@
 {
     "name": "ng-cordova-oauth",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "Connect to Oauth providers using Apache Cordova and the InAppBrowser plugin",
     "author": {
         "name": "Nic Raboy",

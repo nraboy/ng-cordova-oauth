@@ -392,10 +392,9 @@
                     var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                     if(cordovaMetadata.hasOwnProperty("org.apache.cordova.inappbrowser") === true) {
                         if(typeof jsSHA !== "undefined") {
-                            var nonceObj = new jsSHA(Math.round((new Date()).getTime() / 1000.0), "TEXT");
                             var oauthObject = {
                                 oauth_consumer_key: clientId,
-                                oauth_nonce: nonceObj.getHash("SHA-1", "HEX"),
+                                oauth_nonce: $cordovaOauthUtility.createNonce(10),
                                 oauth_signature_method: "HMAC-SHA1",
                                 oauth_timestamp: Math.round((new Date()).getTime() / 1000.0),
                                 oauth_version: "1.0"
@@ -650,6 +649,21 @@
                 } else {
                     return "Missing jsSHA JavaScript library";
                 }
+            },
+
+            /*
+            * Create Random String Nonce
+            *
+            * @param    integer length
+            * @return   string
+            */
+            createNonce: function(length) {
+                var text = "";
+                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                for(var i = 0; i < length; i++) {
+                    text += possible.charAt(Math.floor(Math.random() * possible.length));
+                }
+                return text;
             }
 
         };

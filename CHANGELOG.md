@@ -1,3 +1,7 @@
+0.0.6 -
+
+* Fix/Add: Nonce method to the $cordovaOauthUtility factory
+
 0.0.5 - December 7, 2014
 
 * Add Salesfoce support
