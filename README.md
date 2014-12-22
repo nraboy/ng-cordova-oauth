@@ -14,7 +14,7 @@ Requirements
 
 * Apache Cordova 3.5+
 * [Apache Cordova InAppBrowser Plugin](http://cordova.apache.org/docs/en/3.0.0/cordova_inappbrowser_inappbrowser.md.html)
-* [jsSHA](https://github.com/Caligatio/jsSHA) Secure Hash Library (Twitter only)
+* [jsSHA](https://github.com/Caligatio/jsSHA) Secure Hash Library (Twitter & Withings only)
 
 
 Installing ngCordovaOauth Into Your Project
@@ -58,6 +58,8 @@ perform tasks when this URL is found.
     $cordovaOauth.meetup(string consumerKey);
     $cordovaOauth.salesforce(string loginUrl, string clientId);
     $cordovaOauth.strava(string clientId, string clientSecret, array appScope);
+    $cordovaOauth.withings(string clientId, string clientSecret);
+    $cordovaOauth.foursquare(string clientId);
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
