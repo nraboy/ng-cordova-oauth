@@ -469,11 +469,12 @@
                                                         deferred.reject("Oauth access token was not received");
                                                     }
                                                     deferred.resolve(parameterMap);
+                                                    browserRef.close();
                                                 })
                                                 .error(function(error) {
                                                     deferred.reject(error);
+                                                    browserRef.close();
                                                 });
-                                            browserRef.close();
                                         }
                                     });
                                     browserRef.addEventListener('exit', function(event) {
