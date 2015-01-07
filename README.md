@@ -14,7 +14,7 @@ Requirements
 
 * Apache Cordova 3.5+
 * [Apache Cordova InAppBrowser Plugin](http://cordova.apache.org/docs/en/3.0.0/cordova_inappbrowser_inappbrowser.md.html)
-* [jsSHA](https://github.com/Caligatio/jsSHA) Secure Hash Library (Twitter & Withings only)
+* [jsSHA](https://github.com/Caligatio/jsSHA) Secure Hash Library (Twitter, Withings, and Magento only)
 
 
 Installing ngCordovaOauth Into Your Project
@@ -60,17 +60,18 @@ perform tasks when this URL is found.
     $cordovaOauth.strava(string clientId, string clientSecret, array appScope);
     $cordovaOauth.withings(string clientId, string clientSecret);
     $cordovaOauth.foursquare(string clientId);
+    $cordovaOauth.magento(string baseUrl, string clientId, string clientSecret)
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
 
-    $cordovaOauth.google("CLIENT_ID_HERE", ["https://www.googleapis.com/auth/userinfo.email"]).then(function(result) {
+    $cordovaOauth.google("CLIENT_ID_HERE", ["https://www.googleapis.com/auth/plus.profile.emails.read"]).then(function(result) {
         console.log("Response Object -> " + JSON.stringify(result));
     }, function(error) {
         console.log("Error -> " + error);
     });
 
-To authenticate with Twitter an additional library is required.  Twitter requires HMAC-SHA1 signatures in their Oauth
+To authenticate with Twitter, Withings, and Magento an additional library is required.  Twitter requires HMAC-SHA1 signatures in their Oauth
 implementation.  Including the sha1.js component of jsSHA will accomplish this task.
 
 
@@ -96,3 +97,5 @@ Ionic Framework - [http://www.ionicframework.com](http://www.ionicframework.com)
 AngularJS - [http://www.angularjs.org](http://www.angularjs.org)
 
 Apache Cordova - [http://cordova.apache.org](http://cordova.apache.org)
+
+Nic Raboy's Code Blog - [https://blog.nraboy.com](https://blog.nraboy.com)

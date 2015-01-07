@@ -1,9 +1,13 @@
+0.0.7 - January 7, 2015
+
+* Add Magento support
+
 0.0.6 - December 22, 2014
 
 * Fix/Add: Nonce method to the $cordovaOauthUtility factory
-- Fix: Handle browser cancel events
-- Add Withings support
-- Add Foursquare support
+* Fix: Handle browser cancel events
+* Add Withings support
+* Add Foursquare support
 
 0.0.5 - December 7, 2014
 
