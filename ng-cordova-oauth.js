@@ -103,10 +103,11 @@
                                 $http({method: "post", url: "https://cloud.digitalocean.com/v1/oauth/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=http://localhost/callback" + "&grant_type=authorization_code" + "&code=" + requestToken })
                                     .success(function(data) {
                                         deferred.resolve(data);
-                                        browserRef.close();
                                     })
                                     .error(function(data, status) {
                                         deferred.reject("Problem authenticating");
+                                    })
+                                    .finally(function() {
                                         browserRef.close();
                                     });
                             }
@@ -186,10 +187,11 @@
                                 $http({method: "post", url: "https://github.com/login/oauth/access_token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=http://localhost/callback" + "&code=" + requestToken })
                                     .success(function(data) {
                                         deferred.resolve(data);
-                                        browserRef.close();
                                     })
                                     .error(function(data, status) {
                                         deferred.reject("Problem authenticating");
+                                    })
+                                    .finally(function() {
                                         browserRef.close();
                                     });
                             }
@@ -269,10 +271,11 @@
                                 $http({method: "post", url: "https://www.linkedin.com/uas/oauth2/accessToken", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=http://localhost/callback" + "&grant_type=authorization_code" + "&code=" + requestToken })
                                     .success(function(data) {
                                         deferred.resolve(data);
-                                        browserRef.close();
                                     })
                                     .error(function(data, status) {
                                         deferred.reject("Problem authenticating");
+                                    })
+                                    .finally(function() {
                                         browserRef.close();
                                     });
                             }
@@ -351,10 +354,11 @@
                                 $http({method: "post", url: "https://app.box.com/api/oauth2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=http://localhost/callback" + "&grant_type=authorization_code" + "&code=" + requestToken })
                                     .success(function(data) {
                                         deferred.resolve(data);
-                                        browserRef.close();
                                     })
                                     .error(function(data, status) {
                                         deferred.reject("Problem authenticating");
+                                    })
+                                    .finally(function() {
                                         browserRef.close();
                                     });
                             }
@@ -393,10 +397,11 @@
                                 $http({method: "post", url: "https://ssl.reddit.com/api/v1/access_token", data: "redirect_uri=http://localhost/callback" + "&grant_type=authorization_code" + "&code=" + requestToken })
                                     .success(function(data) {
                                         deferred.resolve(data);
-                                        browserRef.close();
                                     })
                                     .error(function(data, status) {
                                         deferred.reject("Problem authenticating");
+                                    })
+                                    .finally(function() {
                                         browserRef.close();
                                     });
                             }
@@ -475,10 +480,11 @@
                                                         deferred.reject("Oauth access token was not received");
                                                     }
                                                     deferred.resolve(parameterMap);
-                                                    browserRef.close();
                                                 })
                                                 .error(function(error) {
                                                     deferred.reject(error);
+                                                })
+                                                .finally(function() {
                                                     browserRef.close();
                                                 });
                                         }
@@ -623,10 +629,11 @@
                                 $http({method: "post", url: "https://www.strava.com/oauth/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&code=" + requestToken })
                                 .success(function(data) {
                                     deferred.resolve(data);
-                                    browserRef.close();
                                 })
                                 .error(function(data, status) {
                                     deferred.reject("Problem authenticating");
+                                })
+                                .finally(function() {
                                     browserRef.close();
                                 });
                             }
@@ -714,10 +721,11 @@
                                                         deferred.reject("Oauth access token was not received");
                                                     }
                                                     deferred.resolve(parameterMap);
-                                                    browserRef.close();
                                                 })
                                                 .error(function(error) {
                                                     deferred.reject(error);
+                                                })
+                                                .finally(function() {
                                                     browserRef.close();
                                                 });
                                         }
@@ -853,10 +861,11 @@
                                                 deferred.reject("Oauth access token was not received");
                                             }
                                             deferred.resolve(parameterMap);
-                                            browserRef.close();
                                         })
                                         .error(function(error) {
                                             deferred.reject(error);
+                                        })
+                                        .finally(function() {
                                             browserRef.close();
                                         });
                                     }
