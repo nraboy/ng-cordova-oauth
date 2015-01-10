@@ -42,51 +42,6 @@
     angular.module("ngCordovaOauth", ['ngCordovaOauthUtility']).factory('$cordovaOauth', ['$q', '$http', '$cordovaOauthUtility', function ($q, $http, $cordovaOauthUtility) {
 
         return {
-	        
-            /*
-             * Sign into the ADFS service
-             *
-             * redirect_uri 	must match the RedirectUri value associated with the Client registered in ADFS
-             *
-             * @param    string clientId (client registered in ADFS)
-             * @param	 string adfsServer (url of the ADFS Server)	
-             * @param	 string relyingPartyId (url of the Relying Party configured in ADFS)
-             * 
-             * @return   promise
-             */
-            adfs: function(clientId, adfsServer, relyingPartyId) {
-                var deferred = $q.defer();
-                if(window.cordova) {
-                    var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-                    if(cordovaMetadata.hasOwnProperty("org.apache.cordova.inappbrowser") === true) {
-                        var browserRef = window.open(adfsServer + '/adfs/oauth2/authorize?response_type=code&client_id=' + clientId +'&redirect_uri=http://localhost/callback&resource=' + relyingPartyId, '_blank', 'location=no');
-                        browserRef.addEventListener("loadstart", function(event) {
-                            if((event.url).indexOf(relyingPartyId) === 0) {
-                                var requestToken = (event.url).split("code=")[1];
-                                $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-                                $http({method: "post", url: adfsServer + "/adfs/oauth2/token", data: "client_id=" + clientId + "&code=" + requestToken + "&redirect_uri=http://localhost/callback&grant_type=authorization_code"  })
-                                    .success(function(data) {
-                                        deferred.resolve(data);
-                                    })
-                                    .error(function(data, status) {
-                                        deferred.reject("Problem authenticating");
-                                    })
-                                    .finally(function() {
-                                        browserRef.close();
-                                    });
-                            }
-                        });
-                        browserRef.addEventListener('exit', function(event) {
-                            deferred.reject("The sign in flow was canceled");
-                        });
-                    } else {
-                        deferred.reject("Could not find InAppBrowser plugin");
-                    }
-                } else {
-                    deferred.reject("Cannot authenticate via a web browser");
-                }
-                return deferred.promise;
-            },
 
             /*
              * Sign into the Dropbox service
