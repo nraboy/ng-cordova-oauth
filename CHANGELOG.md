@@ -1,3 +1,7 @@
+0.0.8 -
+
+* Add vkontakte support
+
 0.0.7 - January 7, 2015
 
 * Add Magento support
