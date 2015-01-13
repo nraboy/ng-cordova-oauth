@@ -1,8 +1,41 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <title>ngCordovaOauth | Oauth For Apache Cordova &amp; AngularJS</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Nic Raboy">
+        <link rel="stylesheet" href="/ng-cordova-oauth/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/ng-cordova-oauth/css/style.css">
+        <script src="/ng-cordova-oauth/js/angular.min.js"></script>
+        <script src="/ng-cordova-oauth/js/angular-ui-router.min.js"></script>
+        <script src="/ng-cordova-oauth/js/app.js"></script>
     </head>
-    <body>
+    <body ng-app="oauthapp">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <span class="navbar-brand">ng-cordova-oauth</span>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="https://github.com/nraboy/ng-cordova-oauth/archive/gh-pages.zip">Download</a></li>
+                        <li><a href="https://github.com/nraboy/ng-cordova-oauth">GitHub</a></li>
+                        <li><a href="#">Help</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         this is a test page
+        <div ui-view></div>
+        <script src="/ng-cordova-oauth/js/jquery-2.1.3.min.js"></script>
+        <script src="/ng-cordova-oauth/js/bootstrap.min.js"></script>
     </body>
 </html>
