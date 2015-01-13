@@ -2,6 +2,10 @@ var oauthApp = angular.module("oauthapp", ["ui.router"]);
 
 oauthApp.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
+        .state("overview", {
+            url: "/overview",
+            templateUrl: "templates/overview.html"
+        })
         .state('docs', {
             url: '/docs',
             templateUrl: 'templates/docs.html'
@@ -16,7 +20,7 @@ oauthApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'templates/provider.html',
             controller: 'ProviderController'
         });
-    $urlRouterProvider.otherwise('/docs/providers');
+    $urlRouterProvider.otherwise('/overview');
 });
 
 
@@ -24,6 +28,8 @@ oauthApp.controller("ProvidersController", function($scope) {
 
 });
 
-oauthApp.controller("ProviderController", function($scope) {
+oauthApp.controller("ProviderController", function($scope, $stateParams) {
+
+    $scope.provider = $stateParams.providerName;
 
 });

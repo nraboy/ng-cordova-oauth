@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Nic Raboy">
         <link rel="stylesheet" href="/ng-cordova-oauth/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/ng-cordova-oauth/css/font-awesome.min.css">
         <link rel="stylesheet" href="/ng-cordova-oauth/css/style.css">
         <script src="/ng-cordova-oauth/js/angular.min.js"></script>
         <script src="/ng-cordova-oauth/js/angular-ui-router.min.js"></script>
@@ -22,19 +23,35 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <span class="navbar-brand">ng-cordova-oauth</span>
+                    <a class="navbar-brand" ui-sref="overview">ng-cordova-oauth</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a ui-sref="docs.providers">Docs</a></li>
                         <li><a href="https://github.com/nraboy/ng-cordova-oauth/archive/gh-pages.zip">Download</a></li>
                         <li><a href="https://github.com/nraboy/ng-cordova-oauth">GitHub</a></li>
-                        <li><a href="#">Help</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        this is a test page
         <div ui-view></div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row" style="margin-top: 20px">
+                    <div class="col-md-4 col-xs-6">
+                        &copy; 2015 Nic Raboy
+                    </div>
+                    <div class="col-md-8 col-xs-6" style="text-align: right">
+                        <ul class="b-social pull-right">
+                            <li><a href="https://www.twitter.com/nraboy"><i class="fa fa-twitter fa-lg"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/nraboy"><i class="fa fa-linkedin fa-lg"></i></a></li>
+                            <li><a href="https://www.github.com/nraboy"><i class="fa fa-github fa-lg"></i></a></li>
+                            <li><a href="https://www.youtube.com/user/nicraboy"><i class="fa fa-youtube fa-lg"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
         <script src="/ng-cordova-oauth/js/jquery-2.1.3.min.js"></script>
         <script src="/ng-cordova-oauth/js/bootstrap.min.js"></script>
     </body>

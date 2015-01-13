@@ -2,24 +2,26 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Download</a></li>
-                <li><a href="#">Source Code</a></li>
+                <li class="active"><a href="#">Documentation Overview <span class="sr-only">(current)</span></a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="">Box</a></li>
-                <li><a href="">Dropbox</a></li>
-                <li><a href="">Digital Ocean</a></li>
-                <li><a href="">Facebook</a></li>
-                <li><a href="">Foursquare</a></li>
-                <li><a href="">Google</a></li>
-                <li><a href="">GitHub</a></li>
-                <li><a href="">Instagram</a></li>
-                <li><a href="">LinkedIn</a></li>
-                <li><a href="">Meetup</a></li>
+                <li><a ui-sref="docs.provider({providerName: 'box'})">Box</a></li>
+                <li><a ui-sref="docs.provider({providerName: 'Digital Ocean'})">Digital Ocean</a></li>
+                <li><a ui-sref="docs.provider({providerName: 'Dropbox'})">Dropbox</a></li>
+                <li><a ui-sref="docs.provider({providerName: 'Facebook'})">Facebook</a></li>
+                <li><a ui-sref="docs.provider({providerName: 'Foursquare'})">Foursquare</a></li>
+                <li><a ui-sref="docs.provider({providerName: 'Google'})">Google</a></li>
+                <li><a ui-sref="docs.provider({providerName: 'GitHub'})">GitHub</a></li>
+                <li><a ui-sref="docs.provider({providerName: 'Instagram'})">Instagram</a></li>
+                <li><a ui-sref="docs.provider({providerName: 'LinkedIn'})">LinkedIn</a></li>
+                <li><a ui-sref="docs.provider({providerName: 'Meetup'})">Meetup</a></li>
+                <li><a ui-sref="docs.provider({providerName: 'Reddit'})">Reddit</a></li>
+                <li><a ui-sref="docs.provider({providerName: 'Salesforce'})">Salesforce</a></li>
+                <li><a ui-sref="docs.provider({providerName: 'Strava'})">Strava</a></li>
+                <li><a ui-sref="docs.provider({providerName: 'Withings'})">Withings</a></li>
             </ul>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 main">
             <div ui-view></div>
         </div>
     </div>
