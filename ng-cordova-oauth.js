@@ -36,6 +36,7 @@
  *    Foursquare
  *    Magento
  *    vkontakte
+ *	  ADFS	
  */
 
 (function(){
@@ -43,8 +44,7 @@
     angular.module("ngCordovaOauth", ['ngCordovaOauthUtility']).factory('$cordovaOauth', ['$q', '$http', '$cordovaOauthUtility', function ($q, $http, $cordovaOauthUtility) {
 
         return {
-<<<<<<< HEAD
-	        
+
             /*
              * Sign into the ADFS service (ADFS 3.0 onwards)
 			 *
@@ -88,8 +88,6 @@
                 }
                 return deferred.promise;
             },
-=======
->>>>>>> upstream/master
 
             /*
              * Sign into the Dropbox service
