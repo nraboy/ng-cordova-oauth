@@ -35,6 +35,7 @@
  *    Withings
  *    Foursquare
  *    Magento
+ *    vkontakte
  */
 
 (function(){
@@ -68,7 +69,9 @@
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
-                                browserRef.close();
+                                setTimeout(function() {
+                                    browserRef.close();
+                                }, 10);
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
@@ -108,7 +111,9 @@
                                         deferred.reject("Problem authenticating");
                                     })
                                     .finally(function() {
-                                        browserRef.close();
+                                        setTimeout(function() {
+                                            browserRef.close();
+                                        }, 10);
                                     });
                             }
                         });
@@ -150,7 +155,9 @@
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
-                                browserRef.close();
+                                setTimeout(function() {
+                                    browserRef.close();
+                                }, 10);
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
@@ -192,7 +199,9 @@
                                         deferred.reject("Problem authenticating");
                                     })
                                     .finally(function() {
-                                        browserRef.close();
+                                        setTimeout(function() {
+                                            browserRef.close();
+                                        }, 10);
                                     });
                             }
                         });
@@ -234,7 +243,9 @@
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
-                                browserRef.close();
+                                setTimeout(function() {
+                                    browserRef.close();
+                                }, 10);
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
@@ -276,7 +287,9 @@
                                         deferred.reject("Problem authenticating");
                                     })
                                     .finally(function() {
-                                        browserRef.close();
+                                        setTimeout(function() {
+                                            browserRef.close();
+                                        }, 10);
                                     });
                             }
                         });
@@ -318,7 +331,9 @@
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
-                                browserRef.close();
+                                setTimeout(function() {
+                                    browserRef.close();
+                                }, 10);
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
@@ -359,7 +374,9 @@
                                         deferred.reject("Problem authenticating");
                                     })
                                     .finally(function() {
-                                        browserRef.close();
+                                        setTimeout(function() {
+                                            browserRef.close();
+                                        }, 10);
                                     });
                             }
                         });
@@ -402,7 +419,9 @@
                                         deferred.reject("Problem authenticating");
                                     })
                                     .finally(function() {
-                                        browserRef.close();
+                                        setTimeout(function() {
+                                            browserRef.close();
+                                        }, 10);
                                     });
                             }
                         });
@@ -485,7 +504,9 @@
                                                     deferred.reject(error);
                                                 })
                                                 .finally(function() {
-                                                    browserRef.close();
+                                                    setTimeout(function() {
+                                                        browserRef.close();
+                                                    }, 10);
                                                 });
                                         }
                                     });
@@ -533,7 +554,9 @@
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
-                                browserRef.close();
+                                setTimeout(function() {
+                                    browserRef.close();
+                                }, 10);
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
@@ -593,7 +616,9 @@
                                 } else {
                                     deferred.resolve(oauthResponse);
                                 }
-                                browserRef.close();
+                                setTimeout(function() {
+                                    browserRef.close();
+                                }, 10);
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
@@ -634,7 +659,9 @@
                                     deferred.reject("Problem authenticating");
                                 })
                                 .finally(function() {
-                                    browserRef.close();
+                                    setTimeout(function() {
+                                        browserRef.close();
+                                    }, 10);
                                 });
                             }
                         });
@@ -726,7 +753,9 @@
                                                     deferred.reject(error);
                                                 })
                                                 .finally(function() {
-                                                    browserRef.close();
+                                                    setTimeout(function() {
+                                                        browserRef.close();
+                                                    }, 10);
                                                 });
                                         }
                                     });
@@ -778,7 +807,9 @@
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
-                                browserRef.close();
+                                setTimeout(function() {
+                                    browserRef.close();
+                                }, 10);
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
@@ -866,7 +897,9 @@
                                             deferred.reject(error);
                                         })
                                         .finally(function() {
-                                            browserRef.close();
+                                            setTimeout(function() {
+                                                browserRef.close();
+                                            }, 10);
                                         });
                                     }
                                 });
@@ -888,6 +921,7 @@
                 }
                 return deferred.promise;
             },
+
             /*
              * Sign into the Vkontakte service
              *
@@ -915,7 +949,9 @@
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
-                                browserRef.close();
+                                setTimeout(function() {
+                                    browserRef.close();
+                                }, 10);
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
