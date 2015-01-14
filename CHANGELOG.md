@@ -1,6 +1,8 @@
-0.0.8 -
+0.0.8 - January 13, 2015
 
 * Add vkontakte support
+* Add ADFS support
+* Add timeout to browser close
 
 0.0.7 - January 7, 2015
 
