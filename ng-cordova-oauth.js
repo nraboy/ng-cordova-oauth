@@ -505,9 +505,16 @@
                                 oauth_version: "1.0"
                             };
                             var signatureObj = $cordovaOauthUtility.createSignature("POST", "https://api.twitter.com/oauth/request_token", oauthObject,  { oauth_callback: "http://localhost/callback" }, clientSecret);
-                            $http.defaults.headers.post.Authorization = signatureObj.authorization_header;
-                            $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-                            $http({method: "post", url: "https://api.twitter.com/oauth/request_token", data: "oauth_callback=http://localhost/callback" })
+                            $http({
+                                method: "post",
+                                url: "https://api.twitter.com/oauth/request_token",
+                                headers: {
+                                    "Authorization": signatureObj.authorization_header
+                                },
+                                params: {
+                                    "oauth_callback": "http://localhost/callback"
+                                }
+                            })
                                 .success(function(requestTokenResult) {
                                     var requestTokenParameters = (requestTokenResult).split("&");
                                     var parameterMap = {};
@@ -532,9 +539,16 @@
                                             delete oauthObject.oauth_signature;
                                             oauthObject.oauth_token = parameterMap.oauth_token;
                                             var signatureObj = $cordovaOauthUtility.createSignature("POST", "https://api.twitter.com/oauth/access_token", oauthObject,  { oauth_verifier: parameterMap.oauth_verifier }, clientSecret);
-                                            $http.defaults.headers.post.Authorization = signatureObj.authorization_header;
-                                            $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-                                            $http({method: "post", url: "https://api.twitter.com/oauth/access_token", data: "oauth_verifier=" + parameterMap.oauth_verifier })
+                                            $http({
+                                                method: "post",
+                                                url: "https://api.twitter.com/oauth/access_token",
+                                                headers: {
+                                                    "Authorization": signatureObj.authorization_header
+                                                },
+                                                params: {
+                                                    "oauth_verifier": parameterMap.oauth_verifier
+                                                }
+                                            })
                                                 .success(function(result) {
                                                     var accessTokenParameters = result.split("&");
                                                     var parameterMap = {};
