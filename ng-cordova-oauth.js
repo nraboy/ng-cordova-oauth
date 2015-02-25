@@ -104,6 +104,8 @@
                         var browserRef = window.open("https://www.dropbox.com/1/oauth2/authorize?client_id=" + appKey + "&redirect_uri=http://localhost/callback" + "&response_type=token", "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
                         browserRef.addEventListener("loadstart", function(event) {
                             if((event.url).indexOf("http://localhost/callback") === 0) {
+                            	browserRef.removeEventListener("exit",function(event){});
+                            	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
                                 var responseParameters = (callbackResponse).split("&");
                                 var parameterMap = [];
@@ -115,9 +117,6 @@
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
-                                setTimeout(function() {
-                                    browserRef.close();
-                                }, 10);
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
@@ -190,6 +189,8 @@
                         var browserRef = window.open('https://accounts.google.com/o/oauth2/auth?client_id=' + clientId + '&redirect_uri=http://localhost/callback&scope=' + appScope.join(" ") + '&approval_prompt=force&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener("loadstart", function(event) {
                             if((event.url).indexOf("http://localhost/callback") === 0) {
+                           		browserRef.removeEventListener("exit",function(event){});
+                            	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
                                 var responseParameters = (callbackResponse).split("&");
                                 var parameterMap = [];
@@ -201,9 +202,6 @@
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
-                                setTimeout(function() {
-                                    browserRef.close();
-                                }, 10);
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
@@ -278,6 +276,8 @@
                         var browserRef = window.open('https://www.facebook.com/dialog/oauth?client_id=' + clientId + '&redirect_uri=http://localhost/callback&response_type=token&scope=' + appScope.join(","), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function(event) {
                             if((event.url).indexOf("http://localhost/callback") === 0) {
+                            	browserRef.removeEventListener("exit",function(event){});
+                            	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
                                 var responseParameters = (callbackResponse).split("&");
                                 var parameterMap = [];
@@ -289,9 +289,6 @@
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
-                                setTimeout(function() {
-                                    browserRef.close();
-                                }, 10);
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
@@ -366,6 +363,8 @@
                         var browserRef = window.open('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=http://localhost/callback&scope=' + appScope.join(" ") + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function(event) {
                             if((event.url).indexOf("http://localhost/callback") === 0) {
+                            	browserRef.removeEventListener("exit",function(event){});
+                            	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
                                 var responseParameters = (callbackResponse).split("&");
                                 var parameterMap = [];
@@ -377,9 +376,6 @@
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
-                                setTimeout(function() {
-                                    browserRef.close();
-                                }, 10);
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
@@ -603,6 +599,8 @@
                         var browserRef = window.open('https://secure.meetup.com/oauth2/authorize/?client_id=' + clientId + '&redirect_uri=http://localhost/callback&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function(event) {
                             if((event.url).indexOf("http://localhost/callback") === 0) {
+                            	browserRef.removeEventListener("exit",function(event){});
+                            	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
                                 var responseParameters = (callbackResponse).split("&");
                                 var parameterMap = {};
@@ -614,9 +612,6 @@
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
-                                setTimeout(function() {
-                                    browserRef.close();
-                                }, 10);
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
@@ -852,6 +847,8 @@
                         var browserRef = window.open('https://foursquare.com/oauth2/authenticate?client_id=' + clientId + '&redirect_uri=http://localhost/callback&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function (event) {
                             if ((event.url).indexOf("http://localhost/callback") === 0) {
+                            	browserRef.removeEventListener("exit",function(event){});
+                            	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
                                 var responseParameters = (callbackResponse).split("&");
                                 var parameterMap = [];
@@ -867,9 +864,6 @@
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
-                                setTimeout(function() {
-                                    browserRef.close();
-                                }, 10);
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
@@ -998,6 +992,8 @@
                         browserRef.addEventListener('loadstart', function(event) {
                             var tmp = (event.url).split("#");
                             if (tmp[0] == 'https://oauth.vk.com/blank.html' || tmp[0] == 'http://oauth.vk.com/blank.html') {
+                            	browserRef.removeEventListener("exit",function(event){});
+                            	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
                                 var responseParameters = (callbackResponse).split("&");
                                 var parameterMap = [];
@@ -1009,9 +1005,6 @@
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
-                                setTimeout(function() {
-                                    browserRef.close();
-                                }, 10);
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
