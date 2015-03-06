@@ -1,7 +1,7 @@
 {
   "name": "ng-cordova-oauth",
   "main": "ng-cordova-oauth.js",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "homepage": "https://github.com/nraboy/ng-cordova-oauth",
   "authors": [
     "Nic Raboy <http://www.nraboy.com>"
@@ -12,9 +12,13 @@
   ],
   "keywords": [
     "ng-cordova-oauth",
-    "ngCordova",
-    "AngularJS",
-    "Ionic"
+    "ngcordova",
+    "angularjs",
+    "ionic",
+    "oauth",
+    "apache cordova",
+    "phonegap",
+    "ionic framework"
   ],
   "license": "MIT",
   "ignore": [
