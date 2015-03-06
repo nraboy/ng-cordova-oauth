@@ -63,6 +63,7 @@ perform tasks when this URL is found.
     $cordovaOauth.magento(string baseUrl, string clientId, string clientSecret)
     $cordovaOauth.vkontakte(string clientId, array appScope)
     $cordovaOauth.adfs(string clientId, string adfsServer, string relyingPartyId)
+    $cordovaOauth.imgur(string clientId)
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
