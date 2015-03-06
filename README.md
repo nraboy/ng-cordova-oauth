@@ -45,25 +45,25 @@ Each web service API acts independently in this library.  However, when configur
 consistent.  You must use **http://localhost/callback** as your callback / redirect URI.  This is because this library will
 perform tasks when this URL is found.
 
-    $cordovaOauth.dropbox(string appKey);
+    $cordovaOauth.dropbox(string appKey, object options);
     $cordovaOauth.digitalOcean(string clientId, string clientSecret);
-    $cordovaOauth.google(string clientId, array appScope);
+    $cordovaOauth.google(string clientId, array appScope, object options);
     $cordovaOauth.github(string clientId, string clientSecret, array appScope);
-    $cordovaOauth.facebook(string clientId, array appScope);
+    $cordovaOauth.facebook(string clientId, array appScope, object options);
     $cordovaOauth.linkedin(string clientId, string clientSecret, array appScope, string state);
-    $cordovaOauth.instagram(string clientId, array appScope);
+    $cordovaOauth.instagram(string clientId, array appScope, object options);
     $cordovaOauth.box(string clientId, string clientSecret, string state);
     $cordovaOauth.reddit(string clientId, string clientSecret, array appScope);
     $cordovaOauth.twitter(string consumerKey, string consumerSecretKey);
-    $cordovaOauth.meetup(string consumerKey);
+    $cordovaOauth.meetup(string consumerKey, object options);
     $cordovaOauth.salesforce(string loginUrl, string clientId);
     $cordovaOauth.strava(string clientId, string clientSecret, array appScope);
     $cordovaOauth.withings(string clientId, string clientSecret);
-    $cordovaOauth.foursquare(string clientId);
+    $cordovaOauth.foursquare(string clientId, object options);
     $cordovaOauth.magento(string baseUrl, string clientId, string clientSecret)
     $cordovaOauth.vkontakte(string clientId, array appScope)
     $cordovaOauth.adfs(string clientId, string adfsServer, string relyingPartyId)
-    $cordovaOauth.imgur(string clientId)
+    $cordovaOauth.imgur(string clientId, object options)
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.

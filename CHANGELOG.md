@@ -1,3 +1,11 @@
+0.1.0 -
+
+* Add optional `options` parameter to implicit grant providers
+
+0.0.9 - March 5, 2015
+
+* Add Imgur support
+
 0.0.8 - January 13, 2015
 
 * Add vkontakte support

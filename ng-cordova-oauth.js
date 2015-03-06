@@ -95,16 +95,23 @@
              * Sign into the Dropbox service
              *
              * @param    string appKey
+             * @param    object options
              * @return   promise
              */
-            dropbox: function(appKey) {
+            dropbox: function(appKey, options) {
                 var deferred = $q.defer();
                 if(window.cordova) {
                     var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                     if(cordovaMetadata.hasOwnProperty("org.apache.cordova.inappbrowser") === true) {
-                        var browserRef = window.open("https://www.dropbox.com/1/oauth2/authorize?client_id=" + appKey + "&redirect_uri=http://localhost/callback" + "&response_type=token", "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
+                        var redirect_uri = "http://localhost/callback";
+                        if(options !== undefined) {
+                            if(options.hasOwnProperty("redirect_uri")) {
+                                redirect_uri = options.redirect_uri;
+                            }
+                        }
+                        var browserRef = window.open("https://www.dropbox.com/1/oauth2/authorize?client_id=" + appKey + "&redirect_uri=" + redirect_uri + "&response_type=token", "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
                         browserRef.addEventListener("loadstart", function(event) {
-                            if((event.url).indexOf("http://localhost/callback") === 0) {
+                            if((event.url).indexOf(redirect_uri) === 0) {
                             	browserRef.removeEventListener("exit",function(event){});
                             	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
@@ -180,16 +187,23 @@
              *
              * @param    string clientId
              * @param    array appScope
+             * @param    object options
              * @return   promise
              */
-            google: function(clientId, appScope) {
+            google: function(clientId, appScope, options) {
                 var deferred = $q.defer();
                 if(window.cordova) {
                     var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                     if(cordovaMetadata.hasOwnProperty("org.apache.cordova.inappbrowser") === true) {
-                        var browserRef = window.open('https://accounts.google.com/o/oauth2/auth?client_id=' + clientId + '&redirect_uri=http://localhost/callback&scope=' + appScope.join(" ") + '&approval_prompt=force&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                        var redirect_uri = "http://localhost/callback";
+                        if(options !== undefined) {
+                            if(options.hasOwnProperty("redirect_uri")) {
+                                redirect_uri = options.redirect_uri;
+                            }
+                        }
+                        var browserRef = window.open('https://accounts.google.com/o/oauth2/auth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&approval_prompt=force&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener("loadstart", function(event) {
-                            if((event.url).indexOf("http://localhost/callback") === 0) {
+                            if((event.url).indexOf(redirect_uri) === 0) {
                            		browserRef.removeEventListener("exit",function(event){});
                             	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
@@ -267,16 +281,23 @@
              *
              * @param    string clientId
              * @param    array appScope
+             * @param    object options
              * @return   promise
              */
-            facebook: function(clientId, appScope) {
+            facebook: function(clientId, appScope, options) {
                 var deferred = $q.defer();
                 if(window.cordova) {
                     var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                     if(cordovaMetadata.hasOwnProperty("org.apache.cordova.inappbrowser") === true) {
-                        var browserRef = window.open('https://www.facebook.com/dialog/oauth?client_id=' + clientId + '&redirect_uri=http://localhost/callback&response_type=token&scope=' + appScope.join(","), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                        var redirect_uri = "http://localhost/callback";
+                        if(options !== undefined) {
+                            if(options.hasOwnProperty("redirect_uri")) {
+                                redirect_uri = options.redirect_uri;
+                            }
+                        }
+                        var browserRef = window.open('https://www.facebook.com/dialog/oauth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(","), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function(event) {
-                            if((event.url).indexOf("http://localhost/callback") === 0) {
+                            if((event.url).indexOf(redirect_uri) === 0) {
                             	browserRef.removeEventListener("exit",function(event){});
                             	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
@@ -354,16 +375,23 @@
              *
              * @param    string clientId
              * @param    array appScope
+             * @param    object options
              * @return   promise
              */
-            instagram: function(clientId, appScope) {
+            instagram: function(clientId, appScope, options) {
                 var deferred = $q.defer();
                 if(window.cordova) {
                     var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                     if(cordovaMetadata.hasOwnProperty("org.apache.cordova.inappbrowser") === true) {
-                        var browserRef = window.open('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=http://localhost/callback&scope=' + appScope.join(" ") + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                        var redirect_uri = "http://localhost/callback";
+                        if(options !== undefined) {
+                            if(options.hasOwnProperty("redirect_uri")) {
+                                redirect_uri = options.redirect_uri;
+                            }
+                        }
+                        var browserRef = window.open('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function(event) {
-                            if((event.url).indexOf("http://localhost/callback") === 0) {
+                            if((event.url).indexOf(redirect_uri) === 0) {
                             	browserRef.removeEventListener("exit",function(event){});
                             	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
@@ -590,16 +618,23 @@
             * Sign into the Meetup service
             *
             * @param    string clientId
+            * @param    object options
             * @return   promise
             */
-            meetup: function(clientId) {
+            meetup: function(clientId, options) {
                 var deferred = $q.defer();
                 if(window.cordova) {
                     var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                     if(cordovaMetadata.hasOwnProperty("org.apache.cordova.inappbrowser") === true) {
-                        var browserRef = window.open('https://secure.meetup.com/oauth2/authorize/?client_id=' + clientId + '&redirect_uri=http://localhost/callback&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                        var redirect_uri = "http://localhost/callback";
+                        if(options !== undefined) {
+                            if(options.hasOwnProperty("redirect_uri")) {
+                                redirect_uri = options.redirect_uri;
+                            }
+                        }
+                        var browserRef = window.open('https://secure.meetup.com/oauth2/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function(event) {
-                            if((event.url).indexOf("http://localhost/callback") === 0) {
+                            if((event.url).indexOf(redirect_uri) === 0) {
                             	browserRef.removeEventListener("exit",function(event){});
                             	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
@@ -838,16 +873,23 @@
             * Sign into the Foursquare service
             *
             * @param    string clientId
+            * @param    object options
             * @return   promise
             */
-            foursquare: function(clientId) {
+            foursquare: function(clientId, options) {
                 var deferred = $q.defer();
                 if (window.cordova) {
                     var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                     if (cordovaMetadata.hasOwnProperty("org.apache.cordova.inappbrowser") === true) {
-                        var browserRef = window.open('https://foursquare.com/oauth2/authenticate?client_id=' + clientId + '&redirect_uri=http://localhost/callback&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                        var redirect_uri = "http://localhost/callback";
+                        if(options !== undefined) {
+                            if(options.hasOwnProperty("redirect_uri")) {
+                                redirect_uri = options.redirect_uri;
+                            }
+                        }
+                        var browserRef = window.open('https://foursquare.com/oauth2/authenticate?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function (event) {
-                            if ((event.url).indexOf("http://localhost/callback") === 0) {
+                            if ((event.url).indexOf(redirect_uri) === 0) {
                             	browserRef.removeEventListener("exit",function(event){});
                             	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
@@ -1024,16 +1066,23 @@
              * Sign into the Imgur service
              *
              * @param    string clientId
+             * @param    object options
              * @return   promise
              */
-            imgur: function(clientId) {
+            imgur: function(clientId, options) {
                 var deferred = $q.defer();
                 if(window.cordova) {
                     var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                     if(cordovaMetadata.hasOwnProperty("org.apache.cordova.inappbrowser") === true) {
+                        var redirect_uri = "http://localhost/callback";
+                        if(options !== undefined) {
+                            if(options.hasOwnProperty("redirect_uri")) {
+                                redirect_uri = options.redirect_uri;
+                            }
+                        }
                         var browserRef = window.open('https://api.imgur.com/oauth2/authorize?client_id=' + clientId + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function(event) {
-                            if((event.url).indexOf("http://localhost/callback") === 0) {
+                            if((event.url).indexOf(redirect_uri) === 0) {
                             	browserRef.removeEventListener("exit",function(event){});
                             	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
