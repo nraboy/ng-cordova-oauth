@@ -534,11 +534,10 @@
                                 method: "post",
                                 url: "https://api.twitter.com/oauth/request_token",
                                 headers: {
-                                    "Authorization": signatureObj.authorization_header
+                                    "Authorization": signatureObj.authorization_header,
+                                    "Content-Type": "application/x-www-form-urlencoded"
                                 },
-                                params: {
-                                    "oauth_callback": "http://localhost/callback"
-                                }
+                                data: "oauth_callback=" + encodeURIComponent("http://localhost/callback")
                             })
                                 .success(function(requestTokenResult) {
                                     var requestTokenParameters = (requestTokenResult).split("&");
