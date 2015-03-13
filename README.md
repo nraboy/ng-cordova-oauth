@@ -19,7 +19,18 @@ Requirements
 
 Installing ngCordovaOauth Into Your Project
 -------------
+#### Bower way:
+Add this repository as dependency:
 
+    $ bower install ng-cordova-oauth -S
+This action will set the dependency and add it to the `bower.json` file.
+
+The JavaScript library must then be added to your **index.html** file found in your projects **www**
+directory:
+
+    <script src="../ng-cordova-oauth/ng-cordova-oauth.min.js"></script>
+    
+#### Outdated way:
 Copy the following file from this repository to your Apache Cordova project:
 
     $ cd ng-cordova-oauth
@@ -30,6 +41,7 @@ directory:
 
     <script src="js/ng-cordova-oauth.min.js"></script>
 
+### Injecting:
 Once added to your index.html file, you must inject the library into your **app.js** module.  Make your
 **app.js** file look something like the following:
 
