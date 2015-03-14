@@ -1,6 +1,9 @@
-0.1.0 -
+0.1.0 - March 14, 2015
 
 * Add optional `options` parameter to implicit grant providers
+* Add Spotify provider support
+* Fix Facebook to use API v2.0 instead of the ending v1.0
+* Fix Twitter to meet needs of changed API
 
 0.0.9 - March 5, 2015
 

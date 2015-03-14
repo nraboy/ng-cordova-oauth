@@ -29,7 +29,7 @@ The JavaScript library must then be added to your **index.html** file found in y
 directory:
 
     <script src="../ng-cordova-oauth/ng-cordova-oauth.min.js"></script>
-    
+
 #### Outdated way:
 Copy the following file from this repository to your Apache Cordova project:
 
@@ -76,6 +76,7 @@ perform tasks when this URL is found.
     $cordovaOauth.vkontakte(string clientId, array appScope)
     $cordovaOauth.adfs(string clientId, string adfsServer, string relyingPartyId)
     $cordovaOauth.imgur(string clientId, object options)
+    $cordovaOauth.spotify(clientId, appScope, options)
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
