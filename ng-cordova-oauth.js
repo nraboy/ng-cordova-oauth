@@ -1044,7 +1044,11 @@
                                     parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
                                 }
                                 if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
-                                    deferred.resolve({ access_token: parameterMap.access_token, expires_in: parameterMap.expires_in });
+                                    var output = { access_token: parameterMap.access_token, expires_in: parameterMap.expires_in };
+                                    if(parameterMap.email !== undefined && parameterMap.email !== null){
+                                        output.email = parameterMap.email;
+                                    }
+                                    deferred.resolve(output);
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
