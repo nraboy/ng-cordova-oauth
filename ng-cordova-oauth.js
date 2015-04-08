@@ -531,7 +531,7 @@
                                 oauth_timestamp: Math.round((new Date()).getTime() / 1000.0),
                                 oauth_version: "1.0"
                             };
-                            var signatureObj = $cordovaOauthUtility.createSignature("POST", "https://api.twitter.com/oauth/request_token", oauthObject,  { oauth_callback: "http://localhost/callback" }, clientSecret);
+                            var signatureObj = $cordovaOauthUtility.createSignature("POST", "https://api.twitter.com/oauth/request_token", oauthObject,  { oauth_callback: "oob" }, clientSecret);
                             $http({
                                 method: "post",
                                 url: "https://api.twitter.com/oauth/request_token",
@@ -539,7 +539,7 @@
                                     "Authorization": signatureObj.authorization_header,
                                     "Content-Type": "application/x-www-form-urlencoded"
                                 },
-                                data: "oauth_callback=" + encodeURIComponent("http://localhost/callback")
+                                data: "oauth_callback=" + encodeURIComponent("oob")
                             })
                                 .success(function(requestTokenResult) {
                                     var requestTokenParameters = (requestTokenResult).split("&");
