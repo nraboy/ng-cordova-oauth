@@ -379,9 +379,6 @@
              * @param    array appScope
              * @param    object options
              * @return   promise
-             *
-             * Defaults to an authtoken, add response_type = code in options to get a code back
-             *
              */
             instagram: function(clientId, appScope, options) {
                 var deferred = $q.defer();
@@ -407,8 +404,6 @@
 
                         var browserRef = window.open('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&response_type='+response_type, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function(event) {
-                            console.log('loadstart');
-                            console.log(event);
                             if((event.url).indexOf(redirect_uri) === 0) {
                                 browserRef.removeEventListener("exit",function(event){});
                                 browserRef.close();
@@ -424,8 +419,6 @@
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
-                            console.log('exit');
-                            console.log(event);
                             deferred.reject("The sign in flow was canceled");
                         });
                     } else {
