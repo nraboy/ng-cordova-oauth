@@ -50,7 +50,7 @@
 
             /*
              * Sign into the ADFS service (ADFS 3.0 onwards)
-             *
+			 *
              * @param    string clientId (client registered in ADFS, with redirect_uri configured to: http://localhost/callback)
              * @param	 string adfsServer (url of the ADFS Server)
              * @param	 string relyingPartyId (url of the Relying Party (resource relying on ADFS for authentication) configured in ADFS)
@@ -114,8 +114,8 @@
                         var browserRef = window.open("https://www.dropbox.com/1/oauth2/authorize?client_id=" + appKey + "&redirect_uri=" + redirect_uri + "&response_type=token", "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
                         browserRef.addEventListener("loadstart", function(event) {
                             if((event.url).indexOf(redirect_uri) === 0) {
-                                browserRef.removeEventListener("exit",function(event){});
-                                browserRef.close();
+                            	browserRef.removeEventListener("exit",function(event){});
+                            	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
                                 var responseParameters = (callbackResponse).split("&");
                                 var parameterMap = [];
@@ -206,8 +206,8 @@
                         var browserRef = window.open('https://accounts.google.com/o/oauth2/auth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&approval_prompt=force&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener("loadstart", function(event) {
                             if((event.url).indexOf(redirect_uri) === 0) {
-                                browserRef.removeEventListener("exit",function(event){});
-                                browserRef.close();
+                           		browserRef.removeEventListener("exit",function(event){});
+                            	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
                                 var responseParameters = (callbackResponse).split("&");
                                 var parameterMap = [];
@@ -300,8 +300,8 @@
                         var browserRef = window.open('https://www.facebook.com/v2.0/dialog/oauth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(","), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function(event) {
                             if((event.url).indexOf(redirect_uri) === 0) {
-                                browserRef.removeEventListener("exit",function(event){});
-                                browserRef.close();
+                            	browserRef.removeEventListener("exit",function(event){});
+                            	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
                                 var responseParameters = (callbackResponse).split("&");
                                 var parameterMap = [];
@@ -625,12 +625,12 @@
             },
 
             /*
-             * Sign into the Meetup service
-             *
-             * @param    string clientId
-             * @param    object options
-             * @return   promise
-             */
+            * Sign into the Meetup service
+            *
+            * @param    string clientId
+            * @param    object options
+            * @return   promise
+            */
             meetup: function(clientId, options) {
                 var deferred = $q.defer();
                 if(window.cordova) {
@@ -645,8 +645,8 @@
                         var browserRef = window.open('https://secure.meetup.com/oauth2/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function(event) {
                             if((event.url).indexOf(redirect_uri) === 0) {
-                                browserRef.removeEventListener("exit",function(event){});
-                                browserRef.close();
+                            	browserRef.removeEventListener("exit",function(event){});
+                            	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
                                 var responseParameters = (callbackResponse).split("&");
                                 var parameterMap = {};
@@ -706,8 +706,8 @@
                                 if (fragment) {
                                     var nvps = fragment.split('&');
                                     for (var nvp in nvps) {
-                                        var parts = nvps[nvp].split('=');
-                                        oauthResponse[parts[0]] = unescape(parts[1]);
+                                          var parts = nvps[nvp].split('=');
+                                          oauthResponse[parts[0]] = unescape(parts[1]);
                                     }
                                 }
 
@@ -735,13 +735,13 @@
             },
 
             /*
-             * Sign into the Strava service
-             *
-             * @param    string clientId
-             * @param    string clientSecret
-             * @param    array appScope
-             * @return   promise
-             */
+            * Sign into the Strava service
+            *
+            * @param    string clientId
+            * @param    string clientSecret
+            * @param    array appScope
+            * @return   promise
+            */
             strava: function(clientId, clientSecret, appScope) {
                 var deferred = $q.defer();
                 if(window.cordova) {
@@ -753,17 +753,17 @@
                                 requestToken = (event.url).split("code=")[1];
                                 $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
                                 $http({method: "post", url: "https://www.strava.com/oauth/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&code=" + requestToken })
-                                    .success(function(data) {
-                                        deferred.resolve(data);
-                                    })
-                                    .error(function(data, status) {
-                                        deferred.reject("Problem authenticating");
-                                    })
-                                    .finally(function() {
-                                        setTimeout(function() {
-                                            browserRef.close();
-                                        }, 10);
-                                    });
+                                .success(function(data) {
+                                    deferred.resolve(data);
+                                })
+                                .error(function(data, status) {
+                                    deferred.reject("Problem authenticating");
+                                })
+                                .finally(function() {
+                                    setTimeout(function() {
+                                        browserRef.close();
+                                    }, 10);
+                                });
                             }
                         });
                         browserRef.addEventListener('exit', function(event) {
@@ -880,12 +880,12 @@
             },
 
             /*
-             * Sign into the Foursquare service
-             *
-             * @param    string clientId
-             * @param    object options
-             * @return   promise
-             */
+            * Sign into the Foursquare service
+            *
+            * @param    string clientId
+            * @param    object options
+            * @return   promise
+            */
             foursquare: function(clientId, options) {
                 var deferred = $q.defer();
                 if (window.cordova) {
@@ -900,8 +900,8 @@
                         var browserRef = window.open('https://foursquare.com/oauth2/authenticate?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function (event) {
                             if ((event.url).indexOf(redirect_uri) === 0) {
-                                browserRef.removeEventListener("exit",function(event){});
-                                browserRef.close();
+                            	browserRef.removeEventListener("exit",function(event){});
+                            	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
                                 var responseParameters = (callbackResponse).split("&");
                                 var parameterMap = [];
@@ -932,14 +932,14 @@
             },
 
             /*
-             * Sign into the Magento service
-             * Note that this service requires jsSHA for generating HMAC-SHA1 Oauth 1.0 signatures
-             *
-             * @param    string baseUrl
-             * @param    string clientId
-             * @param    string clientSecret
-             * @return   promise
-             */
+            * Sign into the Magento service
+            * Note that this service requires jsSHA for generating HMAC-SHA1 Oauth 1.0 signatures
+            *
+            * @param    string baseUrl
+            * @param    string clientId
+            * @param    string clientSecret
+            * @return   promise
+            */
             magento: function(baseUrl, clientId, clientSecret) {
                 var deferred = $q.defer();
                 if(window.cordova) {
@@ -958,65 +958,65 @@
                             $http.defaults.headers.post.Authorization = signatureObj.authorization_header;
                             $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
                             $http({method: "post", url: baseUrl + "/oauth/initiate", data: "oauth_callback=http://localhost/callback" })
-                                .success(function(requestTokenResult) {
-                                    var requestTokenParameters = (requestTokenResult).split("&");
-                                    var parameterMap = {};
-                                    for(var i = 0; i < requestTokenParameters.length; i++) {
-                                        parameterMap[requestTokenParameters[i].split("=")[0]] = requestTokenParameters[i].split("=")[1];
-                                    }
-                                    if(parameterMap.hasOwnProperty("oauth_token") === false) {
-                                        deferred.reject("Oauth request token was not received");
-                                    }
-                                    var tokenSecret = parameterMap.oauth_token_secret;
-                                    var browserRef = window.open(baseUrl + '/oauth/authorize?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
-                                    browserRef.addEventListener('loadstart', function(event) {
-                                        if((event.url).indexOf("http://localhost/callback") === 0) {
-                                            var callbackResponse = (event.url).split("?")[1];
-                                            var responseParameters = (callbackResponse).split("&");
-                                            var parameterMap = {};
-                                            for(var i = 0; i < responseParameters.length; i++) {
-                                                parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
-                                            }
-                                            if(parameterMap.hasOwnProperty("oauth_verifier") === false) {
-                                                deferred.reject("Browser authentication failed to complete.  No oauth_verifier was returned");
-                                            }
-                                            delete oauthObject.oauth_signature;
-                                            delete oauthObject.oauth_callback;
-                                            oauthObject.oauth_token = parameterMap.oauth_token;
-                                            oauthObject.oauth_nonce = $cordovaOauthUtility.createNonce(5);
-                                            oauthObject.oauth_verifier = parameterMap.oauth_verifier;
-                                            var signatureObj = $cordovaOauthUtility.createSignature("POST", baseUrl + "/oauth/token", oauthObject,  {}, clientSecret, tokenSecret);
-                                            $http.defaults.headers.post.Authorization = signatureObj.authorization_header;
-                                            $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-                                            $http({method: "post", url: baseUrl + "/oauth/token" })
-                                                .success(function(result) {
-                                                    var accessTokenParameters = result.split("&");
-                                                    var parameterMap = {};
-                                                    for(var i = 0; i < accessTokenParameters.length; i++) {
-                                                        parameterMap[accessTokenParameters[i].split("=")[0]] = accessTokenParameters[i].split("=")[1];
-                                                    }
-                                                    if(parameterMap.hasOwnProperty("oauth_token_secret") === false) {
-                                                        deferred.reject("Oauth access token was not received");
-                                                    }
-                                                    deferred.resolve(parameterMap);
-                                                })
-                                                .error(function(error) {
-                                                    deferred.reject(error);
-                                                })
-                                                .finally(function() {
-                                                    setTimeout(function() {
-                                                        browserRef.close();
-                                                    }, 10);
-                                                });
+                            .success(function(requestTokenResult) {
+                                var requestTokenParameters = (requestTokenResult).split("&");
+                                var parameterMap = {};
+                                for(var i = 0; i < requestTokenParameters.length; i++) {
+                                    parameterMap[requestTokenParameters[i].split("=")[0]] = requestTokenParameters[i].split("=")[1];
+                                }
+                                if(parameterMap.hasOwnProperty("oauth_token") === false) {
+                                    deferred.reject("Oauth request token was not received");
+                                }
+                                var tokenSecret = parameterMap.oauth_token_secret;
+                                var browserRef = window.open(baseUrl + '/oauth/authorize?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                                browserRef.addEventListener('loadstart', function(event) {
+                                    if((event.url).indexOf("http://localhost/callback") === 0) {
+                                        var callbackResponse = (event.url).split("?")[1];
+                                        var responseParameters = (callbackResponse).split("&");
+                                        var parameterMap = {};
+                                        for(var i = 0; i < responseParameters.length; i++) {
+                                            parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
                                         }
-                                    });
-                                    browserRef.addEventListener('exit', function(event) {
-                                        deferred.reject("The sign in flow was canceled");
-                                    });
-                                })
-                                .error(function(error) {
-                                    deferred.reject(error);
+                                        if(parameterMap.hasOwnProperty("oauth_verifier") === false) {
+                                            deferred.reject("Browser authentication failed to complete.  No oauth_verifier was returned");
+                                        }
+                                        delete oauthObject.oauth_signature;
+                                        delete oauthObject.oauth_callback;
+                                        oauthObject.oauth_token = parameterMap.oauth_token;
+                                        oauthObject.oauth_nonce = $cordovaOauthUtility.createNonce(5);
+                                        oauthObject.oauth_verifier = parameterMap.oauth_verifier;
+                                        var signatureObj = $cordovaOauthUtility.createSignature("POST", baseUrl + "/oauth/token", oauthObject,  {}, clientSecret, tokenSecret);
+                                        $http.defaults.headers.post.Authorization = signatureObj.authorization_header;
+                                        $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+                                        $http({method: "post", url: baseUrl + "/oauth/token" })
+                                        .success(function(result) {
+                                            var accessTokenParameters = result.split("&");
+                                            var parameterMap = {};
+                                            for(var i = 0; i < accessTokenParameters.length; i++) {
+                                                parameterMap[accessTokenParameters[i].split("=")[0]] = accessTokenParameters[i].split("=")[1];
+                                            }
+                                            if(parameterMap.hasOwnProperty("oauth_token_secret") === false) {
+                                                deferred.reject("Oauth access token was not received");
+                                            }
+                                            deferred.resolve(parameterMap);
+                                        })
+                                        .error(function(error) {
+                                            deferred.reject(error);
+                                        })
+                                        .finally(function() {
+                                            setTimeout(function() {
+                                                browserRef.close();
+                                            }, 10);
+                                        });
+                                    }
                                 });
+                                browserRef.addEventListener('exit', function(event) {
+                                    deferred.reject("The sign in flow was canceled");
+                                });
+                            })
+                            .error(function(error) {
+                                deferred.reject(error);
+                            });
                         } else {
                             deferred.reject("Missing jsSHA JavaScript library");
                         }
@@ -1045,8 +1045,8 @@
                         browserRef.addEventListener('loadstart', function(event) {
                             var tmp = (event.url).split("#");
                             if (tmp[0] == 'https://oauth.vk.com/blank.html' || tmp[0] == 'http://oauth.vk.com/blank.html') {
-                                browserRef.removeEventListener("exit",function(event){});
-                                browserRef.close();
+                            	browserRef.removeEventListener("exit",function(event){});
+                            	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
                                 var responseParameters = (callbackResponse).split("&");
                                 var parameterMap = [];
@@ -1097,8 +1097,8 @@
                         var browserRef = window.open('https://api.imgur.com/oauth2/authorize?client_id=' + clientId + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function(event) {
                             if((event.url).indexOf(redirect_uri) === 0) {
-                                browserRef.removeEventListener("exit",function(event){});
-                                browserRef.close();
+                            	browserRef.removeEventListener("exit",function(event){});
+                            	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
                                 var responseParameters = (callbackResponse).split("&");
                                 var parameterMap = [];
@@ -1145,8 +1145,8 @@
                         var browserRef = window.open('https://accounts.spotify.com/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(" "), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function(event) {
                             if((event.url).indexOf(redirect_uri) === 0) {
-                                browserRef.removeEventListener("exit",function(event){});
-                                browserRef.close();
+                            	browserRef.removeEventListener("exit",function(event){});
+                            	browserRef.close();
                                 var callbackResponse = (event.url).split("#")[1];
                                 var responseParameters = (callbackResponse).split("&");
                                 var parameterMap = [];
@@ -1286,11 +1286,11 @@
             },
 
             /*
-             * Create Random String Nonce
-             *
-             * @param    integer length
-             * @return   string
-             */
+            * Create Random String Nonce
+            *
+            * @param    integer length
+            * @return   string
+            */
             createNonce: function(length) {
                 var text = "";
                 var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
