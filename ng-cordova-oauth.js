@@ -382,28 +382,37 @@
              */
             instagram: function(clientId, appScope, options) {
                 var deferred = $q.defer();
+
+                var split_tokens = {
+                    'code':'?',
+                    'token':'#'
+                };
+
                 if(window.cordova) {
                     var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                     if(cordovaMetadata.hasOwnProperty("org.apache.cordova.inappbrowser") === true) {
                         var redirect_uri = "http://localhost/callback";
+                        var response_type = "token";
                         if(options !== undefined) {
                             if(options.hasOwnProperty("redirect_uri")) {
                                 redirect_uri = options.redirect_uri;
                             }
+                            if(options.hasOwnProperty("response_type")) {
+                                response_type = options.response_type;
+                            }
                         }
-                        var browserRef = window.open('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+                        var browserRef = window.open('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&response_type='+response_type, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function(event) {
                             if((event.url).indexOf(redirect_uri) === 0) {
-                            	browserRef.removeEventListener("exit",function(event){});
-                            	browserRef.close();
-                                var callbackResponse = (event.url).split("#")[1];
-                                var responseParameters = (callbackResponse).split("&");
-                                var parameterMap = [];
-                                for(var i = 0; i < responseParameters.length; i++) {
-                                    parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
-                                }
+                                browserRef.removeEventListener("exit",function(event){});
+                                browserRef.close();
+                                var callbackResponse = (event.url).split(split_tokens[response_type])[1];
+                                var parameterMap = $cordovaOauthUtility.parseResponseParameters(callbackResponse);
                                 if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
                                     deferred.resolve({ access_token: parameterMap.access_token });
+                                } else if(parameterMap.code !== undefined && parameterMap.code !== null) {
+                                    deferred.resolve({ code: parameterMap.code });
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
