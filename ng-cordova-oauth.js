@@ -527,11 +527,18 @@
              * @param    string clientSecret
              * @return   promise
              */
-            twitter: function(clientId, clientSecret) {
+            twitter: function(clientId, clientSecret, options) {
                 var deferred = $q.defer();
                 if(window.cordova) {
                     var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                     if(cordovaMetadata.hasOwnProperty("org.apache.cordova.inappbrowser") === true) {
+                        var redirect_uri = "http://localhost/callback";
+                        if(options !== undefined) {
+                            if(options.hasOwnProperty("redirect_uri")) {
+                                redirect_uri = options.redirect_uri;
+                            }
+                        }
+
                         if(typeof jsSHA !== "undefined") {
                             var oauthObject = {
                                 oauth_consumer_key: clientId,
@@ -540,7 +547,7 @@
                                 oauth_timestamp: Math.round((new Date()).getTime() / 1000.0),
                                 oauth_version: "1.0"
                             };
-                            var signatureObj = $cordovaOauthUtility.createSignature("POST", "https://api.twitter.com/oauth/request_token", oauthObject,  { oauth_callback: "http://localhost/callback" }, clientSecret);
+                            var signatureObj = $cordovaOauthUtility.createSignature("POST", "https://api.twitter.com/oauth/request_token", oauthObject,  { oauth_callback: redirect_uri }, clientSecret);
                             $http({
                                 method: "post",
                                 url: "https://api.twitter.com/oauth/request_token",
@@ -548,7 +555,7 @@
                                     "Authorization": signatureObj.authorization_header,
                                     "Content-Type": "application/x-www-form-urlencoded"
                                 },
-                                data: "oauth_callback=" + encodeURIComponent("http://localhost/callback")
+                                data: "oauth_callback=" + encodeURIComponent(redirect_uri)
                             })
                                 .success(function(requestTokenResult) {
                                     var requestTokenParameters = (requestTokenResult).split("&");
@@ -561,7 +568,7 @@
                                     }
                                     var browserRef = window.open('https://api.twitter.com/oauth/authenticate?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                                     browserRef.addEventListener('loadstart', function(event) {
-                                        if((event.url).indexOf("http://localhost/callback") === 0) {
+                                        if((event.url).indexOf(redirect_uri) === 0) {
                                             var callbackResponse = (event.url).split("?")[1];
                                             var responseParameters = (callbackResponse).split("&");
                                             var parameterMap = {};
