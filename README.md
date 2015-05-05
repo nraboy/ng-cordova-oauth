@@ -2,27 +2,27 @@
 |-----------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
 | [![Build Status](https://travis-ci.org/nraboy/ng-cordova-oauth.svg?branch=master)](https://travis-ci.org/nraboy/ng-cordova-oauth) | [![Build Status](https://travis-ci.org/nraboy/ng-cordova-oauth.svg?branch=development)](https://travis-ci.org/nraboy/ng-cordova-oauth) |
 
-ngCordovaOauth
-==============================
+# ngCordovaOauth
 
 ngCordovaOauth is an AngularJS Apache Cordova Oauth library.  The purpose of this library is to
 quickly and easily obtain an access token from various web services to use their APIs.
 
 
-Requirements
--------------
+## Requirements
 
 * Apache Cordova 3.5+
 * [Apache Cordova InAppBrowser Plugin](http://cordova.apache.org/docs/en/3.0.0/cordova_inappbrowser_inappbrowser.md.html)
 * [jsSHA](https://github.com/Caligatio/jsSHA) Secure Hash Library (Twitter, Withings, and Magento only)
 
 
-Installing ngCordovaOauth Into Your Project
--------------
-#### Bower way:
+## Installing ngCordovaOauth Into Your Project
+
+### Bower way:
+
 Add this repository as dependency:
 
     $ bower install ng-cordova-oauth -S
+
 This action will set the dependency and add it to the `bower.json` file.
 
 The JavaScript library must then be added to your **index.html** file found in your projects **www**
@@ -30,7 +30,8 @@ directory:
 
     <script src="../ng-cordova-oauth/ng-cordova-oauth.min.js"></script>
 
-#### Outdated way:
+### Outdated way:
+
 Copy the following file from this repository to your Apache Cordova project:
 
     $ cd ng-cordova-oauth
@@ -42,6 +43,7 @@ directory:
     <script src="js/ng-cordova-oauth.min.js"></script>
 
 ### Injecting:
+
 Once added to your index.html file, you must inject the library into your **app.js** module.  Make your
 **app.js** file look something like the following:
 
@@ -50,8 +52,7 @@ Once added to your index.html file, you must inject the library into your **app.
 At this point, ngCordovaOauth is installed into your project and is ready for use.
 
 
-Using ngCordovaOauth In Your Project
--------------
+## Using ngCordovaOauth In Your Project
 
 Each web service API acts independently in this library.  However, when configuring each web service, one thing must remain
 consistent.  You must use **http://localhost/callback** as your callback / redirect URI.  This is because this library will
@@ -66,7 +67,7 @@ perform tasks when this URL is found.
     $cordovaOauth.instagram(string clientId, array appScope, object options);
     $cordovaOauth.box(string clientId, string clientSecret, string state);
     $cordovaOauth.reddit(string clientId, string clientSecret, array appScope);
-    $cordovaOauth.twitter(string consumerKey, string consumerSecretKey);
+    $cordovaOauth.twitter(string consumerKey, string consumerSecretKey, object options);
     $cordovaOauth.meetup(string consumerKey, object options);
     $cordovaOauth.salesforce(string loginUrl, string clientId);
     $cordovaOauth.strava(string clientId, string clientSecret, array appScope);
@@ -76,8 +77,8 @@ perform tasks when this URL is found.
     $cordovaOauth.vkontakte(string clientId, array appScope)
     $cordovaOauth.adfs(string clientId, string adfsServer, string relyingPartyId)
     $cordovaOauth.imgur(string clientId, object options)
-    $cordovaOauth.spotify(clientId, appScope, options)
-    $cordovaOauth.uber(clientId, appScope, options)
+    $cordovaOauth.spotify(string clientId, array appScope, object options)
+    $cordovaOauth.uber(string clientId, array appScope, object options)
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
@@ -88,26 +89,25 @@ callback will return a string.
         console.log("Error -> " + error);
     });
 
-To authenticate with Twitter, Withings, and Magento an additional library is required.  These services require HMAC-SHA1 signatures in their Oauth
-implementation.  Including the sha1.js component of jsSHA will accomplish this task.
+To authenticate with Twitter, Withings, and Magento an additional library is required.  These services require HMAC-SHA1 signatures in their Oauth implementation.  Including the sha1.js component of jsSHA will accomplish this task.
 
 
-Version History
--------------
+## Version History
 
 [View CHANGELOG](CHANGELOG.md)
 
 
-Have a question or found a bug (compliments work too)?
--------------
+## Contribution Rules
 
-Email me via my website - [http://www.nraboy.com](http://www.nraboy.com/contact)
+All contributions must be made via the `development` branch.  This keeps the project more maintainable in terms of versioning as well as code control.
+
+
+## Have a question or found a bug (compliments work too)?
 
 Tweet me on Twitter - [@nraboy](https://www.twitter.com/nraboy)
 
 
-Resources
--------------
+## Resources
 
 Ionic Framework - [http://www.ionicframework.com](http://www.ionicframework.com)
 

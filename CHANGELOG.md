@@ -1,3 +1,8 @@
+0.1.1 - May 4, 2015
+
+* Fix InAppBrowser checks to `cordova-plugin-inappbrowser` instead of `org.apache.cordova.inappbrowser`
+* Minor code cleanup
+
 0.1.0 - March 14, 2015
 
 * Add optional `options` parameter to implicit grant providers
