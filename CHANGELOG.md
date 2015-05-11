@@ -1,6 +1,7 @@
 0.1.2 -
 
 * Add Windows Live Connect support
+* Add Yammer support
 
 0.1.1 - May 4, 2015
 
