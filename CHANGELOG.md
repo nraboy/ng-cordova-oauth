@@ -2,6 +2,7 @@
 
 * Add Windows Live Connect support
 * Add Yammer support
+* Add Venmo support
 
 0.1.1 - May 4, 2015
 
