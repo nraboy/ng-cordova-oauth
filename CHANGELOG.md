@@ -3,6 +3,7 @@
 * Add Windows Live Connect support
 * Add Yammer support
 * Add Venmo support
+* Add Stripe support
 
 0.1.1 - May 4, 2015
 
