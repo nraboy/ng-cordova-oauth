@@ -1,3 +1,7 @@
+0.1.2 -
+
+* Add Windows Live Connect support
+
 0.1.1 - May 4, 2015
 
 * Fix InAppBrowser checks to `cordova-plugin-inappbrowser` instead of `org.apache.cordova.inappbrowser`
