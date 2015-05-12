@@ -4,6 +4,7 @@
 * Add Yammer support
 * Add Venmo support
 * Add Stripe support
+* Add Rally support
 
 0.1.1 - May 4, 2015
 
