@@ -312,6 +312,9 @@
                                 if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
                                     deferred.resolve({ access_token: parameterMap.access_token, expires_in: parameterMap.expires_in });
                                 } else {
+                                  if ((event.url).indexOf("error_code=100") !== 0)
+                                    deferred.reject("Facebook returned error_code=100: Invalid permissions");
+                                  else
                                     deferred.reject("Problem authenticating");
                                 }
                             }
