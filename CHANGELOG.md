@@ -1,10 +1,11 @@
-0.1.2 -
+0.1.2 - May 24, 2015
 
 * Add Windows Live Connect support
 * Add Yammer support
 * Add Venmo support
 * Add Stripe support
 * Add Rally support
+* Apache Cordova Whitelist plugin is now required and is noted in the documentation
 
 0.1.1 - May 4, 2015
 

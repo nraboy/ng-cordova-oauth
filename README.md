@@ -12,6 +12,7 @@ quickly and easily obtain an access token from various web services to use their
 
 * Apache Cordova 3.5+
 * [Apache Cordova InAppBrowser Plugin](http://cordova.apache.org/docs/en/3.0.0/cordova_inappbrowser_inappbrowser.md.html)
+* [Apache Cordova Whitelist Plugin](https://github.com/apache/cordova-plugin-whitelist)
 * [jsSHA](https://github.com/Caligatio/jsSHA) Secure Hash Library (Twitter, Withings, and Magento only)
 
 
@@ -54,9 +55,7 @@ At this point, ngCordovaOauth is installed into your project and is ready for us
 
 ## Using ngCordovaOauth In Your Project
 
-Each web service API acts independently in this library.  However, when configuring each web service, one thing must remain
-consistent.  You must use **http://localhost/callback** as your callback / redirect URI.  This is because this library will
-perform tasks when this URL is found.
+Each web service API acts independently in this library.  However, when configuring each web service, one thing must remain consistent.  You must use **http://localhost/callback** as your callback / redirect URI.  This is because this library will perform tasks when this URL is found.
 
     $cordovaOauth.dropbox(string appKey, object options);
     $cordovaOauth.digitalOcean(string clientId, string clientSecret);
@@ -95,6 +94,10 @@ callback will return a string.
     });
 
 To authenticate with Twitter, Withings, and Magento an additional library is required.  These services require HMAC-SHA1 signatures in their Oauth implementation.  Including the sha1.js component of jsSHA will accomplish this task.
+
+As of Apache Cordova 5.0.0, the [whitelist plugin](https://blog.nraboy.com/2015/05/whitelist-external-resources-for-use-in-ionic-framework/) must be used in order to reach external web services.
+
+This library will NOT work with a web browser, ionic serve, or ionic view.  It must be used via installing to a device or simulator.
 
 
 ## Version History
