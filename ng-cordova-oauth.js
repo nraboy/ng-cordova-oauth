@@ -52,15 +52,11 @@
 
     angular.module("ngCordovaOauth", ['ngCordovaOauthUtility']).factory('$cordovaOauth', ['$q', '$http', '$cordovaOauthUtility', function ($q, $http, $cordovaOauthUtility) {
         var inAppBrowserInstalled = function (cordovaMetadata) {
-            var inAppBrowserNames = ['cordova-plugin-inappbrowser', 'org.apache.cordova.inappbrowser'],
-                installed = false;
+            var inAppBrowserNames = ['cordova-plugin-inappbrowser', 'org.apache.cordova.inappbrowser'];
 
-            inAppBrowserNames.forEach(function(name) {
-                if (cordovaMetadata.hasOwnProperty(name)) {
-                    installed = true;
-                }
+            return inAppBrowserNames.some(function(name) {
+                return cordovaMetadata.hasOwnProperty(name);
             });
-            return installed;
         };
 
         return {
