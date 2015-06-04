@@ -498,7 +498,7 @@
              * @param    array appScope
              * @return   promise
              */
-            reddit: function(clientId, clientSecret, appScope) {
+            reddit: function(clientId, clientSecret, appScope, compact) {
                 var deferred = $q.defer();
                 if(window.cordova) {
                     var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
