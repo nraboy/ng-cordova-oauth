@@ -59,6 +59,63 @@
             });
         };
 
+        var providers = {
+          facebook: function(deferred, clientId, appScope, options) {
+              var redirect_uri = "http://localhost/callback";
+              if(options !== undefined) {
+                  if(options.hasOwnProperty("redirect_uri")) {
+                      redirect_uri = options.redirect_uri;
+                  }
+              }
+              var browserRef = window.open('https://www.facebook.com/v2.0/dialog/oauth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(","), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+              browserRef.addEventListener('loadstart', function(event) {
+                  if((event.url).indexOf(redirect_uri) === 0) {
+                    browserRef.removeEventListener("exit",function(event){});
+                    browserRef.close();
+                      var callbackResponse = (event.url).split("#")[1];
+                      var responseParameters = (callbackResponse).split("&");
+                      var parameterMap = [];
+                      for(var i = 0; i < responseParameters.length; i++) {
+                          parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
+                      }
+                      if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
+                          deferred.resolve({ access_token: parameterMap.access_token, expires_in: parameterMap.expires_in });
+                      } else {
+                        if ((event.url).indexOf("error_code=100") !== 0)
+                          deferred.reject("Facebook returned error_code=100: Invalid permissions");
+                        else
+                          deferred.reject("Problem authenticating");
+                      }
+                  }
+              });
+              browserRef.addEventListener('exit', function(event) {
+                  deferred.reject("The sign in flow was canceled");
+              });
+            }
+        }
+
+        function wrapWithChecks(providerName, args) {
+          var deferred = $q.defer();
+
+          var fn = providers[providerName];
+          if(!fn) {
+              deferred.reject('Unknown provider', {providerName: providerName});
+              return deferred.promise;
+          }
+          if(window.cordova) {
+              var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
+              if(inAppBrowserInstalled(cordovaMetadata) === true) {
+                  var fnArgs = [deferred];
+                  Array.prototype.push.apply(fnArgs, args);
+                  fn.apply(this, fnArgs);
+              } else {
+                  deferred.reject("Could not find InAppBrowser plugin");
+              }
+          } else {
+              deferred.reject("Cannot authenticate via a web browser");
+          }
+          return deferred.promise;
+        }
         return {
 
             /*
@@ -166,6 +223,7 @@
                 if(window.cordova) {
                     var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                     if(inAppBrowserInstalled(cordovaMetadata) === true) {
+
                         var browserRef = window.open("https://cloud.digitalocean.com/v1/oauth/authorize?client_id=" + clientId + "&redirect_uri=http://localhost/callback&response_type=code&scope=read%20write", "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
                         browserRef.addEventListener("loadstart", function(event) {
                             if((event.url).indexOf("http://localhost/callback") === 0) {
@@ -299,49 +357,9 @@
              * @param    object options
              * @return   promise
              */
-            facebook: function(clientId, appScope, options) {
-                var deferred = $q.defer();
-                if(window.cordova) {
-                    var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-                    if(inAppBrowserInstalled(cordovaMetadata) === true) {
-                        var redirect_uri = "http://localhost/callback";
-                        if(options !== undefined) {
-                            if(options.hasOwnProperty("redirect_uri")) {
-                                redirect_uri = options.redirect_uri;
-                            }
-                        }
-                        var browserRef = window.open('https://www.facebook.com/v2.0/dialog/oauth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(","), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
-                        browserRef.addEventListener('loadstart', function(event) {
-                            if((event.url).indexOf(redirect_uri) === 0) {
-                            	browserRef.removeEventListener("exit",function(event){});
-                            	browserRef.close();
-                                var callbackResponse = (event.url).split("#")[1];
-                                var responseParameters = (callbackResponse).split("&");
-                                var parameterMap = [];
-                                for(var i = 0; i < responseParameters.length; i++) {
-                                    parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
-                                }
-                                if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
-                                    deferred.resolve({ access_token: parameterMap.access_token, expires_in: parameterMap.expires_in });
-                                } else {
-                                  if ((event.url).indexOf("error_code=100") !== 0)
-                                    deferred.reject("Facebook returned error_code=100: Invalid permissions");
-                                  else
-                                    deferred.reject("Problem authenticating");
-                                }
-                            }
-                        });
-                        browserRef.addEventListener('exit', function(event) {
-                            deferred.reject("The sign in flow was canceled");
-                        });
-                    } else {
-                        deferred.reject("Could not find InAppBrowser plugin");
-                    }
-                } else {
-                    deferred.reject("Cannot authenticate via a web browser");
-                }
-                return deferred.promise;
-            },
+             facebook: function(clientId, appScope, options) {
+               return wrapWithChecks('facebook', arguments);
+             },
 
             /*
              * Sign into the LinkedIn service
