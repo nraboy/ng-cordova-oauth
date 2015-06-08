@@ -10,7 +10,7 @@ angular.module("oauth.utils", [])
              * @param
              * @return   boolean
              */
-            isInAppBrowserInstalled: function() {
+            isInAppBrowserInstalled: function(cordovaMetadata) {
                 var inAppBrowserNames = ["cordova-plugin-inappbrowser", "org.apache.cordova.inappbrowser"];
 
                 return inAppBrowserNames.some(function(name) {
