@@ -1,3 +1,7 @@
+0.1.3 -
+
+* Refactor code to function as submodule
+
 0.1.2 - May 24, 2015
 
 * Add Windows Live Connect support

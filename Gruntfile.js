@@ -7,15 +7,15 @@ module.exports = function(grunt) {
                 banner: '// <%= pkg.name %> - v<%= pkg.version %> (<%= grunt.template.today("yyyy-mm-dd") %>)\n' + '// http://www.nraboy.com\n'
             },
             build: {
-                src: '<%= pkg.name %>.js',
-                dest: '<%= pkg.name %>.min.js'
+                src: ['src/*.js'],
+                dest: 'dist/<%= pkg.name %>.min.js'
             }
         },
         jshint: {
-            all: ['*.js']
+            all: ['src/*.js']
         },
         clean: {
-            js: ['*.min.js']
+            js: ['dist/*.min.js']
         }
     });
 
