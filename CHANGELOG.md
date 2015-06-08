@@ -1,4 +1,4 @@
-0.1.3 -
+0.1.3 - June 7, 2015
 
 * Refactor code to function as submodule
 
