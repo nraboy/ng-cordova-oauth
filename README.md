@@ -13,7 +13,7 @@ quickly and easily obtain an access token from various web services to use their
 * Apache Cordova 3.5+
 * [Apache Cordova InAppBrowser Plugin](http://cordova.apache.org/docs/en/3.0.0/cordova_inappbrowser_inappbrowser.md.html)
 * [Apache Cordova Whitelist Plugin](https://github.com/apache/cordova-plugin-whitelist)
-* [jsSHA](https://github.com/Caligatio/jsSHA) Secure Hash Library (Twitter, Withings, and Magento only)
+* [jsSHA 1.6.0](https://github.com/Caligatio/jsSHA) Secure Hash Library (Twitter, Withings, and Magento only)
 
 
 ## Installing ngCordovaOauth Into Your Project
@@ -29,7 +29,7 @@ This action will set the dependency and add it to the `bower.json` file.
 The JavaScript library must then be added to your **index.html** file found in your projects **www**
 directory:
 
-    <script src="../ng-cordova-oauth/ng-cordova-oauth.min.js"></script>
+    <script src="../ng-cordova-oauth/dist/ng-cordova-oauth.min.js"></script>
 
 ### Outdated way:
 

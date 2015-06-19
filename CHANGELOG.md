@@ -1,6 +1,7 @@
 0.1.3 - June 7, 2015
 
 * Refactor code to function as submodule
+* Add Family Search support
 
 0.1.2 - May 24, 2015
 

@@ -47,6 +47,7 @@
  *    Venmo
  *    Stripe
  *    Rally
+ *    Family Search
  */
 
 angular.module("ngCordovaOauth", [
