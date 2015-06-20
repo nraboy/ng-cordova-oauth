@@ -48,6 +48,7 @@
  *    Stripe
  *    Rally
  *    Family Search
+ *    Envato
  */
 
 angular.module("ngCordovaOauth", [
