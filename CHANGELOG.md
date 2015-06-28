@@ -1,7 +1,8 @@
-0.1.4 -
+0.1.4 - June 28, 2015
 
 * Add Envato support
 * Add optional `options` parameter to more providers
+* Add optional re-request for permissions to Facebook provider
 
 0.1.3 - June 7, 2015
 

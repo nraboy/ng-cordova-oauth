@@ -267,7 +267,11 @@ angular.module("oauth.providers", ["oauth.utils"])
                                 redirect_uri = options.redirect_uri;
                             }
                         }
-                        var browserRef = window.open('https://www.facebook.com/v2.0/dialog/oauth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(","), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                        var flowUrl = "https://www.facebook.com/v2.0/dialog/oauth?client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&response_type=token&scope=" + appScope.join(",");
+                        if(options !== undefined && options.hasOwnProperty("auth_type")) {
+                            flowUrl += "&auth_type=" + options.auth_type;
+                        }
+                        var browserRef = window.open(flowUrl, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener('loadstart', function(event) {
                             if((event.url).indexOf(redirect_uri) === 0) {
                             	browserRef.removeEventListener("exit",function(event){});

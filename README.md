@@ -3,8 +3,7 @@
 
 # ngCordovaOauth
 
-ngCordovaOauth is an AngularJS Apache Cordova Oauth library.  The purpose of this library is to
-quickly and easily obtain an access token from various web services to use their APIs.
+ngCordovaOauth is an AngularJS Apache Cordova Oauth library.  The purpose of this library is to quickly and easily obtain an access token from various web services to use their APIs.
 
 
 ## Requirements
