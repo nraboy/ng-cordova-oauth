@@ -1,6 +1,7 @@
 0.1.4 -
 
 * Add Envato support
+* Add optional `options` parameter to more providers
 
 0.1.3 - June 7, 2015
 

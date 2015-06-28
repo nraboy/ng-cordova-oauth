@@ -1,6 +1,5 @@
-| Master                                                                                                                            | Development                                                                                                                            |
-|-----------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| [![Build Status](https://travis-ci.org/nraboy/ng-cordova-oauth.svg?branch=master)](https://travis-ci.org/nraboy/ng-cordova-oauth) | [![Build Status](https://travis-ci.org/nraboy/ng-cordova-oauth.svg?branch=development)](https://travis-ci.org/nraboy/ng-cordova-oauth) |
+[![Build Status](https://travis-ci.org/nraboy/ng-cordova-oauth.svg?branch=master)](https://travis-ci.org/nraboy/ng-cordova-oauth)
+[![PayPal](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XK2JBEZ2PD2QS)
 
 # ngCordovaOauth
 
