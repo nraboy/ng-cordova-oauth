@@ -1657,7 +1657,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                             }
                         }
                         var flowUrl = "https://open.weibo.cn/oauth2/authorize?display=mobile&client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&scope=" + appScope.join(",");
-                        if(options !== undefined && options.hasOwnProperty("language")) {
+                        if(options !== undefined) {
                             if(options.hasOwnProperty("language")) {
                                 flowUrl += "&language=" + options.language;
                             }
