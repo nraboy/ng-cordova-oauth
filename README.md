@@ -80,6 +80,7 @@ Each web service API acts independently in this library.  However, when configur
     $cordovaOauth.yammer(string clientId, object options)
     $cordovaOauth.venmo(string clientId, array appScope, object options)
     $cordovaOauth.stripe(string clientId, string clientSecret, string appScope, object options)
+    $cordovaOauth.slack(string clientId, string clientSecret, array appScope, object options)
     $cordovaOauth.rally(string clientId, string clientSecret, string appScope, object options)
     $cordovaOauth.familySearch(string clientId, string state, object options);
     $cordovaOauth.envato(string clientId, object options);
