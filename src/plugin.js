@@ -50,6 +50,7 @@
  *    Family Search
  *    Envato
  *    Slack
+ *    Jawbone
  */
 
 angular.module("ngCordovaOauth", [
