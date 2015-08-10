@@ -277,7 +277,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                               browserRef.removeEventListener("exit",function(event){});
                               browserRef.close();
                               var parameterMap = $cordovaOauthUtility.parseResponseUrl(event.url, '#');
-                              if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
+                              if(parameterMap.access_token) {
                                   deferred.resolve(parameterMap);
                               } else {
                                   if ((event.url).indexOf("error_code=100") !== 0)
