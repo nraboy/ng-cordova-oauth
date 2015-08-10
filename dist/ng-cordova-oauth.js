@@ -1808,7 +1808,7 @@ angular.module("oauth.utils", [])
           },
 
           parseResponseUrl: function(url, delimiter) {
-              var queryString = url.split(delimiter || '#');
+              var queryString = url.split(delimiter || '#')[1] || '';
               var ret = {};
               var keyValueList = queryString.split('&');
               for (var i = 0; i < keyValueList.length; i++) {
