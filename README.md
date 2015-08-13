@@ -54,7 +54,8 @@ At this point, ngCordovaOauth is installed into your project and is ready for us
 ## Using ngCordovaOauth In Your Project
 
 Each web service API acts independently in this library.  However, when configuring each web service, one thing must remain consistent.  You must use **http://localhost/callback** as your callback / redirect URI.  This is because this library will perform tasks when this URL is found.
-
+    
+    $cordovaOauth.azureAD(string clientId, string tenantId, string resourceURL);
     $cordovaOauth.dropbox(string appKey, object options);
     $cordovaOauth.digitalOcean(string clientId, string clientSecret, object options);
     $cordovaOauth.google(string clientId, array appScope, object options);
