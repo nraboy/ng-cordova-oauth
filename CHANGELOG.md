@@ -1,3 +1,14 @@
+0.1.4 - June 28, 2015
+
+* Add Envato support
+* Add optional `options` parameter to more providers
+* Add optional re-request for permissions to Facebook provider
+
+0.1.3 - June 7, 2015
+
+* Refactor code to function as submodule
+* Add Family Search support
+
 0.1.2 - May 24, 2015
 
 * Add Windows Live Connect support

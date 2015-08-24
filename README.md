@@ -1,11 +1,9 @@
-| Master                                                                                                                            | Development                                                                                                                            |
-|-----------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| [![Build Status](https://travis-ci.org/nraboy/ng-cordova-oauth.svg?branch=master)](https://travis-ci.org/nraboy/ng-cordova-oauth) | [![Build Status](https://travis-ci.org/nraboy/ng-cordova-oauth.svg?branch=development)](https://travis-ci.org/nraboy/ng-cordova-oauth) |
+[![Build Status](https://travis-ci.org/nraboy/ng-cordova-oauth.svg?branch=master)](https://travis-ci.org/nraboy/ng-cordova-oauth)
+[![PayPal](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XK2JBEZ2PD2QS)
 
 # ngCordovaOauth
 
-ngCordovaOauth is an AngularJS Apache Cordova Oauth library.  The purpose of this library is to
-quickly and easily obtain an access token from various web services to use their APIs.
+ngCordovaOauth is an AngularJS Apache Cordova Oauth library.  The purpose of this library is to quickly and easily obtain an access token from various web services to use their APIs.
 
 
 ## Requirements
@@ -13,7 +11,7 @@ quickly and easily obtain an access token from various web services to use their
 * Apache Cordova 3.5+
 * [Apache Cordova InAppBrowser Plugin](http://cordova.apache.org/docs/en/3.0.0/cordova_inappbrowser_inappbrowser.md.html)
 * [Apache Cordova Whitelist Plugin](https://github.com/apache/cordova-plugin-whitelist)
-* [jsSHA](https://github.com/Caligatio/jsSHA) Secure Hash Library (Twitter, Withings, and Magento only)
+* [jsSHA 1.6.0](https://github.com/Caligatio/jsSHA) Secure Hash Library (Twitter, Withings, and Magento only)
 
 
 ## Installing ngCordovaOauth Into Your Project
@@ -29,7 +27,7 @@ This action will set the dependency and add it to the `bower.json` file.
 The JavaScript library must then be added to your **index.html** file found in your projects **www**
 directory:
 
-    <script src="../ng-cordova-oauth/ng-cordova-oauth.min.js"></script>
+    <script src="../ng-cordova-oauth/dist/ng-cordova-oauth.min.js"></script>
 
 ### Outdated way:
 
@@ -58,18 +56,18 @@ At this point, ngCordovaOauth is installed into your project and is ready for us
 Each web service API acts independently in this library.  However, when configuring each web service, one thing must remain consistent.  You must use **http://localhost/callback** as your callback / redirect URI.  This is because this library will perform tasks when this URL is found.
 
     $cordovaOauth.dropbox(string appKey, object options);
-    $cordovaOauth.digitalOcean(string clientId, string clientSecret);
+    $cordovaOauth.digitalOcean(string clientId, string clientSecret, object options);
     $cordovaOauth.google(string clientId, array appScope, object options);
-    $cordovaOauth.github(string clientId, string clientSecret, array appScope);
+    $cordovaOauth.github(string clientId, string clientSecret, array appScope, object options);
     $cordovaOauth.facebook(string clientId, array appScope, object options);
     $cordovaOauth.linkedin(string clientId, string clientSecret, array appScope, string state);
     $cordovaOauth.instagram(string clientId, array appScope, object options);
-    $cordovaOauth.box(string clientId, string clientSecret, string state);
-    $cordovaOauth.reddit(string clientId, string clientSecret, array appScope);
+    $cordovaOauth.box(string clientId, string clientSecret, string state, object options);
+    $cordovaOauth.reddit(string clientId, string clientSecret, array appScope, object options);
     $cordovaOauth.twitter(string consumerKey, string consumerSecretKey, object options);
     $cordovaOauth.meetup(string consumerKey, object options);
     $cordovaOauth.salesforce(string loginUrl, string clientId);
-    $cordovaOauth.strava(string clientId, string clientSecret, array appScope);
+    $cordovaOauth.strava(string clientId, string clientSecret, array appScope, object options);
     $cordovaOauth.withings(string clientId, string clientSecret);
     $cordovaOauth.foursquare(string clientId, object options);
     $cordovaOauth.magento(string baseUrl, string clientId, string clientSecret)
@@ -83,6 +81,8 @@ Each web service API acts independently in this library.  However, when configur
     $cordovaOauth.venmo(string clientId, array appScope, object options)
     $cordovaOauth.stripe(string clientId, string clientSecret, string appScope, object options)
     $cordovaOauth.rally(string clientId, string clientSecret, string appScope, object options)
+    $cordovaOauth.familySearch(string clientId, string state, object options);
+    $cordovaOauth.envato(string clientId, object options);
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
