@@ -387,7 +387,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         }
 
                         var scope = '';
-                        if (appScope) {
+                        if (appScope && appScope.length > 0) {
                             scope = '&scope' + appScope.join('+');
                         }
 
