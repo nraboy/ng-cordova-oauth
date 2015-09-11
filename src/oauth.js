@@ -1634,8 +1634,72 @@ angular.module("oauth.providers", ["oauth.utils"])
                     deferred.reject("Cannot authenticate via a web browser");
                 }
                 return deferred.promise;
+            },
+
+            /*
+             * Sign into the Dribble service
+             *
+             * @param    string clientId                  REQUIRED
+             * @param    string clientSecret              REQUIRED
+             * @param    object Array appscope            REQUIRED
+             * @param    object options (redirect_uri)    OPTIONAL
+             * @param    state  string                    OPTIONAL
+             * @return   promise
+             */
+
+            dribble: function (clientId, clientSecret, appScope, options, state) {
+                var deferred = $q.defer();
+                if (window.cordova) {
+                    var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
+                    if ($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+                        var redirect_uri = "http://localhost/callback";
+                        var OAUTH_URL = 'https://dribbble.com/oauth/authorize';
+                        var ACCESS_TOKEN_URL = 'https://dribbble.com/oauth/token';
+                        if (options !== undefined) {
+                            if (options.hasOwnProperty("redirect_uri")) {
+                                redirect_uri = options.redirect_uri;
+                            }
+                        }
+                        if (state == undefined) {
+                            var text = '';
+                            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                            for (var i = 0; i < 5; i++)
+                                text += possible.charAt(Math.floor(Math.random() * possible.length));
+                            state = text
+                        }
+                        var browserRef = window.open(OAUTH_URL + '?client_id=' + clientId + '&redirect_uri=' + redirect_uri +
+                        '&scope=' + appScope.join(",") + '&state=' + state, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                        browserRef.addEventListener('loadstart', function (event) {
+                            if ((event.url).indexOf(redirect_uri) === 0) {
+                                var callBackCode = (event.url).split("code=")[1];
+                                var code = callBackCode.split("&")[0];
+                                $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+                                $http(
+                                    {   method: "post",
+                                        url: ACCESS_TOKEN_URL,
+                                        data: "client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&client_secret=" + clientSecret + "&code=" + code
+                                    })
+                                    .success(function (res) {
+                                        deferred.resolve(res)
+                                    }).error(function (data, status) {
+                                        deferred.reject("Problem authenticating " + JSON.stringify(data) +'status '+ JSON.stringify(status));
+                                    }).finally(function () {
+                                        setTimeout(function () {
+                                            browserRef.close();
+                                        }, 10);
+                                    })
+                            }
+                        });
+                        browserRef.addEventListener('exit', function (event) {
+                            deferred.reject("The sign in flow was canceled");
+                        })
+                    } else {
+                        deferred.reject("Could not find InAppBrowser plugin");
+                    }
+                } else {
+                    deferred.reject("Cannot authenticate via a web browser");
+                }
+                return deferred.promise;
             }
-
         };
-
     }]);
