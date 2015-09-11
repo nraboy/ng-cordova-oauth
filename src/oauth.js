@@ -1963,7 +1963,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                         });
                         browserRef.addEventListener('exit', function (event) {
                             deferred.reject("The sign in flow was canceled");
-                        })
+                        });
                     } else {
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
