@@ -217,7 +217,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                                 redirect_uri = options.redirect_uri;
                             }
                         }
-                        var browserRef = window.open('https://accounts.google.com/o/oauth2/auth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&approval_prompt=force&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                        var browserRef = window.open('https://accounts.google.com/o/oauth2/auth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&approval_prompt=force&response_type=token id_token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
                         browserRef.addEventListener("loadstart", function(event) {
                             if((event.url).indexOf(redirect_uri) === 0) {
                            		browserRef.removeEventListener("exit",function(event){});
@@ -229,7 +229,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                                     parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
                                 }
                                 if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
-                                    deferred.resolve({ access_token: parameterMap.access_token, token_type: parameterMap.token_type, expires_in: parameterMap.expires_in });
+                                    deferred.resolve({ access_token: parameterMap.access_token, token_type: parameterMap.token_type, expires_in: parameterMap.expires_in, id_token: parameterMap.id_token });
                                 } else {
                                     deferred.reject("Problem authenticating");
                                 }
