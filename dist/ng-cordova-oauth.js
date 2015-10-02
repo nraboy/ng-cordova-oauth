@@ -1180,6 +1180,9 @@ angular.module("oauth.providers", ["oauth.utils"])
                                     if(parameterMap.email !== undefined && parameterMap.email !== null){
                                         output.email = parameterMap.email;
                                     }
+                                    if(parameterMap.user_id !== undefined && parameterMap.user_id !== null){
+                                        output.user_id = parameterMap.user_id;
+                                    }
                                     deferred.resolve(output);
                                 } else {
                                     deferred.reject("Problem authenticating");
