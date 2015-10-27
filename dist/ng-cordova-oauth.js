@@ -2,22 +2,31 @@ angular.module("oauth.providers", ["oauth.utils"])
 
   .factory("$cordovaOauth", ["$q", '$http', "$cordovaOauthUtility", function($q, $http, $cordovaOauthUtility) {
 
+      function windowOpenProxy(url, target, options, extraOptions) {
+          options = options || '';
+          extraOptions = extraOptions || '';
+          options = !!options ? (options + ',' + extraOptions) : extraOptions;
+          return window.open(url, target, options);
+      }
+
       return {
 
           /*
            * Sign into the ADFS service (ADFS 3.0 onwards)
            *
-           * @param    string clientId (client registered in ADFS, with redirect_uri configured to: http://localhost/callback)
+           * @param  string clientId (client registered in ADFS, with redirect_uri configured to: http://localhost/callback)
            * @param	 string adfsServer (url of the ADFS Server)
            * @param	 string relyingPartyId (url of the Relying Party (resource relying on ADFS for authentication) configured in ADFS)
-           * @return   promise
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
+           * @return promise
            */
-          adfs: function(clientId, adfsServer, relyingPartyId) {
+          adfs: function(clientId, adfsServer, relyingPartyId, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
+                  windowOpenOptions = windowOpenOptions ? ('&' + windowOpenOptions) : '';
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                   if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
-                      var browserRef = window.open(adfsServer + '/adfs/oauth2/authorize?response_type=code&client_id=' + clientId +'&redirect_uri=http://localhost/callback&resource=' + relyingPartyId, '_blank', 'location=no');
+                      var browserRef = windowOpenProxy(adfsServer + '/adfs/oauth2/authorize?response_type=code&client_id=' + clientId +'&redirect_uri=http://localhost/callback&resource=' + relyingPartyId, '_blank', 'location=no', windowOpenOptions);
 
                       browserRef.addEventListener("loadstart", function(event) {
                           if((event.url).indexOf('http://localhost/callback') === 0) {
@@ -54,9 +63,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            *
            * @param    string appKey
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          dropbox: function(appKey, options) {
+          dropbox: function(appKey, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -67,7 +77,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open("https://www.dropbox.com/1/oauth2/authorize?client_id=" + appKey + "&redirect_uri=" + redirect_uri + "&response_type=token", "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
+                      var browserRef = windowOpenOptions("https://www.dropbox.com/1/oauth2/authorize?client_id=" + appKey + "&redirect_uri=" + redirect_uri + "&response_type=token", "_blank", "location=no,clearsessioncache=yes,clearcache=yes", windowOpenOptions);
                       browserRef.addEventListener("loadstart", function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
                               browserRef.removeEventListener("exit",function(event){});
@@ -103,9 +113,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            * @param    string clientId
            * @param    string clientSecret
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          digitalOcean: function(clientId, clientSecret, options) {
+          digitalOcean: function(clientId, clientSecret, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -116,7 +127,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open("https://cloud.digitalocean.com/v1/oauth/authorize?client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&response_type=code&scope=read%20write", "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
+                      var browserRef = windowOpenProxy("https://cloud.digitalocean.com/v1/oauth/authorize?client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&response_type=code&scope=read%20write", "_blank", "location=no,clearsessioncache=yes,clearcache=yes", windowOpenOptions);
                       browserRef.addEventListener("loadstart", function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
                               var requestToken = (event.url).split("code=")[1];
@@ -153,9 +164,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            * @param    string clientId
            * @param    array appScope
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          google: function(clientId, appScope, options) {
+          google: function(clientId, appScope, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -166,7 +178,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open('https://accounts.google.com/o/oauth2/auth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&approval_prompt=force&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://accounts.google.com/o/oauth2/auth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&approval_prompt=force&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener("loadstart", function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
                               browserRef.removeEventListener("exit",function(event){});
@@ -203,9 +215,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            * @param    string clientSecret
            * @param    array appScope
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          github: function(clientId, clientSecret, appScope, options) {
+          github: function(clientId, clientSecret, appScope, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -216,10 +229,10 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open('https://github.com/login/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(","), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://github.com/login/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(","), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
-                              requestToken = (event.url).split("code=")[1];
+                              var requestToken = (event.url).split("code=")[1];
                               $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
                               $http.defaults.headers.post.accept = 'application/json';
                               $http({method: "post", url: "https://github.com/login/oauth/access_token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&code=" + requestToken })
@@ -254,9 +267,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            * @param    string clientId
            * @param    array appScope
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          facebook: function(clientId, appScope, options) {
+          facebook: function(clientId, appScope, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -271,7 +285,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                       if(options !== undefined && options.hasOwnProperty("auth_type")) {
                           flowUrl += "&auth_type=" + options.auth_type;
                       }
-                      var browserRef = window.open(flowUrl, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy(flowUrl, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
                               browserRef.removeEventListener("exit",function(event){});
@@ -307,9 +321,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            * @param    array appScope
            * @param    string state
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          linkedin: function(clientId, clientSecret, appScope, state, options) {
+          linkedin: function(clientId, clientSecret, appScope, state, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -321,11 +336,11 @@ angular.module("oauth.providers", ["oauth.utils"])
                           }
                       }
 
-                      var browserRef = window.open('https://www.linkedin.com/uas/oauth2/authorization?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&response_type=code&state=' + state, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://www.linkedin.com/uas/oauth2/authorization?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&response_type=code&state=' + state, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
 
                       browserRef.addEventListener('loadstart', function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
-                              requestToken = (event.url).split("code=")[1];
+                              var requestToken = (event.url).split("code=")[1];
                               $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
                               $http({method: "post", url: "https://www.linkedin.com/uas/oauth2/accessToken", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&grant_type=authorization_code" + "&code=" + requestToken })
                                 .success(function(data) {
@@ -359,9 +374,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            * @param    string clientId
            * @param    array appScope
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          instagram: function(clientId, appScope, options) {
+          instagram: function(clientId, appScope, options, windowOpenOptions) {
               var deferred = $q.defer();
 
               var split_tokens = {
@@ -383,7 +399,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                           }
                       }
 
-                      var browserRef = window.open('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&response_type='+response_type, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&response_type='+response_type, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
                               browserRef.removeEventListener("exit",function(event){});
@@ -418,9 +434,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            * @param    string clientSecret
            * @param    string appState
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          box: function(clientId, clientSecret, appState, options) {
+          box: function(clientId, clientSecret, appState, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -431,10 +448,10 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open('https://app.box.com/api/oauth2/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&state=' + appState + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://app.box.com/api/oauth2/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&state=' + appState + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
-                              requestToken = (event.url).split("code=")[1];
+                              var requestToken = (event.url).split("code=")[1];
                               $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
                               $http({method: "post", url: "https://app.box.com/api/oauth2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&grant_type=authorization_code" + "&code=" + requestToken })
                                 .success(function(data) {
@@ -469,9 +486,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            * @param    string clientSecret
            * @param    array appScope
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          reddit: function(clientId, clientSecret, appScope, compact, options) {
+          reddit: function(clientId, clientSecret, appScope, compact, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -482,10 +500,10 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open('https://ssl.reddit.com/api/v1/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&duration=permanent&state=ngcordovaoauth&scope=' + appScope.join(",") + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://ssl.reddit.com/api/v1/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&duration=permanent&state=ngcordovaoauth&scope=' + appScope.join(",") + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
-                              requestToken = (event.url).split("code=")[1];
+                              var requestToken = (event.url).split("code=")[1];
                               $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
                               $http.defaults.headers.post.Authorization = 'Basic ' + btoa(clientId + ":" + clientSecret);
                               $http({method: "post", url: "https://ssl.reddit.com/api/v1/access_token", data: "redirect_uri=" + redirect_uri + "&grant_type=authorization_code" + "&code=" + requestToken })
@@ -520,9 +538,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            *
            * @param    string clientId
            * @param    string clientSecret
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          twitter: function(clientId, clientSecret, options) {
+          twitter: function(clientId, clientSecret, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -561,7 +580,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                                 if(parameterMap.hasOwnProperty("oauth_token") === false) {
                                     deferred.reject("Oauth request token was not received");
                                 }
-                                var browserRef = window.open('https://api.twitter.com/oauth/authenticate?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                                var browserRef = windowOpenProxy('https://api.twitter.com/oauth/authenticate?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                                 browserRef.addEventListener('loadstart', function(event) {
                                     if((event.url).indexOf(redirect_uri) === 0) {
                                         var callbackResponse = (event.url).split("?")[1];
@@ -631,9 +650,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            *
            * @param    string clientId
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          meetup: function(clientId, options) {
+          meetup: function(clientId, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -644,7 +664,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open('https://secure.meetup.com/oauth2/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://secure.meetup.com/oauth2/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
                               browserRef.removeEventListener("exit",function(event){});
@@ -682,14 +702,15 @@ angular.module("oauth.providers", ["oauth.utils"])
            * @param    string loginUrl (such as: https://login.salesforce.com ; please notice community login)
            * @param    string clientId (copy from connection app info)
            * @param    string redirectUri (callback url in connection app info)
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          salesforce: function (loginUrl, clientId) {
+          salesforce: function (loginUrl, clientId, windowOpenOptions) {
               var redirectUri = 'http://localhost/callback';
               var getAuthorizeUrl = function (loginUrl, clientId, redirectUri) {
                   return loginUrl+'services/oauth2/authorize?display=touch'+
-                    '&response_type=token&client_id='+escape(clientId)+
-                    '&redirect_uri='+escape(redirectUri);
+                    '&response_type=token&client_id='+encodeURIComponent(clientId)+
+                    '&redirect_uri='+encodeURIComponent(redirectUri);
               };
               var startWith = function(string, str) {
                   return (string.substr(0, str.length) === str);
@@ -698,7 +719,7 @@ angular.module("oauth.providers", ["oauth.utils"])
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                   if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
-                      var browserRef = window.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
+                      var browserRef = windowOpenProxy(getAuthorizeUrl(loginUrl, clientId, redirectUri), "_blank", "location=no,clearsessioncache=yes,clearcache=yes", windowOpenOptions);
                       browserRef.addEventListener("loadstart", function(event) {
                           if(startWith(event.url, redirectUri)) {
                               var oauthResponse = {};
@@ -709,7 +730,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                                   var nvps = fragment.split('&');
                                   for (var nvp in nvps) {
                                       var parts = nvps[nvp].split('=');
-                                      oauthResponse[parts[0]] = unescape(parts[1]);
+                                      oauthResponse[parts[0]] = encodeURIComponent(parts[1]);
                                   }
                               }
 
@@ -743,9 +764,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            * @param    string clientSecret
            * @param    array appScope
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          strava: function(clientId, clientSecret, appScope, options) {
+          strava: function(clientId, clientSecret, appScope, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -756,10 +778,10 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open('https://www.strava.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(",") + '&response_type=code&approval_prompt=force', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://www.strava.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(",") + '&response_type=code&approval_prompt=force', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
-                              requestToken = (event.url).split("code=")[1];
+                              var requestToken = (event.url).split("code=")[1];
                               $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
                               $http({method: "post", url: "https://www.strava.com/oauth/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&code=" + requestToken })
                                 .success(function(data) {
@@ -793,9 +815,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            *
            * @param    string clientId
            * @param    string clientSecret
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          withings: function(clientId, clientSecret) {
+          withings: function(clientId, clientSecret, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -831,7 +854,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                                 oauthObject.oauth_signature = signatureObj.signature;
 
                                 var authorizeParameters = $cordovaOauthUtility.generateUrlParameters(oauthObject);
-                                var browserRef = window.open(authorizeUrlBase + '?' + authorizeParameters, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                                var browserRef = windowOpenProxy(authorizeUrlBase + '?' + authorizeParameters, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
 
                                 // STEP 3: User Data Access token
                                 browserRef.addEventListener('loadstart', function(event) {
@@ -893,9 +916,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            *
            * @param    string clientId
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          foursquare: function(clientId, options) {
+          foursquare: function(clientId, options, windowOpenOptions) {
               var deferred = $q.defer();
               if (window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -906,7 +930,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open('https://foursquare.com/oauth2/authenticate?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://foursquare.com/oauth2/authenticate?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function (event) {
                           if ((event.url).indexOf(redirect_uri) === 0) {
                               browserRef.removeEventListener("exit",function(event){});
@@ -947,9 +971,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            * @param    string baseUrl
            * @param    string clientId
            * @param    string clientSecret
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          magento: function(baseUrl, clientId, clientSecret) {
+          magento: function(baseUrl, clientId, clientSecret, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -977,7 +1002,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                                     deferred.reject("Oauth request token was not received");
                                 }
                                 var tokenSecret = parameterMap.oauth_token_secret;
-                                var browserRef = window.open(baseUrl + '/oauth/authorize?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                                var browserRef = windowOpenProxy(baseUrl + '/oauth/authorize?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                                 browserRef.addEventListener('loadstart', function(event) {
                                     if((event.url).indexOf("http://localhost/callback") === 0) {
                                         var callbackResponse = (event.url).split("?")[1];
@@ -1043,14 +1068,15 @@ angular.module("oauth.providers", ["oauth.utils"])
            *
            * @param    string clientId
            * @param    array appScope (for example: "friends,wall,photos,messages")
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          vkontakte: function(clientId, appScope) {
+          vkontakte: function(clientId, appScope, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                   if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
-                      var browserRef = window.open('https://oauth.vk.com/authorize?client_id=' + clientId + '&redirect_uri=http://oauth.vk.com/blank.html&response_type=token&scope=' + appScope.join(",") + '&display=touch&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://oauth.vk.com/authorize?client_id=' + clientId + '&redirect_uri=http://oauth.vk.com/blank.html&response_type=token&scope=' + appScope.join(",") + '&display=touch&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function(event) {
                           var tmp = (event.url).split("#");
                           if (tmp[0] == 'https://oauth.vk.com/blank.html' || tmp[0] == 'http://oauth.vk.com/blank.html') {
@@ -1090,9 +1116,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            *
            * @param    string clientId
            * @param    array appScope (for example: "VALUABLE_ACCESS ,GROUP_CONTENT,VIDEO_CONTENT")
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          odnoklassniki: function (clientId, appScope)
+          odnoklassniki: function (clientId, appScope, windowOpenOptions)
           {
               var deferred = $q.defer();
               if (window.cordova)
@@ -1100,7 +1127,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                   if ($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true)
                   {
-                      var browserRef = window.open('http://www.odnoklassniki.ru/oauth/authorize?client_id=' + clientId + '&scope=' + appScope.join(",") + '&response_type=token&redirect_uri=http://localhost/callback' + '&layout=m', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('http://www.odnoklassniki.ru/oauth/authorize?client_id=' + clientId + '&scope=' + appScope.join(",") + '&response_type=token&redirect_uri=http://localhost/callback' + '&layout=m', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function (event)
                       {
                           if ((event.url).indexOf("http://localhost/callback") === 0)
@@ -1146,9 +1173,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            *
            * @param    string clientId
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          imgur: function(clientId, options) {
+          imgur: function(clientId, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -1159,7 +1187,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open('https://api.imgur.com/oauth2/authorize?client_id=' + clientId + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://api.imgur.com/oauth2/authorize?client_id=' + clientId + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
                               browserRef.removeEventListener("exit",function(event){});
@@ -1194,9 +1222,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            *
            * @param    string clientId
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          spotify: function(clientId, appScope, options) {
+          spotify: function(clientId, appScope, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -1207,7 +1236,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open('https://accounts.spotify.com/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(" "), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://accounts.spotify.com/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(" "), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
                               browserRef.removeEventListener("exit",function(event){});
@@ -1243,9 +1272,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            * @param    string clientId
            * @param    appScope array
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          uber: function(clientId, appScope, options) {
+          uber: function(clientId, appScope, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -1256,7 +1286,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open('https://login.uber.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(" "), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://login.uber.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(" "), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
                               browserRef.removeEventListener("exit",function(event){});
@@ -1292,9 +1322,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            * @param    string clientId
            * @param    array appScope
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          windowsLive: function (clientId, appScope, options) {
+          windowsLive: function (clientId, appScope, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -1305,7 +1336,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open('https://login.live.com/oauth20_authorize.srf?client_id=' + clientId + "&scope=" + appScope.join(",") + '&response_type=token&display=touch' + '&redirect_uri=' + redirect_uri, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://login.live.com/oauth20_authorize.srf?client_id=' + clientId + "&scope=" + appScope.join(",") + '&response_type=token&display=touch' + '&redirect_uri=' + redirect_uri, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function (event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
                               browserRef.removeEventListener("exit", function (event) { });
@@ -1340,9 +1371,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            *
            * @param    string clientId
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          yammer: function(clientId, options) {
+          yammer: function(clientId, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -1353,7 +1385,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open('https://www.yammer.com/dialog/oauth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://www.yammer.com/dialog/oauth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
                               browserRef.removeEventListener("exit",function(event){});
@@ -1389,9 +1421,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            * @param    string clientId
            * @param    array appScope
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          venmo: function(clientId, appScope, options) {
+          venmo: function(clientId, appScope, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -1402,7 +1435,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open('https://api.venmo.com/v1/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(" "), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://api.venmo.com/v1/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(" "), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
                               browserRef.removeEventListener("exit",function(event){});
@@ -1439,9 +1472,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            * @param    string clientSecret
            * @param    string appScope
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          stripe: function(clientId, clientSecret, appScope, options) {
+          stripe: function(clientId, clientSecret, appScope, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -1452,10 +1486,10 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open('https://connect.stripe.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://connect.stripe.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function(event) {
                           if((event.url).indexOf("http://localhost/callback") === 0) {
-                              requestToken = (event.url).split("code=")[1];
+                              var requestToken = (event.url).split("code=")[1];
                               $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
                               $http({method: "post", url: "https://connect.stripe.com/oauth/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&grant_type=authorization_code" + "&code=" + requestToken })
                                 .success(function(data) {
@@ -1490,9 +1524,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            * @param    string clientSecret
            * @param    string appScope
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          rally: function(clientId, clientSecret, appScope, options) {
+          rally: function(clientId, clientSecret, appScope, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -1503,10 +1538,10 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open('https://rally1.rallydev.com/login/oauth2/auth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://rally1.rallydev.com/login/oauth2/auth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function(event) {
                           if((event.url).indexOf("http://localhost/callback") === 0) {
-                              requestToken = (event.url).split("code=")[1];
+                              var requestToken = (event.url).split("code=")[1];
                               $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
                               $http({method: "post", url: "https://rally1.rallydev.com/login/oauth2/auth", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&grant_type=authorization_code" + "&code=" + requestToken })
                                 .success(function(data) {
@@ -1539,9 +1574,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            *
            * @param    string clientId
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          familySearch: function(clientId, state, options) {
+          familySearch: function(clientId, state, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -1552,7 +1588,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open("https://ident.familysearch.org/cis-web/oauth2/v3/authorization?client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&response_type=code&state=" + state, "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
+                      var browserRef = windowOpenProxy("https://ident.familysearch.org/cis-web/oauth2/v3/authorization?client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&response_type=code&state=" + state, "_blank", "location=no,clearsessioncache=yes,clearcache=yes", windowOpenOptions);
                       browserRef.addEventListener("loadstart", function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
                               var requestToken = (event.url).split("code=")[1];
@@ -1588,9 +1624,10 @@ angular.module("oauth.providers", ["oauth.utils"])
            *
            * @param    string clientId
            * @param    object options
+           * @param	 string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
            * @return   promise
            */
-          envato: function(clientId, options) {
+          envato: function(clientId, options, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -1601,7 +1638,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = window.open('https://api.envato.com/authorization?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                      var browserRef = windowOpenProxy('https://api.envato.com/authorization?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
                       browserRef.addEventListener('loadstart', function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
                               browserRef.removeEventListener("exit",function(event){});
