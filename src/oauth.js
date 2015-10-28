@@ -35,7 +35,6 @@ angular.module("oauth.providers", ["oauth.utils"])
           adfs: function(clientId, adfsServer, relyingPartyId, windowOpenOptions) {
               var deferred = $q.defer();
               if(window.cordova) {
-                  windowOpenOptions = windowOpenOptions ? ('&' + windowOpenOptions) : '';
                   var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
                   if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
                       var browserRef = windowOpenProxy(adfsServer + '/adfs/oauth2/authorize?response_type=code&client_id=' + clientId +'&redirect_uri=http://localhost/callback&resource=' + relyingPartyId, '_blank', 'location=no', windowOpenOptions);
