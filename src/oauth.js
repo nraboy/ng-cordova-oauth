@@ -88,7 +88,7 @@ angular.module("oauth.providers", ["oauth.utils"])
                               redirect_uri = options.redirect_uri;
                           }
                       }
-                      var browserRef = windowOpenOptions("https://www.dropbox.com/1/oauth2/authorize?client_id=" + appKey + "&redirect_uri=" + redirect_uri + "&response_type=token", "_blank", "location=no,clearsessioncache=yes,clearcache=yes", windowOpenOptions);
+                      var browserRef = windowOpenProxy("https://www.dropbox.com/1/oauth2/authorize?client_id=" + appKey + "&redirect_uri=" + redirect_uri + "&response_type=token", "_blank", "location=no,clearsessioncache=yes,clearcache=yes", windowOpenOptions);
                       browserRef.addEventListener("loadstart", function(event) {
                           if((event.url).indexOf(redirect_uri) === 0) {
                               browserRef.removeEventListener("exit",function(event){});
