@@ -1,11 +1,9 @@
 angular.module('oauth.azuread', ['oauth.utils'])
-.factory('oauthAzureAD', azureAD);
-
-oauthAzureAD.$inject = ['$q', '$http', '$cordovaUtility'];
+  .factory('$azureAD', azureAD);
 
 function azureAD($q, $http, $cordovaUtility) {
   return {
-    azureAD: oauthAzureAD
+    signin: oauthAzureAD
   }
 
   /*
@@ -60,3 +58,5 @@ function azureAD($q, $http, $cordovaUtility) {
     return deferred.promise;
   }
 }
+
+oauthAzureAD.$inject = ['$q', '$http', '$cordovaUtility'];
