@@ -2,7 +2,7 @@ angular.module('oauth.vkontakte', ['oauth.utils'])
   .factory('$vkontakte', vkontakte);
 
 function vkontakte($q, $http, $cordovaUtility) {
-  return { signin: oauthvKontakte }
+  return { signin: oauthvKontakte };
 
   /*
    * Sign into the Vkontakte service

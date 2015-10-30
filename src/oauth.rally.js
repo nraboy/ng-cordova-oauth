@@ -2,7 +2,7 @@ angular.module('oauth.rally', ['oauth.utils'])
   .factory('$rally', rally);
 
 function rally($q, $http, $cordovaUtility) {
-  return { signin: oauthRally }
+  return { signin: oauthRally };
 
   /*
    * Sign into the Rally service

@@ -2,7 +2,7 @@ angular.module('oauth.weibo', ['oauth.utils'])
   .factory('$weibo', weibo);
 
 function weibo($q, $http, $cordovaUtility) {
-  return { signin: oauthWeibo }
+  return { signin: oauthWeibo };
 
   /*
    * Sign into the Weibo service

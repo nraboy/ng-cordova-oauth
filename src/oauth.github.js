@@ -2,7 +2,7 @@ angular.module('oauth.github', ['oauth.utils'])
   .factory('$github', github);
 
 function github($q, $http, $cordovaUtility) {
-  return { signin: oauthGithub }
+  return { signin: oauthGithub };
 
   /*
    * Sign into the GitHub service

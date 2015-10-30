@@ -2,7 +2,7 @@ angular.module('oauth.google', ['oauth.utils'])
   .factory('$google', google);
 
 function google($q, $http, $cordovaUtility) {
-  return { signin: oauthGoogle }
+  return { signin: oauthGoogle };
 
   /*
    * Sign into the Google service
@@ -50,7 +50,7 @@ function google($q, $http, $cordovaUtility) {
     } else {
       deferred.reject("Cannot authenticate via a web browser");
     }
-    åreturn deferred.promise;
+    return deferred.promise;
   }
 }
 

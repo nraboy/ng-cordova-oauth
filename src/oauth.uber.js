@@ -2,7 +2,7 @@ angular.module('oauth.uber', ['oauth.utils'])
   .factory('$uber', uber);
 
 function uber($q, $http, $cordovaUtility) {
-  return { signin: oauthUber }
+  return { signin: oauthUber };
 
   /*
    * Sign into the Uber service

@@ -2,7 +2,7 @@ angular.module('oauth.envato', ['oauth.utils'])
   .factory('$envato', envato);
 
 function envato($q, $http, $cordovaUtility) {
-  return { signin: oauthEnvato }
+  return { signin: oauthEnvato };
 
   /*
    * Sign into the Envato service
@@ -53,7 +53,7 @@ function envato($q, $http, $cordovaUtility) {
     }
 
     return deferred.promise;
-}
+  }
 }
 
 $envato.$inject = ['$q', '$http', '$cordovaUtility'];

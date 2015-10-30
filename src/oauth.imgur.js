@@ -2,7 +2,7 @@ angular.module('oauth.imgur', ['oauth.utils'])
   .factory('$imgur', imgur);
 
 function imgur($q, $http, $cordovaUtility) {
-  return { signin: oauthImgur }
+  return { signin: oauthImgur };
 
   /*
    * Sign into the Imgur service

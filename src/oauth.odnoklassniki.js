@@ -2,7 +2,7 @@ angular.module('oauth.odnoklassniki', ['oauth.utils'])
   .factory('$odnoklassniki', odnoklassniki);
 
 function odnoklassniki($q, $http, $cordovaUtility) {
-  return { signin: oauthOdnoklassniki }
+  return { signin: oauthOdnoklassniki };
 
   /*
    * Sign into the Odnoklassniki service

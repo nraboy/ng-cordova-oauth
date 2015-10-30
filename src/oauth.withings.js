@@ -2,7 +2,7 @@ angular.module('oauth.withings', ['oauth.utils'])
   .factory('$withings', withings);
 
 function withings($q, $http, $cordovaUtility) {
-  return { signin: oauthWithings }
+  return { signin: oauthWithings };
 
   /*
    * Sign into the Withings service

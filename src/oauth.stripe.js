@@ -2,7 +2,7 @@ angular.module('oauth.stripe', ['oauth.utils'])
   .factory('$stripe', stripe);
 
 function stripe($q, $http, $cordovaUtility) {
-  return { signin: oauthStripe }
+  return { signin: oauthStripe };
 
   /*
    * Sign into the Stripe service

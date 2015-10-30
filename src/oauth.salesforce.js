@@ -2,7 +2,7 @@ angular.module('oauth.salesforce', ['oauth.utils'])
   .factory('$salesforce', salesforce);
 
 function salesforce($q, $http, $cordovaUtility) {
-  return { signin: oauthSalesforce }
+  return { signin: oauthSalesforce };
 
   /*
    * Sign into the Salesforce service

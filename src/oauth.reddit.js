@@ -2,7 +2,7 @@ angular.module('oauth.reddit', ['oauth.utils'])
   .factory('$reddit', reddit);
 
 function reddit($q, $http, $cordovaUtility) {
-  return { signin: oauthReddit }
+  return { signin: oauthReddit };
 
   /*
    * Sign into the Reddit service

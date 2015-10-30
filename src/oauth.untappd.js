@@ -2,7 +2,7 @@ angular.module('oauth.untappd', ['oauth.utils'])
   .factory('$untappd', untappd);
 
 function untappd($q, $http, $cordovaUtility) {
-  return { signin: oauthUntappd }
+  return { signin: oauthUntappd };
 
   /*
   * Sign into the Untappd service

@@ -2,7 +2,7 @@ angular.module('oauth.instagram', ['oauth.utils'])
   .factory('$instagram', instagram);
 
 function instagram($q, $http, $cordovaUtility) {
-  return { signin: oauthInstagram }
+  return { signin: oauthInstagram };
 
   /*
    * Sign into the Instagram service

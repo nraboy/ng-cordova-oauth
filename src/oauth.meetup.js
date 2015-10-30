@@ -2,7 +2,7 @@ angular.module('oauth.meetup', ['oauth.utils'])
   .factory('$meetup', meetup);
 
 function meetup($q, $http, $cordovaUtility) {
-  return { signin: oauthMeetup }
+  return { signin: oauthMeetup };
 
   /*
   * Sign into the Meetup service

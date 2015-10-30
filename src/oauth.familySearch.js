@@ -2,7 +2,7 @@ angular.module('oauth.familySearch', ['oauth.utils'])
   .factory('$familySearch', familySearch);
 
 function familySearch($q, $http, $cordovaUtility) {
-  return { signin: oauthFamilySearch }
+  return { signin: oauthFamilySearch };
 
   /*
    * Sign into the FamilySearch service

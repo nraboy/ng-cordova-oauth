@@ -2,7 +2,7 @@ angular.module('oauth.twitter', ['oauth.utils'])
   .factory('$twitter', twitter);
 
 function twitter($q, $http, $cordovaUtility) {
-  return { signin: oauthTwitter }
+  return { signin: oauthTwitter };
 
   /*
    * Sign into the Twitter service

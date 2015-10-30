@@ -2,7 +2,7 @@ angular.module('oauth.foursquare', ['oauth.utils'])
   .factory('$foursquare', foursquare);
 
 function foursquare($q, $http, $cordovaUtility) {
-  return { signin: oauthFoursquare }
+  return { signin: oauthFoursquare };
 
   /*
   * Sign into the Foursquare service

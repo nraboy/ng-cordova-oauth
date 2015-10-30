@@ -2,7 +2,7 @@ angular.module('oauth.dribble', ['oauth.utils'])
   .factory('$dribble', dribble);
 
 function dribble($q, $http, $cordovaUtility) {
-  return { signin: oauthDribble }
+  return { signin: oauthDribble };
 
   /*
    * Sign into the Dribble service

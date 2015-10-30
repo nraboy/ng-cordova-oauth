@@ -2,7 +2,7 @@ angular.module('oauth.yammer', ['oauth.utils'])
   .factory('$yammer', yammer);
 
 function yammer($q, $http, $cordovaUtility) {
-  return { signin: oauthYammer }
+  return { signin: oauthYammer };
 
   /*
    * Sign into the Yammer service

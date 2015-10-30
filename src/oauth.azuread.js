@@ -2,9 +2,7 @@ angular.module('oauth.azuread', ['oauth.utils'])
   .factory('$azureAD', azureAD);
 
 function azureAD($q, $http, $cordovaUtility) {
-  return {
-    signin: oauthAzureAD
-  }
+  return { signin: oauthAzureAD };
 
   /*
    * Sign into the Azure AD Authentication Library

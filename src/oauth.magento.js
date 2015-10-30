@@ -2,7 +2,7 @@ angular.module('oauth.magento', ['oauth.utils'])
   .factory('$magento', magento);
 
 function magento($q, $http, $cordovaUtility) {
-  return { signin: oauthMagento }
+  return { signin: oauthMagento };
 
   /*
   * Sign into the Magento service

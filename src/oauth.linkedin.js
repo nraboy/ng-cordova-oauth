@@ -2,7 +2,7 @@ angular.module('oauth.linkedin', ['oauth.utils'])
   .factory('$linkedin', linkedin);
 
 function linkedin($q, $http, $cordovaUtility) {
-  return { signin: oauthLinkedin }
+  return { signin: oauthLinkedin };
 
   /*
    * Sign into the LinkedIn service

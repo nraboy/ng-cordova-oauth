@@ -2,7 +2,7 @@ angular.module('oauth.facebook', ['oauth.utils'])
   .factory('$facebook', facebook);
 
 function facebook($q, $http, $cordovaUtility) {
-  return { signin: oauthFacebook }
+  return { signin: oauthFacebook };
 
   /*
    * Sign into the Facebook service

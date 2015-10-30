@@ -2,7 +2,7 @@ angular.module('oauth.digitalOcean', ['oauth.utils'])
   .factory('$digitalOcean', digitalOcean);
 
 function digitalOcean($q, $http, $cordovaUtility) {
-  return { signin: oauthDigitalOcean }
+  return { signin: oauthDigitalOcean };
 
   /*
    * Sign into the Digital Ocean service

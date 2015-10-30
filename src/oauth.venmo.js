@@ -2,7 +2,7 @@ angular.module('oauth.venmo', ['oauth.utils'])
   .factory('$venmo', venmo);
 
 function venmo($q, $http, $cordovaUtility) {
-  return { signin: oauthVenmo }
+  return { signin: oauthVenmo };
 
   /*
    * Sign into the Venmo service

@@ -2,7 +2,7 @@ angular.module('oauth.adfs', ['oauth.utils'])
   .factory('$adfs', adfs);
 
 function adfs($q, $http, $cordovaUtility) {
-  return { signin: oauthAdfs }
+  return { signin: oauthAdfs };
 
   /*
    * Sign into the ADFS service (ADFS 3.0 onwards)

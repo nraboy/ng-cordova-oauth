@@ -2,7 +2,7 @@ angular.module('oauth.jawbone', ['oauth.utils'])
   .factory('$jawbone', jawbone);
 
 function jawbone($q, $http, $cordovaUtility) {
-  return { signin: oauthJawbone }
+  return { signin: oauthJawbone };
 
   /*
    * Sign into the Jawbone service

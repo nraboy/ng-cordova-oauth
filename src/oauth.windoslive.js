@@ -2,7 +2,7 @@ angular.module('oauth.windowslive', ['oauth.utils'])
   .factory('$windowslive', windowslive);
 
 function windowslive($q, $http, $cordovaUtility) {
-  return { signin: oauthWindowslive }
+  return { signin: oauthWindowslive };
 
   /*
    * Sign into the Windows Live Connect service

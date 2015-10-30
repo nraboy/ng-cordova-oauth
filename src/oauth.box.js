@@ -2,7 +2,7 @@ angular.module('oauth.box', ['oauth.utils'])
   .factory('$box', box);
 
 function box($q, $http, $cordovaUtility) {
-  return { signin: oauthBox }
+  return { signin: oauthBox };
 
   /*
    * Sign into the Box service

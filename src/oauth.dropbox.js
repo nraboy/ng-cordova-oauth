@@ -1,10 +1,8 @@
 angular.module('oauth.dropbox', ['oauth.utils'])
-  .factory('$dropbox', dropbox)
+  .factory('$dropbox', dropbox);
 
 function dropbox() {
-  return {
-    signin: oauthDropbox
-  }
+  return { signin: oauthDropbox };
 
   /*
    * Sign into the Dropbox service
@@ -55,4 +53,4 @@ function dropbox() {
   }
 }
 
-$dropbox.$inject = ['$q', '$http']
+$dropbox.$inject = ['$q', '$http', '$cordovaUtility'];
