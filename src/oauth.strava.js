@@ -1,7 +1,7 @@
 angular.module('oauth.strava', ['oauth.utils'])
   .factory('$strava', strava);
 
-function strava($q, $http, $cordovaUtility) {
+function strava($q, $http, $cordovaOauthUtility) {
   return { signin: oauthStrava };
 
   /*
@@ -57,4 +57,4 @@ function strava($q, $http, $cordovaUtility) {
   }
 }
 
-$strava.$inject = ['$q', '$http', '$cordovaUtility'];
+strava.$inject = ['$q', '$http', '$cordovaOauthUtility'];

@@ -1,7 +1,7 @@
 angular.module('oauth.instagram', ['oauth.utils'])
   .factory('$instagram', instagram);
 
-function instagram($q, $http, $cordovaUtility) {
+function instagram($q, $http, $cordovaOauthUtility) {
   return { signin: oauthInstagram };
 
   /*
@@ -68,4 +68,4 @@ function instagram($q, $http, $cordovaUtility) {
   }
 }
 
-$instagram.$inject = ['$q', '$http', '$cordovaUtility'];
+instagram.$inject = ['$q', '$http', '$cordovaOauthUtility'];

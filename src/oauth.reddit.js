@@ -1,7 +1,7 @@
 angular.module('oauth.reddit', ['oauth.utils'])
   .factory('$reddit', reddit);
 
-function reddit($q, $http, $cordovaUtility) {
+function reddit($q, $http, $cordovaOauthUtility) {
   return { signin: oauthReddit };
 
   /*
@@ -57,4 +57,4 @@ function reddit($q, $http, $cordovaUtility) {
   }
 }
 
-$reddit.$inject = ['$q', '$http', '$cordovaUtility'];
+reddit.$inject = ['$q', '$http', '$cordovaOauthUtility'];

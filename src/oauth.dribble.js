@@ -1,7 +1,7 @@
 angular.module('oauth.dribble', ['oauth.utils'])
   .factory('$dribble', dribble);
 
-function dribble($q, $http, $cordovaUtility) {
+function dribble($q, $http, $cordovaOauthUtility) {
   return { signin: oauthDribble };
 
   /*
@@ -71,4 +71,4 @@ function dribble($q, $http, $cordovaUtility) {
   }
 }
 
-$dribble.$inject = ['$q', '$http', '$cordovaUtility'];
+dribble.$inject = ['$q', '$http', '$cordovaOauthUtility'];

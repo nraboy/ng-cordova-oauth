@@ -1,7 +1,7 @@
 angular.module('oauth.adfs', ['oauth.utils'])
   .factory('$adfs', adfs);
 
-function adfs($q, $http, $cordovaUtility) {
+function adfs($q, $http, $cordovaOauthUtility) {
   return { signin: oauthAdfs };
 
   /*
@@ -50,12 +50,12 @@ function adfs($q, $http, $cordovaUtility) {
   }
 }
 
-$adfs.$inject = ['$q', '$http', '$cordovaUtility'];
+adfs.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.azuread', ['oauth.utils'])
   .factory('$azureAD', azureAD);
 
-function azureAD($q, $http, $cordovaUtility) {
+function azureAD($q, $http, $cordovaOauthUtility) {
   return { signin: oauthAzureAD };
 
   /*
@@ -111,12 +111,12 @@ function azureAD($q, $http, $cordovaUtility) {
   }
 }
 
-oauthAzureAD.$inject = ['$q', '$http', '$cordovaUtility'];
+azureAD.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.box', ['oauth.utils'])
   .factory('$box', box);
 
-function box($q, $http, $cordovaUtility) {
+function box($q, $http, $cordovaOauthUtility) {
   return { signin: oauthBox };
 
   /*
@@ -172,12 +172,12 @@ function box($q, $http, $cordovaUtility) {
   }
 }
 
-$box.$inject = ['$q', '$http', '$cordovaUtility'];
+box.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.digitalOcean', ['oauth.utils'])
   .factory('$digitalOcean', digitalOcean);
 
-function digitalOcean($q, $http, $cordovaUtility) {
+function digitalOcean($q, $http, $cordovaOauthUtility) {
   return { signin: oauthDigitalOcean };
 
   /*
@@ -231,12 +231,12 @@ function digitalOcean($q, $http, $cordovaUtility) {
   }
 }
 
-$digitalOcean.$inject = ['$q', '$http', '$cordovaUtility'];
+digitalOcean.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.dribble', ['oauth.utils'])
   .factory('$dribble', dribble);
 
-function dribble($q, $http, $cordovaUtility) {
+function dribble($q, $http, $cordovaOauthUtility) {
   return { signin: oauthDribble };
 
   /*
@@ -306,7 +306,7 @@ function dribble($q, $http, $cordovaUtility) {
   }
 }
 
-$dribble.$inject = ['$q', '$http', '$cordovaUtility'];
+dribble.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.dropbox', ['oauth.utils'])
   .factory('$dropbox', dropbox);
@@ -363,12 +363,12 @@ function dropbox() {
   }
 }
 
-$dropbox.$inject = ['$q', '$http', '$cordovaUtility'];
+dropbox.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.envato', ['oauth.utils'])
   .factory('$envato', envato);
 
-function envato($q, $http, $cordovaUtility) {
+function envato($q, $http, $cordovaOauthUtility) {
   return { signin: oauthEnvato };
 
   /*
@@ -423,12 +423,12 @@ function envato($q, $http, $cordovaUtility) {
   }
 }
 
-$envato.$inject = ['$q', '$http', '$cordovaUtility'];
+envato.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.facebook', ['oauth.utils'])
   .factory('$facebook', facebook);
 
-function facebook($q, $http, $cordovaUtility) {
+function facebook($q, $http, $cordovaOauthUtility) {
   return { signin: oauthFacebook };
 
   /*
@@ -489,12 +489,12 @@ function facebook($q, $http, $cordovaUtility) {
   }
 }
 
-$facebook.$inject = ['$q', '$http', '$cordovaUtility'];
+facebook.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.familySearch', ['oauth.utils'])
   .factory('$familySearch', familySearch);
 
-function familySearch($q, $http, $cordovaUtility) {
+function familySearch($q, $http, $cordovaOauthUtility) {
   return { signin: oauthFamilySearch };
 
   /*
@@ -548,12 +548,12 @@ function familySearch($q, $http, $cordovaUtility) {
   }
 }
 
-$familySearch.$inject = ['$q', '$http', '$cordovaUtility'];
+familySearch.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.foursquare', ['oauth.utils'])
   .factory('$foursquare', foursquare);
 
-function foursquare($q, $http, $cordovaUtility) {
+function foursquare($q, $http, $cordovaOauthUtility) {
   return { signin: oauthFoursquare };
 
   /*
@@ -612,12 +612,12 @@ function foursquare($q, $http, $cordovaUtility) {
   }
 }
 
-$foursquare.$inject = ['$q', '$http', '$cordovaUtility'];
+foursquare.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.github', ['oauth.utils'])
   .factory('$github', github);
 
-function github($q, $http, $cordovaUtility) {
+function github($q, $http, $cordovaOauthUtility) {
   return { signin: oauthGithub };
 
   /*
@@ -674,12 +674,12 @@ function github($q, $http, $cordovaUtility) {
   }
 }
 
-$github.$inject = ['$q', '$http', '$cordovaUtility'];
+github.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.google', ['oauth.utils'])
   .factory('$google', google);
 
-function google($q, $http, $cordovaUtility) {
+function google($q, $http, $cordovaOauthUtility) {
   return { signin: oauthGoogle };
 
   /*
@@ -732,12 +732,12 @@ function google($q, $http, $cordovaUtility) {
   }
 }
 
-$google.$inject = ['$q', '$http', '$cordovaUtility'];
+google.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.imgur', ['oauth.utils'])
   .factory('$imgur', imgur);
 
-function imgur($q, $http, $cordovaUtility) {
+function imgur($q, $http, $cordovaOauthUtility) {
   return { signin: oauthImgur };
 
   /*
@@ -790,12 +790,12 @@ function imgur($q, $http, $cordovaUtility) {
   }
 }
 
-$imgur.$inject = ['$q', '$http', '$cordovaUtility'];
+imgur.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.instagram', ['oauth.utils'])
   .factory('$instagram', instagram);
 
-function instagram($q, $http, $cordovaUtility) {
+function instagram($q, $http, $cordovaOauthUtility) {
   return { signin: oauthInstagram };
 
   /*
@@ -862,12 +862,12 @@ function instagram($q, $http, $cordovaUtility) {
   }
 }
 
-$instagram.$inject = ['$q', '$http', '$cordovaUtility'];
+instagram.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.jawbone', ['oauth.utils'])
   .factory('$jawbone', jawbone);
 
-function jawbone($q, $http, $cordovaUtility) {
+function jawbone($q, $http, $cordovaOauthUtility) {
   return { signin: oauthJawbone };
 
   /*
@@ -926,17 +926,44 @@ function jawbone($q, $http, $cordovaUtility) {
   }
 }
 
-$jawbone.$inject = ['$q', '$http', '$cordovaUtility'];
+jawbone.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module("oauth.providers", [
-  "oauth.utils", "oauth.azuread", "oauth.adfs", 'oauth.dropbox',
-  'oauth.digitalOcean', 'oauth.google', 'oauth.github', 'oauth.facebook',
-  'oauth.linkedin', 'oauth.instagram', 'oauth.box', 'oauth.reddit', 'oauth.slack',
-  'oauth.twitter', 'oauth.meetup', 'oauth.salesforce', 'oauth.strava',
-  'oauth.withings', 'oauth.foursquare', 'oauth.magento', 'oauth.vkontakte',
-  'oauth.odnoklassniki', 'oauth.imgur', 'oauth.spotify', 'oauth.uber',
-  'oauth.windowslive', 'oauth.yammer', 'oauth.venmo', 'oauth.stripe', 'oauth.rally',
-  'oauth.familySearch', 'oauth.envato', 'oauth.weibo', 'oauth.jawbone', 'oauth.untappd',
+  "oauth.utils",
+  "oauth.azuread",
+  "oauth.adfs",
+  'oauth.dropbox',
+  'oauth.digitalOcean',
+  'oauth.google',
+  'oauth.github',
+  'oauth.facebook',
+  'oauth.linkedin',
+  'oauth.instagram',
+  'oauth.box',
+  'oauth.reddit',
+  'oauth.slack',
+  'oauth.twitter',
+  'oauth.meetup',
+  'oauth.salesforce',
+  'oauth.strava',
+  'oauth.withings',
+  'oauth.foursquare',
+  'oauth.magento',
+  'oauth.vkontakte',
+  'oauth.odnoklassniki',
+  'oauth.imgur',
+  'oauth.spotify',
+  'oauth.uber',
+  'oauth.windowslive',
+  'oauth.yammer',
+  'oauth.venmo',
+  'oauth.stripe',
+  'oauth.rally',
+  'oauth.familySearch',
+  'oauth.envato',
+  'oauth.weibo',
+  'oauth.jawbone',
+  'oauth.untappd',
   'oauth.dribble'])
   .factory("$cordovaOauth", cordovaOauth);
 
@@ -987,7 +1014,7 @@ function cordovaOauth(
   };
 }
 
-$cordovaOauth.$inject = [
+cordovaOauth.$inject = [
   "$q", '$http', "$cordovaOauthUtility",
   "$azureAD",
   "$adfs",
@@ -1029,7 +1056,7 @@ $cordovaOauth.$inject = [
 angular.module('oauth.linkedin', ['oauth.utils'])
   .factory('$linkedin', linkedin);
 
-function linkedin($q, $http, $cordovaUtility) {
+function linkedin($q, $http, $cordovaOauthUtility) {
   return { signin: oauthLinkedin };
 
   /*
@@ -1086,12 +1113,12 @@ function linkedin($q, $http, $cordovaUtility) {
   }
 }
 
-$linkedin.$inject = ['$q', '$http', '$cordovaUtility'];
+linkedin.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.magento', ['oauth.utils'])
   .factory('$magento', magento);
 
-function magento($q, $http, $cordovaUtility) {
+function magento($q, $http, $cordovaOauthUtility) {
   return { signin: oauthMagento };
 
   /*
@@ -1200,12 +1227,12 @@ function magento($q, $http, $cordovaUtility) {
   }
 }
 
-$magento.$inject = ['$q', '$http', '$cordovaUtility'];
+magento.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.meetup', ['oauth.utils'])
   .factory('$meetup', meetup);
 
-function meetup($q, $http, $cordovaUtility) {
+function meetup($q, $http, $cordovaOauthUtility) {
   return { signin: oauthMeetup };
 
   /*
@@ -1257,12 +1284,12 @@ function meetup($q, $http, $cordovaUtility) {
   }
 }
 
-$meetup.$inject = ['$q', '$http', '$cordovaUtility'];
+meetup.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.odnoklassniki', ['oauth.utils'])
   .factory('$odnoklassniki', odnoklassniki);
 
-function odnoklassniki($q, $http, $cordovaUtility) {
+function odnoklassniki($q, $http, $cordovaOauthUtility) {
   return { signin: oauthOdnoklassniki };
 
   /*
@@ -1310,12 +1337,12 @@ function odnoklassniki($q, $http, $cordovaUtility) {
   }
 }
 
-$odnoklassniki.$inject = ['$q', '$http', '$cordovaUtility'];
+odnoklassniki.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.rally', ['oauth.utils'])
   .factory('$rally', rally);
 
-function rally($q, $http, $cordovaUtility) {
+function rally($q, $http, $cordovaOauthUtility) {
   return { signin: oauthRally };
 
   /*
@@ -1371,12 +1398,12 @@ function rally($q, $http, $cordovaUtility) {
   }
 }
 
-$rally.$inject = ['$q', '$http', '$cordovaUtility'];
+rally.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.reddit', ['oauth.utils'])
   .factory('$reddit', reddit);
 
-function reddit($q, $http, $cordovaUtility) {
+function reddit($q, $http, $cordovaOauthUtility) {
   return { signin: oauthReddit };
 
   /*
@@ -1432,12 +1459,12 @@ function reddit($q, $http, $cordovaUtility) {
   }
 }
 
-$reddit.$inject = ['$q', '$http', '$cordovaUtility'];
+reddit.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.salesforce', ['oauth.utils'])
   .factory('$salesforce', salesforce);
 
-function salesforce($q, $http, $cordovaUtility) {
+function salesforce($q, $http, $cordovaOauthUtility) {
   return { signin: oauthSalesforce };
 
   /*
@@ -1504,12 +1531,12 @@ function salesforce($q, $http, $cordovaUtility) {
   }
 }
 
-$salesforce.$inject = ['$q', '$http', '$cordovaUtility'];
+salesforce.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.slack', ['oauth.utils'])
   .factory('$slack', slack);
 
-function slack($q, $http, $cordovaUtility) {
+function slack($q, $http, $cordovaOauthUtility) {
   return { signin: oauthSlack };
 
   /*
@@ -1567,12 +1594,12 @@ function slack($q, $http, $cordovaUtility) {
   }
 }
 
-$slack.$inject = ['$q', '$http', '$cordovaUtility'];
+slack.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.spotify', ['oauth.utils'])
   .factory('$spotify', spotify);
 
-function spotify($q, $http, $cordovaUtility) {
+function spotify($q, $http, $cordovaOauthUtility) {
   return { signin: oauthSpotify };
 
   /*
@@ -1625,12 +1652,12 @@ function spotify($q, $http, $cordovaUtility) {
   }
 }
 
-$spotify.$inject = ['$q', '$http', '$cordovaUtility'];
+spotify.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.strava', ['oauth.utils'])
   .factory('$strava', strava);
 
-function strava($q, $http, $cordovaUtility) {
+function strava($q, $http, $cordovaOauthUtility) {
   return { signin: oauthStrava };
 
   /*
@@ -1686,12 +1713,12 @@ function strava($q, $http, $cordovaUtility) {
   }
 }
 
-$strava.$inject = ['$q', '$http', '$cordovaUtility'];
+strava.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.stripe', ['oauth.utils'])
   .factory('$stripe', stripe);
 
-function stripe($q, $http, $cordovaUtility) {
+function stripe($q, $http, $cordovaOauthUtility) {
   return { signin: oauthStripe };
 
   /*
@@ -1747,12 +1774,12 @@ function stripe($q, $http, $cordovaUtility) {
   }
 }
 
-$stripe.$inject = ['$q', '$http', '$cordovaUtility'];
+stripe.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.twitter', ['oauth.utils'])
   .factory('$twitter', twitter);
 
-function twitter($q, $http, $cordovaUtility) {
+function twitter($q, $http, $cordovaOauthUtility) {
   return { signin: oauthTwitter };
 
   /*
@@ -1869,12 +1896,12 @@ function twitter($q, $http, $cordovaUtility) {
   }
 }
 
-$twitter.$inject = ['$q', '$http', '$cordovaUtility'];
+twitter.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.uber', ['oauth.utils'])
   .factory('$uber', uber);
 
-function uber($q, $http, $cordovaUtility) {
+function uber($q, $http, $cordovaOauthUtility) {
   return { signin: oauthUber };
 
   /*
@@ -1931,12 +1958,12 @@ function uber($q, $http, $cordovaUtility) {
   }
 }
 
-$uber.$inject = ['$q', '$http', '$cordovaUtility'];
+uber.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.untappd', ['oauth.utils'])
   .factory('$untappd', untappd);
 
-function untappd($q, $http, $cordovaUtility) {
+function untappd($q, $http, $cordovaOauthUtility) {
   return { signin: oauthUntappd };
 
   /*
@@ -1994,12 +2021,12 @@ function untappd($q, $http, $cordovaUtility) {
   }
 }
 
-$untappd.$inject = ['$q', '$http', '$cordovaUtility'];
+untappd.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.venmo', ['oauth.utils'])
   .factory('$venmo', venmo);
 
-function venmo($q, $http, $cordovaUtility) {
+function venmo($q, $http, $cordovaOauthUtility) {
   return { signin: oauthVenmo };
 
   /*
@@ -2055,12 +2082,12 @@ function venmo($q, $http, $cordovaUtility) {
   }
 }
 
-$venmo.$inject = ['$q', '$http', '$cordovaUtility'];
+venmo.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.vkontakte', ['oauth.utils'])
   .factory('$vkontakte', vkontakte);
 
-function vkontakte($q, $http, $cordovaUtility) {
+function vkontakte($q, $http, $cordovaOauthUtility) {
   return { signin: oauthvKontakte };
 
   /*
@@ -2112,12 +2139,12 @@ function vkontakte($q, $http, $cordovaUtility) {
   }
 }
 
-$vkontakte.$inject = ['$q', '$http', '$cordovaUtility'];
+vkontakte.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.weibo', ['oauth.utils'])
   .factory('$weibo', weibo);
 
-function weibo($q, $http, $cordovaUtility) {
+function weibo($q, $http, $cordovaOauthUtility) {
   return { signin: oauthWeibo };
 
   /*
@@ -2183,12 +2210,12 @@ function weibo($q, $http, $cordovaUtility) {
   }
 }
 
-$weibo.$inject = ['$q', '$http', '$cordovaUtility'];
+weibo.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.windowslive', ['oauth.utils'])
   .factory('$windowslive', windowslive);
 
-function windowslive($q, $http, $cordovaUtility) {
+function windowslive($q, $http, $cordovaOauthUtility) {
   return { signin: oauthWindowslive };
 
   /*
@@ -2244,12 +2271,12 @@ function windowslive($q, $http, $cordovaUtility) {
   }
 }
 
-$windowslive.$inject = ['$q', '$http', '$cordovaUtility'];
+windowslive.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.withings', ['oauth.utils'])
   .factory('$withings', withings);
 
-function withings($q, $http, $cordovaUtility) {
+function withings($q, $http, $cordovaOauthUtility) {
   return { signin: oauthWithings };
 
   /*
@@ -2355,12 +2382,12 @@ function withings($q, $http, $cordovaUtility) {
   }
 }
 
-$withings.$inject = ['$q', '$http', '$cordovaUtility'];
+withings.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.yammer', ['oauth.utils'])
   .factory('$yammer', yammer);
 
-function yammer($q, $http, $cordovaUtility) {
+function yammer($q, $http, $cordovaOauthUtility) {
   return { signin: oauthYammer };
 
   /*
@@ -2415,7 +2442,7 @@ function yammer($q, $http, $cordovaUtility) {
   }
 }
 
-$yammer.$inject = ['$q', '$http', '$cordovaUtility'];
+yammer.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 /*
  * Cordova AngularJS Oauth

@@ -1,7 +1,7 @@
 angular.module('oauth.vkontakte', ['oauth.utils'])
   .factory('$vkontakte', vkontakte);
 
-function vkontakte($q, $http, $cordovaUtility) {
+function vkontakte($q, $http, $cordovaOauthUtility) {
   return { signin: oauthvKontakte };
 
   /*
@@ -53,4 +53,4 @@ function vkontakte($q, $http, $cordovaUtility) {
   }
 }
 
-$vkontakte.$inject = ['$q', '$http', '$cordovaUtility'];
+vkontakte.$inject = ['$q', '$http', '$cordovaOauthUtility'];

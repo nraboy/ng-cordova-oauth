@@ -1,7 +1,7 @@
 angular.module('oauth.windowslive', ['oauth.utils'])
   .factory('$windowslive', windowslive);
 
-function windowslive($q, $http, $cordovaUtility) {
+function windowslive($q, $http, $cordovaOauthUtility) {
   return { signin: oauthWindowslive };
 
   /*
@@ -57,4 +57,4 @@ function windowslive($q, $http, $cordovaUtility) {
   }
 }
 
-$windowslive.$inject = ['$q', '$http', '$cordovaUtility'];
+windowslive.$inject = ['$q', '$http', '$cordovaOauthUtility'];

@@ -1,7 +1,7 @@
 angular.module('oauth.digitalOcean', ['oauth.utils'])
   .factory('$digitalOcean', digitalOcean);
 
-function digitalOcean($q, $http, $cordovaUtility) {
+function digitalOcean($q, $http, $cordovaOauthUtility) {
   return { signin: oauthDigitalOcean };
 
   /*
@@ -55,4 +55,4 @@ function digitalOcean($q, $http, $cordovaUtility) {
   }
 }
 
-$digitalOcean.$inject = ['$q', '$http', '$cordovaUtility'];
+digitalOcean.$inject = ['$q', '$http', '$cordovaOauthUtility'];

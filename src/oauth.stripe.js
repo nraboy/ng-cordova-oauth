@@ -1,7 +1,7 @@
 angular.module('oauth.stripe', ['oauth.utils'])
   .factory('$stripe', stripe);
 
-function stripe($q, $http, $cordovaUtility) {
+function stripe($q, $http, $cordovaOauthUtility) {
   return { signin: oauthStripe };
 
   /*
@@ -57,4 +57,4 @@ function stripe($q, $http, $cordovaUtility) {
   }
 }
 
-$stripe.$inject = ['$q', '$http', '$cordovaUtility'];
+stripe.$inject = ['$q', '$http', '$cordovaOauthUtility'];

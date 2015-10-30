@@ -1,7 +1,7 @@
 angular.module('oauth.slack', ['oauth.utils'])
   .factory('$slack', slack);
 
-function slack($q, $http, $cordovaUtility) {
+function slack($q, $http, $cordovaOauthUtility) {
   return { signin: oauthSlack };
 
   /*
@@ -59,4 +59,4 @@ function slack($q, $http, $cordovaUtility) {
   }
 }
 
-$slack.$inject = ['$q', '$http', '$cordovaUtility'];
+slack.$inject = ['$q', '$http', '$cordovaOauthUtility'];

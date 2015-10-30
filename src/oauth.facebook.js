@@ -1,7 +1,7 @@
 angular.module('oauth.facebook', ['oauth.utils'])
   .factory('$facebook', facebook);
 
-function facebook($q, $http, $cordovaUtility) {
+function facebook($q, $http, $cordovaOauthUtility) {
   return { signin: oauthFacebook };
 
   /*
@@ -62,4 +62,4 @@ function facebook($q, $http, $cordovaUtility) {
   }
 }
 
-$facebook.$inject = ['$q', '$http', '$cordovaUtility'];
+facebook.$inject = ['$q', '$http', '$cordovaOauthUtility'];

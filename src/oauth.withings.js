@@ -1,7 +1,7 @@
 angular.module('oauth.withings', ['oauth.utils'])
   .factory('$withings', withings);
 
-function withings($q, $http, $cordovaUtility) {
+function withings($q, $http, $cordovaOauthUtility) {
   return { signin: oauthWithings };
 
   /*
@@ -107,4 +107,4 @@ function withings($q, $http, $cordovaUtility) {
   }
 }
 
-$withings.$inject = ['$q', '$http', '$cordovaUtility'];
+withings.$inject = ['$q', '$http', '$cordovaOauthUtility'];

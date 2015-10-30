@@ -1,7 +1,7 @@
 angular.module('oauth.meetup', ['oauth.utils'])
   .factory('$meetup', meetup);
 
-function meetup($q, $http, $cordovaUtility) {
+function meetup($q, $http, $cordovaOauthUtility) {
   return { signin: oauthMeetup };
 
   /*
@@ -53,4 +53,4 @@ function meetup($q, $http, $cordovaUtility) {
   }
 }
 
-$meetup.$inject = ['$q', '$http', '$cordovaUtility'];
+meetup.$inject = ['$q', '$http', '$cordovaOauthUtility'];

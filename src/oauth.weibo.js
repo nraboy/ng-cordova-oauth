@@ -1,7 +1,7 @@
 angular.module('oauth.weibo', ['oauth.utils'])
   .factory('$weibo', weibo);
 
-function weibo($q, $http, $cordovaUtility) {
+function weibo($q, $http, $cordovaOauthUtility) {
   return { signin: oauthWeibo };
 
   /*
@@ -67,4 +67,4 @@ function weibo($q, $http, $cordovaUtility) {
   }
 }
 
-$weibo.$inject = ['$q', '$http', '$cordovaUtility'];
+weibo.$inject = ['$q', '$http', '$cordovaOauthUtility'];

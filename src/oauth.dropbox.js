@@ -53,4 +53,4 @@ function dropbox() {
   }
 }
 
-$dropbox.$inject = ['$q', '$http', '$cordovaUtility'];
+dropbox.$inject = ['$q', '$http', '$cordovaOauthUtility'];

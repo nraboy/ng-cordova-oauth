@@ -1,7 +1,7 @@
 angular.module('oauth.yammer', ['oauth.utils'])
   .factory('$yammer', yammer);
 
-function yammer($q, $http, $cordovaUtility) {
+function yammer($q, $http, $cordovaOauthUtility) {
   return { signin: oauthYammer };
 
   /*
@@ -56,4 +56,4 @@ function yammer($q, $http, $cordovaUtility) {
   }
 }
 
-$yammer.$inject = ['$q', '$http', '$cordovaUtility'];
+yammer.$inject = ['$q', '$http', '$cordovaOauthUtility'];

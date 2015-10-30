@@ -1,7 +1,7 @@
 angular.module('oauth.rally', ['oauth.utils'])
   .factory('$rally', rally);
 
-function rally($q, $http, $cordovaUtility) {
+function rally($q, $http, $cordovaOauthUtility) {
   return { signin: oauthRally };
 
   /*
@@ -57,4 +57,4 @@ function rally($q, $http, $cordovaUtility) {
   }
 }
 
-$rally.$inject = ['$q', '$http', '$cordovaUtility'];
+rally.$inject = ['$q', '$http', '$cordovaOauthUtility'];

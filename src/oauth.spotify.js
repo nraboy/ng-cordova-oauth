@@ -1,7 +1,7 @@
 angular.module('oauth.spotify', ['oauth.utils'])
   .factory('$spotify', spotify);
 
-function spotify($q, $http, $cordovaUtility) {
+function spotify($q, $http, $cordovaOauthUtility) {
   return { signin: oauthSpotify };
 
   /*
@@ -54,4 +54,4 @@ function spotify($q, $http, $cordovaUtility) {
   }
 }
 
-$spotify.$inject = ['$q', '$http', '$cordovaUtility'];
+spotify.$inject = ['$q', '$http', '$cordovaOauthUtility'];

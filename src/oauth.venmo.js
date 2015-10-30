@@ -1,7 +1,7 @@
 angular.module('oauth.venmo', ['oauth.utils'])
   .factory('$venmo', venmo);
 
-function venmo($q, $http, $cordovaUtility) {
+function venmo($q, $http, $cordovaOauthUtility) {
   return { signin: oauthVenmo };
 
   /*
@@ -57,4 +57,4 @@ function venmo($q, $http, $cordovaUtility) {
   }
 }
 
-$venmo.$inject = ['$q', '$http', '$cordovaUtility'];
+venmo.$inject = ['$q', '$http', '$cordovaOauthUtility'];

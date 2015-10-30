@@ -1,7 +1,7 @@
 angular.module('oauth.familySearch', ['oauth.utils'])
   .factory('$familySearch', familySearch);
 
-function familySearch($q, $http, $cordovaUtility) {
+function familySearch($q, $http, $cordovaOauthUtility) {
   return { signin: oauthFamilySearch };
 
   /*
@@ -55,4 +55,4 @@ function familySearch($q, $http, $cordovaUtility) {
   }
 }
 
-$familySearch.$inject = ['$q', '$http', '$cordovaUtility'];
+familySearch.$inject = ['$q', '$http', '$cordovaOauthUtility'];

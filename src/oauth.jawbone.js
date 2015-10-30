@@ -1,7 +1,7 @@
 angular.module('oauth.jawbone', ['oauth.utils'])
   .factory('$jawbone', jawbone);
 
-function jawbone($q, $http, $cordovaUtility) {
+function jawbone($q, $http, $cordovaOauthUtility) {
   return { signin: oauthJawbone };
 
   /*
@@ -60,4 +60,4 @@ function jawbone($q, $http, $cordovaUtility) {
   }
 }
 
-$jawbone.$inject = ['$q', '$http', '$cordovaUtility'];
+jawbone.$inject = ['$q', '$http', '$cordovaOauthUtility'];

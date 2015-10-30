@@ -1,7 +1,7 @@
 angular.module('oauth.box', ['oauth.utils'])
   .factory('$box', box);
 
-function box($q, $http, $cordovaUtility) {
+function box($q, $http, $cordovaOauthUtility) {
   return { signin: oauthBox };
 
   /*
@@ -57,4 +57,4 @@ function box($q, $http, $cordovaUtility) {
   }
 }
 
-$box.$inject = ['$q', '$http', '$cordovaUtility'];
+box.$inject = ['$q', '$http', '$cordovaOauthUtility'];

@@ -1,7 +1,7 @@
 angular.module('oauth.foursquare', ['oauth.utils'])
   .factory('$foursquare', foursquare);
 
-function foursquare($q, $http, $cordovaUtility) {
+function foursquare($q, $http, $cordovaOauthUtility) {
   return { signin: oauthFoursquare };
 
   /*
@@ -60,4 +60,4 @@ function foursquare($q, $http, $cordovaUtility) {
   }
 }
 
-$foursquare.$inject = ['$q', '$http', '$cordovaUtility'];
+foursquare.$inject = ['$q', '$http', '$cordovaOauthUtility'];

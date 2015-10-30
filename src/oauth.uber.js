@@ -1,7 +1,7 @@
 angular.module('oauth.uber', ['oauth.utils'])
   .factory('$uber', uber);
 
-function uber($q, $http, $cordovaUtility) {
+function uber($q, $http, $cordovaOauthUtility) {
   return { signin: oauthUber };
 
   /*
@@ -58,4 +58,4 @@ function uber($q, $http, $cordovaUtility) {
   }
 }
 
-$uber.$inject = ['$q', '$http', '$cordovaUtility'];
+uber.$inject = ['$q', '$http', '$cordovaOauthUtility'];

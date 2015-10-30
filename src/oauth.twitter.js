@@ -1,7 +1,7 @@
 angular.module('oauth.twitter', ['oauth.utils'])
   .factory('$twitter', twitter);
 
-function twitter($q, $http, $cordovaUtility) {
+function twitter($q, $http, $cordovaOauthUtility) {
   return { signin: oauthTwitter };
 
   /*
@@ -118,4 +118,4 @@ function twitter($q, $http, $cordovaUtility) {
   }
 }
 
-$twitter.$inject = ['$q', '$http', '$cordovaUtility'];
+twitter.$inject = ['$q', '$http', '$cordovaOauthUtility'];

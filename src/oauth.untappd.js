@@ -1,7 +1,7 @@
 angular.module('oauth.untappd', ['oauth.utils'])
   .factory('$untappd', untappd);
 
-function untappd($q, $http, $cordovaUtility) {
+function untappd($q, $http, $cordovaOauthUtility) {
   return { signin: oauthUntappd };
 
   /*
@@ -59,4 +59,4 @@ function untappd($q, $http, $cordovaUtility) {
   }
 }
 
-$untappd.$inject = ['$q', '$http', '$cordovaUtility'];
+untappd.$inject = ['$q', '$http', '$cordovaOauthUtility'];

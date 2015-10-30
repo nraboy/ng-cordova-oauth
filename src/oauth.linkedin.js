@@ -1,7 +1,7 @@
 angular.module('oauth.linkedin', ['oauth.utils'])
   .factory('$linkedin', linkedin);
 
-function linkedin($q, $http, $cordovaUtility) {
+function linkedin($q, $http, $cordovaOauthUtility) {
   return { signin: oauthLinkedin };
 
   /*
@@ -58,4 +58,4 @@ function linkedin($q, $http, $cordovaUtility) {
   }
 }
 
-$linkedin.$inject = ['$q', '$http', '$cordovaUtility'];
+linkedin.$inject = ['$q', '$http', '$cordovaOauthUtility'];

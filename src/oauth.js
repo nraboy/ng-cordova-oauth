@@ -84,7 +84,7 @@ function cordovaOauth(
   };
 }
 
-$cordovaOauth.$inject = [
+cordovaOauth.$inject = [
   "$q", '$http', "$cordovaOauthUtility",
   "$azureAD",
   "$adfs",

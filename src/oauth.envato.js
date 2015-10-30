@@ -1,7 +1,7 @@
 angular.module('oauth.envato', ['oauth.utils'])
   .factory('$envato', envato);
 
-function envato($q, $http, $cordovaUtility) {
+function envato($q, $http, $cordovaOauthUtility) {
   return { signin: oauthEnvato };
 
   /*
@@ -56,4 +56,4 @@ function envato($q, $http, $cordovaUtility) {
   }
 }
 
-$envato.$inject = ['$q', '$http', '$cordovaUtility'];
+envato.$inject = ['$q', '$http', '$cordovaOauthUtility'];

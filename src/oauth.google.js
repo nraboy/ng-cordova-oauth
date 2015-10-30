@@ -1,7 +1,7 @@
 angular.module('oauth.google', ['oauth.utils'])
   .factory('$google', google);
 
-function google($q, $http, $cordovaUtility) {
+function google($q, $http, $cordovaOauthUtility) {
   return { signin: oauthGoogle };
 
   /*
@@ -54,4 +54,4 @@ function google($q, $http, $cordovaUtility) {
   }
 }
 
-$google.$inject = ['$q', '$http', '$cordovaUtility'];
+google.$inject = ['$q', '$http', '$cordovaOauthUtility'];

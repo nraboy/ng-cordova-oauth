@@ -1,7 +1,7 @@
 angular.module('oauth.magento', ['oauth.utils'])
   .factory('$magento', magento);
 
-function magento($q, $http, $cordovaUtility) {
+function magento($q, $http, $cordovaOauthUtility) {
   return { signin: oauthMagento };
 
   /*
@@ -110,4 +110,4 @@ function magento($q, $http, $cordovaUtility) {
   }
 }
 
-$magento.$inject = ['$q', '$http', '$cordovaUtility'];
+magento.$inject = ['$q', '$http', '$cordovaOauthUtility'];

@@ -1,7 +1,7 @@
 angular.module('oauth.imgur', ['oauth.utils'])
   .factory('$imgur', imgur);
 
-function imgur($q, $http, $cordovaUtility) {
+function imgur($q, $http, $cordovaOauthUtility) {
   return { signin: oauthImgur };
 
   /*
@@ -54,4 +54,4 @@ function imgur($q, $http, $cordovaUtility) {
   }
 }
 
-$imgur.$inject = ['$q', '$http', '$cordovaUtility'];
+imgur.$inject = ['$q', '$http', '$cordovaOauthUtility'];

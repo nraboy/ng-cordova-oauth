@@ -1,7 +1,7 @@
 angular.module('oauth.adfs', ['oauth.utils'])
   .factory('$adfs', adfs);
 
-function adfs($q, $http, $cordovaUtility) {
+function adfs($q, $http, $cordovaOauthUtility) {
   return { signin: oauthAdfs };
 
   /*
@@ -50,4 +50,4 @@ function adfs($q, $http, $cordovaUtility) {
   }
 }
 
-$adfs.$inject = ['$q', '$http', '$cordovaUtility'];
+adfs.$inject = ['$q', '$http', '$cordovaOauthUtility'];

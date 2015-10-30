@@ -1,7 +1,7 @@
 angular.module('oauth.github', ['oauth.utils'])
   .factory('$github', github);
 
-function github($q, $http, $cordovaUtility) {
+function github($q, $http, $cordovaOauthUtility) {
   return { signin: oauthGithub };
 
   /*
@@ -58,4 +58,4 @@ function github($q, $http, $cordovaUtility) {
   }
 }
 
-$github.$inject = ['$q', '$http', '$cordovaUtility'];
+github.$inject = ['$q', '$http', '$cordovaOauthUtility'];

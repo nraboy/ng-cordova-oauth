@@ -1,7 +1,7 @@
 angular.module('oauth.odnoklassniki', ['oauth.utils'])
   .factory('$odnoklassniki', odnoklassniki);
 
-function odnoklassniki($q, $http, $cordovaUtility) {
+function odnoklassniki($q, $http, $cordovaOauthUtility) {
   return { signin: oauthOdnoklassniki };
 
   /*
@@ -49,4 +49,4 @@ function odnoklassniki($q, $http, $cordovaUtility) {
   }
 }
 
-$odnoklassniki.$inject = ['$q', '$http', '$cordovaUtility'];
+odnoklassniki.$inject = ['$q', '$http', '$cordovaOauthUtility'];

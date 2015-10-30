@@ -1,7 +1,7 @@
 angular.module('oauth.salesforce', ['oauth.utils'])
   .factory('$salesforce', salesforce);
 
-function salesforce($q, $http, $cordovaUtility) {
+function salesforce($q, $http, $cordovaOauthUtility) {
   return { signin: oauthSalesforce };
 
   /*
@@ -68,4 +68,4 @@ function salesforce($q, $http, $cordovaUtility) {
   }
 }
 
-$salesforce.$inject = ['$q', '$http', '$cordovaUtility'];
+salesforce.$inject = ['$q', '$http', '$cordovaOauthUtility'];
