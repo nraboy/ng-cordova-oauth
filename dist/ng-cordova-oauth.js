@@ -301,25 +301,30 @@ angular.module("oauth.providers", ["oauth.utils"])
                           if((event.url).indexOf(redirect_uri) === 0) {
                               browserRef.removeEventListener("exit",function(event){});
                               browserRef.close();
-                              var parameterMap = $cordovaOauthUtility.parseResponseUrl(event.url, '#');
-                              if(parameterMap.access_token) {
-                                  deferred.resolve(parameterMap);
+                              var callbackResponse = (event.url).split("#")[1];
+                              var responseParameters = (callbackResponse).split("&");
+                              var parameterMap = [];
+                              for(var i = 0; i < responseParameters.length; i++) {
+                                  parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
+                              }
+                              if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
+                                  deferred.resolve({ access_token: parameterMap.access_token, expires_in: parameterMap.expires_in });
                               } else {
                                   if ((event.url).indexOf("error_code=100") !== 0)
-                                      deferred.reject(new Error('invalid permissions', 100));
+                                      deferred.reject("Facebook returned error_code=100: Invalid permissions");
                                   else
-                                      deferred.reject(new Error('failed to authenticate', 400));
+                                      deferred.reject("Problem authenticating");
                               }
                           }
                       });
                       browserRef.addEventListener('exit', function(event) {
-                          deferred.reject(new Error('cancelled', 0));
+                          deferred.reject("The sign in flow was canceled");
                       });
                   } else {
-                      deferred.reject(new Error('missing dependencies: InAppBrowser', 0));
+                      deferred.reject("Could not find InAppBrowser plugin");
                   }
               } else {
-                  deferred.reject(new Error('incompatible platform', 0));
+                  deferred.reject("Cannot authenticate via a web browser");
               }
               return deferred.promise;
           },
