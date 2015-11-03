@@ -162,8 +162,6 @@ If you want to contribute please use the new architecture of files. Each provide
 
 Tweet me on Twitter - [@nraboy](https://www.twitter.com/nraboy)
 
-Tweet me on Twitter - [@matheusrocha](https://www.twitter.com/matheusrocha)
-
 
 ## Resources
 
