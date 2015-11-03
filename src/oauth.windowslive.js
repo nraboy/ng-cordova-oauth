@@ -10,9 +10,10 @@ function windowslive($q, $http, $cordovaOauthUtility) {
    * @param    string clientId
    * @param    array appScope
    * @param    object options
+   * @param  string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
    * @return   promise
-  */
-  function oauthWindowslive(clientId, appScope, options) {
+   */
+  function oauthWindowslive(clientId, appScope, options, windowOpenOptions) {
     var deferred = $q.defer();
     if(window.cordova) {
       var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -23,7 +24,7 @@ function windowslive($q, $http, $cordovaOauthUtility) {
             redirect_uri = options.redirect_uri;
           }
         }
-        var browserRef = window.open('https://login.live.com/oauth20_authorize.srf?client_id=' + clientId + "&scope=" + appScope.join(",") + '&response_type=token&display=touch' + '&redirect_uri=' + redirect_uri, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+        var browserRef = $cordovaOauthUtility.windowOpenProxy('https://login.live.com/oauth20_authorize.srf?client_id=' + clientId + "&scope=" + appScope.join(",") + '&response_type=token&display=touch' + '&redirect_uri=' + redirect_uri, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
         browserRef.addEventListener('loadstart', function (event) {
           if((event.url).indexOf(redirect_uri) === 0) {
             browserRef.removeEventListener("exit", function (event) { });

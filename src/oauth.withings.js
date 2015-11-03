@@ -10,9 +10,10 @@ function withings($q, $http, $cordovaOauthUtility) {
    *
    * @param    string clientId
    * @param    string clientSecret
+   * @param  string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
    * @return   promise
    */
-  function oauthWithings(clientId, clientSecret) {
+  function oauthWithings(clientId, clientSecret, windowOpenOptions) {
     var deferred = $q.defer();
     if(window.cordova) {
       var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -48,7 +49,7 @@ function withings($q, $http, $cordovaOauthUtility) {
               oauthObject.oauth_signature = signatureObj.signature;
 
               var authorizeParameters = $cordovaOauthUtility.generateUrlParameters(oauthObject);
-              var browserRef = window.open(authorizeUrlBase + '?' + authorizeParameters, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+              var browserRef = $cordovaOauthUtility.windowOpenProxy(authorizeUrlBase + '?' + authorizeParameters, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
 
               // STEP 3: User Data Access token
               browserRef.addEventListener('loadstart', function(event) {

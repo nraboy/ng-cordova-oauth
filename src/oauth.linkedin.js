@@ -12,9 +12,10 @@ function linkedin($q, $http, $cordovaOauthUtility) {
    * @param    array appScope
    * @param    string state
    * @param    object options
+   * @param  string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
    * @return   promise
    */
-  function oauthLinkedin(clientId, clientSecret, appScope, state, options) {
+  function oauthLinkedin(clientId, clientSecret, appScope, state, options, windowOpenOptions) {
     var deferred = $q.defer();
     if(window.cordova) {
       var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -26,7 +27,7 @@ function linkedin($q, $http, $cordovaOauthUtility) {
           }
         }
 
-        var browserRef = window.open('https://www.linkedin.com/uas/oauth2/authorization?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&response_type=code&state=' + state, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+        var browserRef = $cordovaOauthUtility.windowOpenProxy('https://www.linkedin.com/uas/oauth2/authorization?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&response_type=code&state=' + state, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
         browserRef.addEventListener('loadstart', function(event) {
           if((event.url).indexOf(redirect_uri) === 0) {
             requestToken = (event.url).split("code=")[1].split("&")[0];

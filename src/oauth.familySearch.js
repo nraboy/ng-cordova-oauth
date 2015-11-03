@@ -9,9 +9,10 @@ function familySearch($q, $http, $cordovaOauthUtility) {
    *
    * @param    string clientId
    * @param    object options
+   * @param  string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
    * @return   promise
    */
-  function oauthFamilySearch(clientId, state, options) {
+  function oauthFamilySearch(clientId, state, options, windowOpenOptions) {
     var deferred = $q.defer();
     if(window.cordova) {
       var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -22,7 +23,7 @@ function familySearch($q, $http, $cordovaOauthUtility) {
             redirect_uri = options.redirect_uri;
           }
         }
-        var browserRef = window.open("https://ident.familysearch.org/cis-web/oauth2/v3/authorization?client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&response_type=code&state=" + state, "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
+        var browserRef = $cordovaOauthUtility.windowOpenProxy("https://ident.familysearch.org/cis-web/oauth2/v3/authorization?client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&response_type=code&state=" + state, "_blank", "location=no,clearsessioncache=yes,clearcache=yes", windowOpenOptions);
         browserRef.addEventListener("loadstart", function(event) {
           if((event.url).indexOf(redirect_uri) === 0) {
             var requestToken = (event.url).split("code=")[1];

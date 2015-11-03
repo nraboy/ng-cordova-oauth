@@ -10,9 +10,10 @@ function facebook($q, $http, $cordovaOauthUtility) {
    * @param    string clientId
    * @param    array appScope
    * @param    object options
+   * @param  string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
    * @return   promise
    */
-  function oauthFacebook(clientId, appScope, options) {
+  function oauthFacebook(clientId, appScope, options, windowOpenOptions) {
     var deferred = $q.defer();
     if(window.cordova) {
       var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -27,7 +28,7 @@ function facebook($q, $http, $cordovaOauthUtility) {
         if(options !== undefined && options.hasOwnProperty("auth_type")) {
           flowUrl += "&auth_type=" + options.auth_type;
         }
-        var browserRef = window.open(flowUrl, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+        var browserRef = $cordovaOauthUtility.windowOpenProxy(flowUrl, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
         browserRef.addEventListener('loadstart', function(event) {
           if((event.url).indexOf(redirect_uri) === 0) {
             browserRef.removeEventListener("exit",function(event){});

@@ -10,9 +10,10 @@ function instagram($q, $http, $cordovaOauthUtility) {
    * @param    string clientId
    * @param    array appScope
    * @param    object options
+   * @param  string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
    * @return   promise
    */
-  function oauthInstagram(clientId, appScope, options) {
+  function oauthInstagram(clientId, appScope, options, windowOpenOptions) {
     var deferred = $q.defer();
     var split_tokens = {
         'code':'?',
@@ -38,7 +39,7 @@ function instagram($q, $http, $cordovaOauthUtility) {
           scope = '&scope' + appScope.join('+');
         }
 
-        var browserRef = window.open('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + scope + '&response_type='+response_type, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+        var browserRef = $cordovaOauthUtility.windowOpenProxy('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&response_type='+response_type, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
         browserRef.addEventListener('loadstart', function(event) {
           if((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});

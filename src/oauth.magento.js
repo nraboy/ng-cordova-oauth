@@ -5,15 +5,16 @@ function magento($q, $http, $cordovaOauthUtility) {
   return { signin: oauthMagento };
 
   /*
-  * Sign into the Magento service
-  * Note that this service requires jsSHA for generating HMAC-SHA1 Oauth 1.0 signatures
-  *
-  * @param    string baseUrl
-  * @param    string clientId
-  * @param    string clientSecret
-  * @return   promise
-  */
-  function oauthMagento(baseUrl, clientId, clientSecret) {
+   * Sign into the Magento service
+   * Note that this service requires jsSHA for generating HMAC-SHA1 Oauth 1.0 signatures
+   *
+   * @param    string baseUrl
+   * @param    string clientId
+   * @param    string clientSecret
+   * @param  string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
+   * @return   promise
+   */
+  function oauthMagento(baseUrl, clientId, clientSecret, windowOpenOptions) {
     var deferred = $q.defer();
     if(window.cordova) {
       var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -44,7 +45,7 @@ function magento($q, $http, $cordovaOauthUtility) {
             }
 
             var tokenSecret = parameterMap.oauth_token_secret;
-            var browserRef = window.open(baseUrl + '/oauth/authorize?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+            var browserRef = $cordovaOauthUtility.windowOpenProxy(baseUrl + '/oauth/authorize?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
 
             browserRef.addEventListener('loadstart', function(event) {
               if ((event.url).indexOf("http://localhost/callback") === 0) {

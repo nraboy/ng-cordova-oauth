@@ -12,9 +12,10 @@ function salesforce($q, $http, $cordovaOauthUtility) {
    * @param    string loginUrl (such as: https://login.salesforce.com ; please notice community login)
    * @param    string clientId (copy from connection app info)
    * @param    string redirectUri (callback url in connection app info)
+   * @param  string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
    * @return   promise
    */
-  function oauthSalesforce(loginUrl, clientId) {
+  function oauthSalesforce(loginUrl, clientId, windowOpenOptions) {
     var redirectUri = 'http://localhost/callback';
     var getAuthorizeUrl = function (loginUrl, clientId, redirectUri) {
       return loginUrl+'services/oauth2/authorize?display=touch'+
@@ -29,7 +30,7 @@ function salesforce($q, $http, $cordovaOauthUtility) {
     if(window.cordova) {
       var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
       if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
-        var browserRef = window.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
+        var browserRef = $cordovaOauthUtility.windowOpenProxy(getAuthorizeUrl(loginUrl, clientId, redirectUri), "_blank", "location=no,clearsessioncache=yes,clearcache=yes", windowOpenOptions);
         browserRef.addEventListener("loadstart", function(event) {
           if(startWith(event.url, redirectUri)) {
               var oauthResponse = {};

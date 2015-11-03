@@ -10,9 +10,10 @@ function twitter($q, $http, $cordovaOauthUtility) {
    *
    * @param    string clientId
    * @param    string clientSecret
+   * @param  string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
    * @return   promise
    */
-  function oauthTwitter(clientId, clientSecret, options) {
+  function oauthTwitter(clientId, clientSecret, options, windowOpenOptions) {
     var deferred = $q.defer();
     if(window.cordova) {
       var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -51,7 +52,7 @@ function twitter($q, $http, $cordovaOauthUtility) {
               if(parameterMap.hasOwnProperty("oauth_token") === false) {
                 deferred.reject("Oauth request token was not received");
               }
-              var browserRef = window.open('https://api.twitter.com/oauth/authenticate?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+              var browserRef = $cordovaOauthUtility.windowOpenProxy('https://api.twitter.com/oauth/authenticate?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
               browserRef.addEventListener('loadstart', function(event) {
                 if((event.url).indexOf(redirect_uri) === 0) {
                   var callbackResponse = (event.url).split("?")[1];
