@@ -12,7 +12,7 @@ function digitalOcean($q, $http, $cordovaOauthUtility) {
    * @param    object options
    * @return   promise
    */
-  function oauthDigitalOcean() {
+  function oauthDigitalOcean(clientId, clientSecret, options) {
     var deferred = $q.defer();
     if(window.cordova) {
       var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
