@@ -9,10 +9,9 @@ function dropbox() {
    *
    * @param    string appKey
    * @param    object options
-   * @param  string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
    * @return   promise
    */
-  function oauthDropbox(appKey, options, windowOpenOptions) {
+  function oauthDropbox(appKey, options) {
     var deferred = $q.defer();
     if(window.cordova) {
       var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -23,7 +22,7 @@ function dropbox() {
             redirect_uri = options.redirect_uri;
           }
         }
-        var browserRef = $cordovaOauthUtility.windowOpenProxy("https://www.dropbox.com/1/oauth2/authorize?client_id=" + appKey + "&redirect_uri=" + redirect_uri + "&response_type=token", "_blank", "location=no,clearsessioncache=yes,clearcache=yes", windowOpenOptions);
+        var browserRef = window.open("https://www.dropbox.com/1/oauth2/authorize?client_id=" + appKey + "&redirect_uri=" + redirect_uri + "&response_type=token", "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
         browserRef.addEventListener("loadstart", function(event) {
           if ((event.url).indexOf(redirect_uri) === 0) {
             browserRef.removeEventListener("exit",function(event){});

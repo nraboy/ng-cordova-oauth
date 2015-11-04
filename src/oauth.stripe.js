@@ -11,10 +11,9 @@ function stripe($q, $http, $cordovaOauthUtility) {
    * @param    string clientSecret
    * @param    string appScope
    * @param    object options
-   * @param  string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
    * @return   promise
    */
-  function oauthStripe(clientId, clientSecret, appScope, options, windowOpenOptions) {
+  function oauthStripe(clientId, clientSecret, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
       var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -25,7 +24,7 @@ function stripe($q, $http, $cordovaOauthUtility) {
             redirect_uri = options.redirect_uri;
           }
         }
-        var browserRef = $cordovaOauthUtility.windowOpenProxy('https://connect.stripe.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
+        var browserRef = window.open('https://connect.stripe.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
         browserRef.addEventListener('loadstart', function(event) {
           if((event.url).indexOf("http://localhost/callback") === 0) {
             requestToken = (event.url).split("code=")[1];

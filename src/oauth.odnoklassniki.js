@@ -9,15 +9,14 @@ function odnoklassniki($q, $http, $cordovaOauthUtility) {
    *
    * @param    string clientId
    * @param    array appScope (for example: "VALUABLE_ACCESS ,GROUP_CONTENT,VIDEO_CONTENT")
-   * @param  string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
    * @return   promise
    */
-  function oauthOdnoklassniki(clientId, appScope, windowOpenOptions) {
+  function oauthOdnoklassniki(clientId, appScope) {
     var deferred = $q.defer();
     if (window.cordova) {
       var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
       if ($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
-          var browserRef = $cordovaOauthUtility.windowOpenProxy('http://www.odnoklassniki.ru/oauth/authorize?client_id=' + clientId + '&scope=' + appScope.join(",") + '&response_type=token&redirect_uri=http://localhost/callback' + '&layout=m', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
+          var browserRef = window.open('http://www.odnoklassniki.ru/oauth/authorize?client_id=' + clientId + '&scope=' + appScope.join(",") + '&response_type=token&redirect_uri=http://localhost/callback' + '&layout=m', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
           browserRef.addEventListener('loadstart', function (event) {
             if ((event.url).indexOf("http://localhost/callback") === 0) {
               var callbackResponse = (event.url).split("#")[1];

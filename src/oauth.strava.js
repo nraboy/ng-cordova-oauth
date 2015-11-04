@@ -5,16 +5,15 @@ function strava($q, $http, $cordovaOauthUtility) {
   return { signin: oauthStrava };
 
   /*
-   * Sign into the Strava service
-   *
-   * @param    string clientId
-   * @param    string clientSecret
-   * @param    array appScope
-   * @param    object options
-   * @param  string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
-   * @return   promise
-   */
-  function oauthStrava(clientId, clientSecret, appScope, options, windowOpenOptions) {
+  * Sign into the Strava service
+  *
+  * @param    string clientId
+  * @param    string clientSecret
+  * @param    array appScope
+  * @param    object options
+  * @return   promise
+  */
+  function oauthStrava(clientId, clientSecret, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
       var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -25,7 +24,7 @@ function strava($q, $http, $cordovaOauthUtility) {
             redirect_uri = options.redirect_uri;
           }
         }
-        var browserRef = $cordovaOauthUtility.windowOpenProxy('https://www.strava.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(",") + '&response_type=code&approval_prompt=force', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
+        var browserRef = window.open('https://www.strava.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(",") + '&response_type=code&approval_prompt=force', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
         browserRef.addEventListener('loadstart', function(event) {
           if((event.url).indexOf(redirect_uri) === 0) {
             requestToken = (event.url).split("code=")[1];

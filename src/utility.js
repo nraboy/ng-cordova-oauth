@@ -5,24 +5,6 @@ angular.module("oauth.utils", [])
         return {
 
             /*
-             * Warp window.open in a helper function allowing the addition of extra options
-             * {@see https://github.com/apache/cordova-plugin-inappbrowser#cordovainappbrowseropen}
-             *
-             * @param  string url (the url to open, as defined in window.open)
-             * @param    string target (target frame or window, as defined in window.open)
-             * @param    string options (options defined each method, unique to each service)
-             * @param    string extraOptions (a comma delimited string of user defined options that are appended to the options arugment in window.open) example: 'allowInlineMediaPlayback=yes,mediaPlaybackRequiresUserAction=yes'
-             * @return InAppBrowser instance of the in app browser
-             */
-
-            windowOpenProxy: function(url, target, options, extraOptions) {
-                options = options || '';
-                extraOptions = extraOptions || '';
-                options = !!options ? (options + ',' + extraOptions) : extraOptions;
-                return window.open(url, target, options);
-            },
-
-            /*
              * Check to see if the mandatory InAppBrowser plugin is installed
              *
              * @param

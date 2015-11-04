@@ -9,10 +9,9 @@ function spotify($q, $http, $cordovaOauthUtility) {
    *
    * @param    string clientId
    * @param    object options
-   * @param  string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
    * @return   promise
    */
-  function oauthSpotify(clientId, appScope, options, windowOpenOptions) {
+  function oauthSpotify(clientId, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
       var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -23,7 +22,7 @@ function spotify($q, $http, $cordovaOauthUtility) {
             redirect_uri = options.redirect_uri;
           }
         }
-        var browserRef = $cordovaOauthUtility.windowOpenProxy('https://accounts.spotify.com/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(" "), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
+        var browserRef = window.open('https://accounts.spotify.com/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(" "), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
         browserRef.addEventListener('loadstart', function(event) {
           if((event.url).indexOf(redirect_uri) === 0) {
             browserRef.removeEventListener("exit",function(event){});

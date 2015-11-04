@@ -11,10 +11,9 @@ function box($q, $http, $cordovaOauthUtility) {
    * @param    string clientSecret
    * @param    string appState
    * @param    object options
-   * @param  string windowOpenOptions (additional options to pass to window.open such as allowInlineMediaPlayback=yes,enableViewportScale=no)
    * @return   promise
    */
-  function oauthBox(clientId, clientSecret, appState, options, windowOpenOptions) {
+  function oauthBox(clientId, clientSecret, appState, options) {
     var deferred = $q.defer();
     if(window.cordova) {
       var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
@@ -25,7 +24,7 @@ function box($q, $http, $cordovaOauthUtility) {
               redirect_uri = options.redirect_uri;
           }
         }
-        var browserRef = $cordovaOauthUtility.windowOpenProxy('https://app.box.com/api/oauth2/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&state=' + appState + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes', windowOpenOptions);
+        var browserRef = window.open('https://app.box.com/api/oauth2/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&state=' + appState + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
         browserRef.addEventListener('loadstart', function(event) {
           if((event.url).indexOf(redirect_uri) === 0) {
             requestToken = (event.url).split("code=")[1];
