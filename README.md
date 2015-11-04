@@ -54,7 +54,7 @@ At this point, ngCordovaOauth is installed into your project and is ready for us
 ## Using ngCordovaOauth In Your Project
 
 Each web service API acts independently in this library.  However, when configuring each web service, one thing must remain consistent.  You must use **http://localhost/callback** as your callback / redirect URI.  This is because this library will perform tasks when this URL is found.
-    
+
     $cordovaOauth.azureAD(string clientId, string tenantId, string resourceURL);
     $cordovaOauth.dropbox(string appKey, object options);
     $cordovaOauth.digitalOcean(string clientId, string clientSecret, object options);
@@ -114,6 +114,49 @@ This library will NOT work with a web browser, ionic serve, or ionic view.  It m
 
 All contributions must be made via the `development` branch.  This keeps the project more maintainable in terms of versioning as well as code control.
 
+If you want to contribute please use the new architecture of files. Each provider need to be in a separated file following this pattern: `oauth.<provider name>.js` and add it to the `oauth.provider` module as a dependecy.
+
+(If you have any doubt about the architecture take a look other providers to see how it is.)
+
+
+```javascript
+    //oauth.js
+
+    angular.module("oauth.providers", [
+      "oauth.utils", "oauth.azuread", "oauth.adfs", 'oauth.dropbox',
+      'oauth.digitalOcean', 'oauth.google', 'oauth.github', 'oauth.facebook',
+      'oauth.linkedin', 'oauth.instagram', 'oauth.box', 'oauth.reddit', 'oauth.slack',
+      'oauth.twitter', 'oauth.meetup', 'oauth.salesforce', 'oauth.strava',
+      'oauth.withings', 'oauth.foursquare', 'oauth.magento', 'oauth.vkontakte',
+      'oauth.odnoklassniki', 'oauth.imgur', 'oauth.spotify', 'oauth.uber',
+      'oauth.windowslive', 'oauth.yammer', 'oauth.venmo', 'oauth.stripe', 'oauth.rally',
+      'oauth.familySearch', 'oauth.envato', 'oauth.weibo', 'oauth.jawbone', 'oauth.untappd',
+      'oauth.dribble', '<YOUR PROVIDER MODULE HERE>']).factory("$cordovaOauth", cordovaOauth);
+
+    function cordovaOauth(
+        $q, $http, $cordovaOauthUtility, $azureAD, $adfs, $dropbox, $digitalOcean,
+        $google, $github, $facebook, $linkedin, $instagram, $box, $reddit, $slack,
+        $twitter, $meetup, $salesforce, $strava, $withings, $foursquare, $magento
+        $vkontakte, $odnoklassniki, $imgur, $spotify, $uber, $windowslive, $yammer,
+        $venmo, $stripe, $rally, $familySearch, $envato, $weibo, $jawbone, $untappd,
+        $dribble, <YOUR FACTORY NAME>) {
+
+        return {
+            // A lot of providers...
+            yourProvider: $yourProvider.signinFuncion,
+        }
+    }
+
+    $cordovaOauth.$inject = [
+      "$q", '$http', "$cordovaOauthUtility", "$azureAD", "$adfs", '$dropbox',
+      '$digitalOcean', '$google', '$github', '$facebook', '$linkedin',
+      '$instagram', '$box', '$reddit', '$slack', '$twitter' '$meetup', '$salesforce',
+      '$strava', '$withings', '$foursquare', '$magento', '$vkontakte',
+      '$odnoklassniki', '$imgur', '$spotify', '$uber', '$windowslive', '$yammer',
+      '$venmo', '$stripe', '$rally', '$familySearch', '$envato', '$weibo',
+      '$jawbone', '$untappd', '$dribble', '<YOUR FACTORY NAME>'
+    ];
+```
 
 ## Have a question or found a bug (compliments work too)?
 
