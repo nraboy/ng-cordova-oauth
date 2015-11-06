@@ -34,7 +34,7 @@ function withings($q, $http, $cordovaOauthUtility) {
 
               // Step 2 : End-user authorization
               var parameterMap = $cordovaOauthUtility.parseResponseParameters(requestTokenResult);
-              if(parameterMap.hasOwnProperty("oauth_token") === false) {
+              if(!parameterMap.oauth_token) {
                 deferred.reject("Oauth request token was not received");
               }
               var oauthObject = $cordovaOauthUtility.generateOauthParametersInstance(clientId);
@@ -55,7 +55,7 @@ function withings($q, $http, $cordovaOauthUtility) {
                 if((event.url).indexOf("http://localhost/callback") === 0) {
                   var callbackResponse = (event.url).split("?")[1];
                   parameterMap = $cordovaOauthUtility.parseResponseParameters(callbackResponse);
-                  if(parameterMap.hasOwnProperty("oauth_verifier") === false) {
+                  if(!parameterMap.oauth_verifier) {
                     deferred.reject("Browser authentication failed to complete.  No oauth_verifier was returned");
                   }
 
@@ -71,7 +71,7 @@ function withings($q, $http, $cordovaOauthUtility) {
                   $http({method: "get", url: accessTokenUrlBase + '?' + accessTokenParameters})
                     .success(function(result) {
                       var parameterMap = $cordovaOauthUtility.parseResponseParameters(result);
-                      if(parameterMap.hasOwnProperty("oauth_token_secret") === false) {
+                      if(!parameterMap.oauth_token_secret) {
                         deferred.reject("Oauth access token was not received");
                       }
                       deferred.resolve(parameterMap);
