@@ -37,7 +37,6 @@ describe('oauth.utils tests', function() {
   describe('createNonce', function() {
     it('Should return a string with length equal passed', function() {
       expect(oauthUtils.createNonce(10).length).toBe(10);
-
     });
   });
 });
