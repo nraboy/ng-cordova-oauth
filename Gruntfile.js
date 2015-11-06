@@ -27,10 +27,13 @@ module.exports = function(grunt) {
       js: ['dist/*.min.js']
     },
     karma: {
-      unit: {
-        configFile: 'karma.conf.js',
-        sigleRun: true,
-        browsers: ['PhantomJS']
+      options: {
+        configFile: 'karma.conf.js'
+      },
+      continuos: {
+        singleRun: true,
+        browsers: ['PhantomJS'],
+        autoWatch: false
       }
     }
   });
