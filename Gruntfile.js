@@ -32,7 +32,6 @@ module.exports = function(grunt) {
       },
       continuos: {
         singleRun: true,
-        browsers: ['PhantomJS'],
         autoWatch: false
       },
       dev: {}
