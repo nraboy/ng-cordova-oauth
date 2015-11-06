@@ -22,15 +22,15 @@ describe('oauth.utils tests', function() {
 
 
     it('Should return false if plugin not installed', function() {
-      expect(oauthUtils.isInAppBrowserInstalled(nonePluginMetadata)).toBe(false);
+      expect(oauthUtils.isInAppBrowserInstalled(nonePluginMetadata)).toBeFalsy();
     });
 
     it('Should return true when the old version of plugin is installed', function() {
-      expect(oauthUtils.isInAppBrowserInstalled(oldPluginMetadata)).toBe(true);
+      expect(oauthUtils.isInAppBrowserInstalled(oldPluginMetadata)).toBeTruthy();
     });
 
     it('Should return true when the new version of plugin is installed', function() {
-      expect(oauthUtils.isInAppBrowserInstalled(newPluginMetadata)).toBe(true);
+      expect(oauthUtils.isInAppBrowserInstalled(newPluginMetadata)).toBeTruthy();
     });
   });
 
@@ -52,6 +52,34 @@ describe('oauth.utils tests', function() {
       }
       expect(oauthUtils.parseResponseParameters(serverResponse)).toEqual(result);
     });
+  });
+
+  describe('Testing function generateUrlParameters', function() {
+    it('Should return empty string if and empty JSON is passed', function() {
+      expect(oauthUtils.generateUrlParameters({})).toBe("");
+    });
+
+    it('Should return a string with one param without the `&`', function() {
+      var params = {
+        client_id: 'someString'
+      }
+
+      var result = oauthUtils.generateUrlParameters(params);
+
+      expect(result).toBe('client_id=someString');
+      expect(result).not.toMatch('&');
+    });
+
+    it('Should return a string with parameters separated by `&`', function() {
+      var params = {
+        client_id: 'smallToken',
+        'appId': 'appToken'
+      }
+      var result = oauthUtils.generateUrlParameters(params);
+      expect(result).toBe('appId=appToken&client_id=smallToken');
+      expect(result).toMatch('&');
+    });
+
   });
 });
 
