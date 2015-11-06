@@ -34,7 +34,8 @@ module.exports = function(grunt) {
         singleRun: true,
         browsers: ['PhantomJS'],
         autoWatch: false
-      }
+      },
+      dev: {}
     }
   });
 
@@ -44,7 +45,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
 
-  grunt.registerTask('test', ['clean', 'jshint', 'karma']);
+  grunt.registerTask('test:dev', ['clean', 'jshint', 'karma:dev']);
+  grunt.registerTask('test', ['clean', 'jshint', 'karma:continuos']);
+  grunt.registerTask('build', ['clean', 'jshint', 'concat', 'uglify']);
   grunt.registerTask('default', ['clean', 'jshint', 'karma', 'concat', 'uglify']);
 
 };
