@@ -7,7 +7,7 @@ describe('oauth.utils tests', function() {
     oauthUtils = $cordovaOauthUtility;
   }));
 
-  describe('isInAppBrowserInstalled', function() {
+  describe('Testing function isInAppBrowserInstalled: ', function() {
     // Mocks
     var oldPluginMetadata, newPluginMetadata, nonePluginMetadata;
     beforeEach(function() {
@@ -34,9 +34,25 @@ describe('oauth.utils tests', function() {
     });
   });
 
-  describe('createNonce', function() {
+  describe('Testing function createNonce: ', function() {
     it('Should return a string with length equal passed', function() {
       expect(oauthUtils.createNonce(10).length).toBe(10);
     });
   });
+
+  describe('Testing function parseResponseParameters: ', function() {
+    it('Should return empty JSON if the response don\'t have split function', function() {
+      expect(oauthUtils.parseResponseParameters(12)).toEqual({});
+    });
+
+    it('Should return an object with `access_token` as key and token as value', function() {
+      var serverResponse = 'access_token=ThisIsASimpleToken123';
+      var result = {
+        access_token: 'ThisIsASimpleToken123'
+      }
+      expect(oauthUtils.parseResponseParameters(serverResponse)).toEqual(result);
+    });
+  });
 });
+
+//"http://localhost/callback#access_token=2074426136.3057c76.51491af8fc794ae9beaf2753e972c8fd"
