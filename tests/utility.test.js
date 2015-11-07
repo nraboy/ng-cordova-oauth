@@ -79,7 +79,24 @@ describe('oauth.utils tests', function() {
       expect(result).toBe('appId=appToken&client_id=smallToken');
       expect(result).toMatch('&');
     });
+  });
 
+  describe('Testing function generateOauthParametersInstance', function() {
+    it('Should call getHash with params', function() {
+      var consumerKey = 'stringSample';
+      var keys = [
+        'oauth_consumer_key',
+        'oauth_nonce',
+        'oauth_signature_method',
+        'oauth_timestamp',
+        'oauth_version'
+      ];
+      var result = oauthUtils.generateOauthParametersInstance(consumerKey);
+      expect(result['oauth_consumer_key']).toBe(consumerKey);
+      expect(result['oauth_signature_method']).toBe('HMAC-SHA1');
+      expect(result['oauth_version']).toBe('1.0');
+      expect(Object.keys(result)).toEqual(keys);
+    })
   });
 });
 
