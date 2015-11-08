@@ -24,9 +24,17 @@ describe('oauth.utils tests', function() {
   });
 
   describe('Testing function createSignature: ', function() {
-    var originalJsSHA, result;
+    var originalJsSHA, result, oauthObject;
     beforeEach(function() {
       originalJsSHA = jsSHA;
+      oauthObject = {
+        oauth_callback: "http://localhost/callback",
+        oauth_consumer_key: '123123',
+        oauth_nonce: oauthUtils.createNonce(5),
+        oauth_signature_method: "HMAC-SHA1",
+        oauth_timestamp: Math.round((new Date()).getTime() / 1000.0),
+        oauth_version: "1.0"
+      };
     });
 
     afterEach(function() {
@@ -40,18 +48,17 @@ describe('oauth.utils tests', function() {
     });
 
     it('Should return a JSON with 3 keys', function() {
-      var oauthObject = {
-        oauth_callback: "http://localhost/callback",
-        oauth_consumer_key: '123123',
-        oauth_nonce: oauthUtils.createNonce(5),
-        oauth_signature_method: "HMAC-SHA1",
-        oauth_timestamp: Math.round((new Date()).getTime() / 1000.0),
-        oauth_version: "1.0"
-      };
       var result = oauthUtils.createSignature("POST", "http://base.url/oauth/initiate", oauthObject,  { oauth_callback: "http://localhost/callback" }, 'clientSecret');
       var keys = ['signature_base_string', 'authorization_header', 'signature'];
       expect(Object.keys(result)).toEqual(keys);
     });
+
+    it('Should encode tokenSecrete when it is passed', function() {
+      spyOn(window, 'encodeURIComponent');
+      var tokenSecret = 'clientSecret';
+      var result = oauthUtils.createSignature("POST", "http://base.url/oauth/initiate", oauthObject,  { oauth_callback: "http://localhost/callback" }, tokenSecret);
+      expect(window.encodeURIComponent).toHaveBeenCalledWith(tokenSecret);
+    })
   });
 
   describe('Testing function createNonce: ', function() {
