@@ -8,29 +8,49 @@ describe('oauth.utils tests', function() {
   }));
 
   describe('Testing function isInAppBrowserInstalled: ', function() {
-    // Mocks
-    var oldPluginMetadata, newPluginMetadata, nonePluginMetadata;
-    beforeEach(function() {
-      oldPluginMetadata = {
-        "org.apache.cordova.inappbrowser": "1.0.0"
-      }
-      newPluginMetadata = {
-        "cordova-plugin-inappbrowser": "2.0.0"
-      }
-      nonePluginMetadata = {}
-    });
 
 
     it('Should return false if plugin not installed', function() {
-      expect(oauthUtils.isInAppBrowserInstalled(nonePluginMetadata)).toBeFalsy();
+      expect(oauthUtils.isInAppBrowserInstalled({})).toBeFalsy();
     });
 
     it('Should return true when the old version of plugin is installed', function() {
-      expect(oauthUtils.isInAppBrowserInstalled(oldPluginMetadata)).toBeTruthy();
+      expect(oauthUtils.isInAppBrowserInstalled({ "org.apache.cordova.inappbrowser": "1.0.0" })).toBeTruthy();
     });
 
     it('Should return true when the new version of plugin is installed', function() {
-      expect(oauthUtils.isInAppBrowserInstalled(newPluginMetadata)).toBeTruthy();
+      expect(oauthUtils.isInAppBrowserInstalled({ "cordova-plugin-inappbrowser": "2.0.0" })).toBeTruthy();
+    });
+  });
+
+  describe('Testing function createSignature: ', function() {
+    var originalJsSHA, result;
+    beforeEach(function() {
+      originalJsSHA = jsSHA;
+    });
+
+    afterEach(function() {
+      jsSHA = originalJsSHA;
+    });
+
+    it('Should return error message when jsSHA is undefined', function() {
+      jsSHA = undefined;
+      var result = oauthUtils.createSignature();
+      expect(result).toBe('Missing jsSHA JavaScript library');
+    });
+
+    it('Should return a JSON with 3 keys', function() {
+      var oauthObject = {
+        oauth_callback: "http://localhost/callback",
+        oauth_consumer_key: '123123',
+        oauth_nonce: oauthUtils.createNonce(5),
+        oauth_signature_method: "HMAC-SHA1",
+        oauth_timestamp: Math.round((new Date()).getTime() / 1000.0),
+        oauth_version: "1.0"
+      };
+      var result = oauthUtils.createSignature("POST", "http://base.url/oauth/initiate", oauthObject,  { oauth_callback: "http://localhost/callback" }, 'clientSecret');
+      var keys = ['signature_base_string', 'authorization_header', 'signature'];
+      expect(Object.keys(result)).toEqual(keys);
     });
   });
 
