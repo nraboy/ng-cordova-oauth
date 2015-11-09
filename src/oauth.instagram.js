@@ -45,7 +45,7 @@ function instagram($q, $http, $cordovaOauthUtility) {
               browserRef.close();
               var callbackResponse = (event.url).split(split_tokens[response_type])[1];
               var parameterMap = $cordovaOauthUtility.parseResponseParameters(callbackResponse);
-              if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
+              if(parameterMap.access_token) {
                 deferred.resolve({ access_token: parameterMap.access_token });
               } else if(parameterMap.code !== undefined && parameterMap.code !== null) {
                 deferred.resolve({ code: parameterMap.code });
