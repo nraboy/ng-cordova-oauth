@@ -14,8 +14,7 @@ function odnoklassniki($q, $http, $cordovaOauthUtility) {
   function oauthOdnoklassniki(clientId, appScope) {
     var deferred = $q.defer();
     if (window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if ($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if ($cordovaOauthUtility.isInAppBrowserInstalled()) {
           var browserRef = window.open('http://www.odnoklassniki.ru/oauth/authorize?client_id=' + clientId + '&scope=' + appScope.join(",") + '&response_type=token&redirect_uri=http://localhost/callback' + '&layout=m', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
           browserRef.addEventListener('loadstart', function (event) {
             if ((event.url).indexOf("http://localhost/callback") === 0) {

@@ -17,7 +17,8 @@ function cordovaOauthUtility($q) {
    * @param
    * @return   boolean
    */
-  function isInAppBrowserInstalled(cordovaMetadata) {
+  function isInAppBrowserInstalled() {
+    var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
     var inAppBrowserNames = ["cordova-plugin-inappbrowser", "org.apache.cordova.inappbrowser"];
 
     return inAppBrowserNames.some(function(name) {

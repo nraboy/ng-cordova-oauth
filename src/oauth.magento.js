@@ -16,8 +16,7 @@ function magento($q, $http, $cordovaOauthUtility) {
   function oauthMagento(baseUrl, clientId, clientSecret) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         if(typeof jsSHA !== "undefined") {
           var oauthObject = {
             oauth_callback: "http://localhost/callback",
