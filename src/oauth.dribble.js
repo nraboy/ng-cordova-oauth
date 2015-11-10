@@ -18,8 +18,7 @@ function dribble($q, $http, $cordovaOauthUtility) {
 
     var deferred = $q.defer();
     if (window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if ($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if ($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         var OAUTH_URL = 'https://dribbble.com/oauth/authorize';
         var ACCESS_TOKEN_URL = 'https://dribbble.com/oauth/token';

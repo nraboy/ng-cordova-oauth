@@ -14,8 +14,7 @@ function pocket($q, $http, $cordovaOauthUtility) {
   function oauthPocket(clientId, options) {
     var deferred = $q.defer();
     if (window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if ($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if ($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_url = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_url")) {

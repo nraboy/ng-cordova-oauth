@@ -15,8 +15,7 @@ function adfs($q, $http, $cordovaOauthUtility) {
   function oauthAdfs(clientId, adfsServer, relyingPartyId) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var browserRef = window.open(adfsServer + '/adfs/oauth2/authorize?response_type=code&client_id=' + clientId +'&redirect_uri=http://localhost/callback&resource=' + relyingPartyId, '_blank', 'location=no');
 
         browserRef.addEventListener("loadstart", function(event) {

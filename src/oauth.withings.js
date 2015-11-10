@@ -15,8 +15,7 @@ function withings($q, $http, $cordovaOauthUtility) {
   function oauthWithings(clientId, clientSecret) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         if(typeof jsSHA !== "undefined") {
 
           // Step 1 : get a oAuth "request token"

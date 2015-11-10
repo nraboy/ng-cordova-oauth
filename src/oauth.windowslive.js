@@ -15,8 +15,7 @@ function windowslive($q, $http, $cordovaOauthUtility) {
   function oauthWindowslive(clientId, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "https://login.live.com/oauth20_desktop.srf";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {

@@ -20,8 +20,7 @@ function instagram($q, $http, $cordovaOauthUtility) {
     };
 
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         var response_type = "token";
         if(options !== undefined) {

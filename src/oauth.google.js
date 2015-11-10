@@ -15,8 +15,7 @@ function google($q, $http, $cordovaOauthUtility) {
   function oauthGoogle(clientId, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {

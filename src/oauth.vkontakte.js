@@ -14,8 +14,7 @@ function vkontakte($q, $http, $cordovaOauthUtility) {
   function oauthvKontakte(clientId, appScope) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var browserRef = window.open('https://oauth.vk.com/authorize?client_id=' + clientId + '&redirect_uri=http://oauth.vk.com/blank.html&response_type=token&scope=' + appScope.join(",") + '&display=touch&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
         browserRef.addEventListener('loadstart', function(event) {
           var tmp = (event.url).split("#");
