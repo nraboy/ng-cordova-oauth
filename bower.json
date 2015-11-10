@@ -1,6 +1,6 @@
 {
   "name": "ng-cordova-oauth",
-  "main": "./dist/ng-cordova-oauth.js",
+  "main": ["dist/ng-cordova-oauth.js", "dist/ng-cordova-oauth.min.js"],
   "version": "0.1.4",
   "homepage": "https://github.com/nraboy/ng-cordova-oauth",
   "authors": [
