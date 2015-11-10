@@ -19,6 +19,7 @@ module.exports = function(config) {
       'node_modules/angular-mocks/angular-mocks.js',
       'node_modules/jssha/src/sha.js',
       'src/*.js',
+      'tests/mocks/*.mock.js',
       'tests/*.test.js'
     ],
 
