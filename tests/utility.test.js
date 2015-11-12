@@ -9,19 +9,19 @@ describe('oauth.utils tests', function() {
 
   describe('Testing function isInAppBrowserInstalled: ', function() {
     it('Should return false if plugin not installed', function() {
-      spyOn(window.cordova, 'require').and.returnValue({metadata: {}});
+      spyOn(window.cordova, 'require').and.returnValue([]);
       expect(oauthUtils.isInAppBrowserInstalled()).toBeFalsy();
       expect(window.cordova.require).toHaveBeenCalledWith('cordova/plugin_list');
     });
 
     it('Should return true when the old version of plugin is installed', function() {
-      spyOn(window.cordova, 'require').and.returnValue({ metadata: {"org.apache.cordova.inappbrowser": "1.0.0" }});
+      spyOn(window.cordova, 'require').and.returnValue([{ pluginId: "org.apache.cordova.inappbrowser"}]);
       expect(oauthUtils.isInAppBrowserInstalled()).toBeTruthy();
       expect(window.cordova.require).toHaveBeenCalledWith('cordova/plugin_list');
     });
 
     it('Should return true when the new version of plugin is installed', function() {
-      spyOn(window.cordova, 'require').and.returnValue({ metadata: {"cordova-plugin-inappbrowser": "2.0.0"}});
+      spyOn(window.cordova, 'require').and.returnValue([{ pluginId: "cordova-plugin-inappbrowser"}]);
       expect(oauthUtils.isInAppBrowserInstalled()).toBeTruthy();
       expect(window.cordova.require).toHaveBeenCalledWith('cordova/plugin_list');
     });
