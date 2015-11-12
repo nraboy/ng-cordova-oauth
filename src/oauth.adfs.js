@@ -16,7 +16,7 @@ function adfs($q, $http, $cordovaOauthUtility) {
     var deferred = $q.defer();
     if(window.cordova) {
       if($cordovaOauthUtility.isInAppBrowserInstalled()) {
-        var browserRef = window.open(adfsServer + '/adfs/oauth2/authorize?response_type=code&client_id=' + clientId +'&redirect_uri=http://localhost/callback&resource=' + relyingPartyId, '_blank', 'location=no');
+        var browserRef = window.cordova.InAppBrowser.open(adfsServer + '/adfs/oauth2/authorize?response_type=code&client_id=' + clientId +'&redirect_uri=http://localhost/callback&resource=' + relyingPartyId, '_blank', 'location=no');
 
         browserRef.addEventListener("loadstart", function(event) {
           if((event.url).indexOf('http://localhost/callback') === 0) {

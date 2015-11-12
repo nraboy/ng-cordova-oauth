@@ -47,7 +47,7 @@ function withings($q, $http, $cordovaOauthUtility) {
               oauthObject.oauth_signature = signatureObj.signature;
 
               var authorizeParameters = $cordovaOauthUtility.generateUrlParameters(oauthObject);
-              var browserRef = window.open(authorizeUrlBase + '?' + authorizeParameters, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+              var browserRef = window.cordova.InAppBrowser.open(authorizeUrlBase + '?' + authorizeParameters, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
 
               // STEP 3: User Data Access token
               browserRef.addEventListener('loadstart', function(event) {

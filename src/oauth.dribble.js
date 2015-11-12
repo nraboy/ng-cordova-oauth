@@ -33,7 +33,7 @@ function dribble($q, $http, $cordovaOauthUtility) {
         }
 
         var scope = appScope.join(",").replace(/,/g, '+');  //dribble scopes are passed with +
-        var browserRef = window.open(OAUTH_URL + '?client_id=' + clientId + '&redirect_uri=' + redirect_uri +
+        var browserRef = window.cordova.InAppBrowser.open(OAUTH_URL + '?client_id=' + clientId + '&redirect_uri=' + redirect_uri +
         '&scope=' + scope + '&state=' + state, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
         browserRef.addEventListener('loadstart', function (event) {
           if ((event.url).indexOf(redirect_uri) === 0) {

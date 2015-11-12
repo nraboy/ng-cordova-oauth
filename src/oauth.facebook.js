@@ -26,7 +26,7 @@ function facebook($q, $http, $cordovaOauthUtility) {
         if(options !== undefined && options.hasOwnProperty("auth_type")) {
           flowUrl += "&auth_type=" + options.auth_type;
         }
-        var browserRef = window.open(flowUrl, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+        var browserRef = window.cordova.InAppBrowser.open(flowUrl, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
         browserRef.addEventListener('loadstart', function(event) {
           if((event.url).indexOf(redirect_uri) === 0) {
             browserRef.removeEventListener("exit",function(event){});
