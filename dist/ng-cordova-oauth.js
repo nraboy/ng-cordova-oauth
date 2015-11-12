@@ -15,8 +15,7 @@ function adfs($q, $http, $cordovaOauthUtility) {
   function oauthAdfs(clientId, adfsServer, relyingPartyId) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var browserRef = window.open(adfsServer + '/adfs/oauth2/authorize?response_type=code&client_id=' + clientId +'&redirect_uri=http://localhost/callback&resource=' + relyingPartyId, '_blank', 'location=no');
 
         browserRef.addEventListener("loadstart", function(event) {
@@ -69,8 +68,7 @@ function azureAD($q, $http, $cordovaOauthUtility) {
   function oauthAzureAD(clientId, tenantId, resourceURL) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
 
         var browserRef = window.open('https://login.microsoftonline.com/' + tenantId + '/oauth2/authorize?response_type=code&client_id=' + clientId + '&redirect_uri=http://localhost/callback', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
         browserRef.addEventListener("loadstart", function(event) {
@@ -131,8 +129,7 @@ function box($q, $http, $cordovaOauthUtility) {
   function oauthBox(clientId, clientSecret, appState, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -191,8 +188,7 @@ function digitalOcean($q, $http, $cordovaOauthUtility) {
   function oauthDigitalOcean(clientId, clientSecret, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -253,8 +249,7 @@ function dribble($q, $http, $cordovaOauthUtility) {
 
     var deferred = $q.defer();
     if (window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if ($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if ($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         var OAUTH_URL = 'https://dribbble.com/oauth/authorize';
         var ACCESS_TOKEN_URL = 'https://dribbble.com/oauth/token';
@@ -324,8 +319,7 @@ function dropbox() {
   function oauthDropbox(appKey, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -381,8 +375,7 @@ function envato($q, $http, $cordovaOauthUtility) {
   function oauthEnvato(clientId, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -442,8 +435,7 @@ function facebook($q, $http, $cordovaOauthUtility) {
   function oauthFacebook(clientId, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -507,8 +499,7 @@ function familySearch($q, $http, $cordovaOauthUtility) {
   function oauthFamilySearch(clientId, state, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if(cordovaMetadata.hasOwnProperty("cordova-plugin-inappbrowser") === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -566,8 +557,7 @@ function foursquare($q, $http, $cordovaOauthUtility) {
   function oauthFoursquare(clientId, options) {
     var deferred = $q.defer();
     if (window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if ($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if ($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -632,8 +622,7 @@ function github($q, $http, $cordovaOauthUtility) {
   function oauthGithub(clientId, clientSecret, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -693,8 +682,7 @@ function google($q, $http, $cordovaOauthUtility) {
   function oauthGoogle(clientId, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -750,8 +738,7 @@ function imgur($q, $http, $cordovaOauthUtility) {
   function oauthImgur(clientId, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -814,8 +801,7 @@ function instagram($q, $http, $cordovaOauthUtility) {
     };
 
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         var response_type = "token";
         if(options !== undefined) {
@@ -832,14 +818,14 @@ function instagram($q, $http, $cordovaOauthUtility) {
           scope = '&scope' + appScope.join('+');
         }
 
-        var browserRef = window.open('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + scope + '&response_type='+response_type, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+        var browserRef = window.cordova.InAppBrowser.open('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + scope + '&response_type='+response_type, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
         browserRef.addEventListener('loadstart', function(event) {
           if((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});
               browserRef.close();
               var callbackResponse = (event.url).split(split_tokens[response_type])[1];
               var parameterMap = $cordovaOauthUtility.parseResponseParameters(callbackResponse);
-              if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
+              if(parameterMap.access_token) {
                 deferred.resolve({ access_token: parameterMap.access_token });
               } else if(parameterMap.code !== undefined && parameterMap.code !== null) {
                 deferred.resolve({ code: parameterMap.code });
@@ -882,8 +868,7 @@ function jawbone($q, $http, $cordovaOauthUtility) {
   function oauthJawbone(clientId,clientSecret, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -1075,8 +1060,7 @@ function linkedin($q, $http, $cordovaOauthUtility) {
   function oauthLinkedin(clientId, clientSecret, appScope, state, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -1136,8 +1120,7 @@ function magento($q, $http, $cordovaOauthUtility) {
   function oauthMagento(baseUrl, clientId, clientSecret) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         if(typeof jsSHA !== "undefined") {
           var oauthObject = {
             oauth_callback: "http://localhost/callback",
@@ -1248,8 +1231,7 @@ function meetup($q, $http, $cordovaOauthUtility) {
   function oauthMeetup(clientId, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -1305,8 +1287,7 @@ function odnoklassniki($q, $http, $cordovaOauthUtility) {
   function oauthOdnoklassniki(clientId, appScope) {
     var deferred = $q.defer();
     if (window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if ($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if ($cordovaOauthUtility.isInAppBrowserInstalled()) {
           var browserRef = window.open('http://www.odnoklassniki.ru/oauth/authorize?client_id=' + clientId + '&scope=' + appScope.join(",") + '&response_type=token&redirect_uri=http://localhost/callback' + '&layout=m', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
           browserRef.addEventListener('loadstart', function (event) {
             if ((event.url).indexOf("http://localhost/callback") === 0) {
@@ -1358,8 +1339,7 @@ function pocket($q, $http, $cordovaOauthUtility) {
   function oauthPocket(clientId, options) {
     var deferred = $q.defer();
     if (window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if ($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if ($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_url = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_url")) {
@@ -1445,8 +1425,7 @@ function rally($q, $http, $cordovaOauthUtility) {
   function oauthRally(clientId, clientSecret, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-        var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-        if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+        if($cordovaOauthUtility.isInAppBrowserInstalled()) {
           var redirect_uri = "http://localhost/callback";
           if(options !== undefined) {
             if(options.hasOwnProperty("redirect_uri")) {
@@ -1506,8 +1485,7 @@ function reddit($q, $http, $cordovaOauthUtility) {
   function oauthReddit(clientId, clientSecret, appScope, compact, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -1578,8 +1556,7 @@ function salesforce($q, $http, $cordovaOauthUtility) {
 
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var browserRef = window.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
         browserRef.addEventListener("loadstart", function(event) {
           if(startWith(event.url, redirectUri)) {
@@ -1639,8 +1616,7 @@ function slack($q, $http, $cordovaOauthUtility) {
   function oauthSlack(clientId, clientSecret, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -1700,8 +1676,7 @@ function spotify($q, $http, $cordovaOauthUtility) {
   function oauthSpotify(clientId, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -1760,8 +1735,7 @@ function strava($q, $http, $cordovaOauthUtility) {
   function oauthStrava(clientId, clientSecret, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -1821,8 +1795,7 @@ function stripe($q, $http, $cordovaOauthUtility) {
   function oauthStripe(clientId, clientSecret, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -1881,8 +1854,7 @@ function twitter($q, $http, $cordovaOauthUtility) {
   function oauthTwitter(clientId, clientSecret, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -2004,8 +1976,8 @@ function uber($q, $http, $cordovaOauthUtility) {
 
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -2064,8 +2036,7 @@ function untappd($q, $http, $cordovaOauthUtility) {
   function oauthUntappd(clientId, options) {
     var deferred = $q.defer();
     if (window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if ($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if ($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_url = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_url")) {
@@ -2128,8 +2099,7 @@ function venmo($q, $http, $cordovaOauthUtility) {
   function oauthVenmo(clientId, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -2188,8 +2158,7 @@ function vkontakte($q, $http, $cordovaOauthUtility) {
   function oauthvKontakte(clientId, appScope) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var browserRef = window.open('https://oauth.vk.com/authorize?client_id=' + clientId + '&redirect_uri=http://oauth.vk.com/blank.html&response_type=token&scope=' + appScope.join(",") + '&display=touch&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
         browserRef.addEventListener('loadstart', function(event) {
           var tmp = (event.url).split("#");
@@ -2247,8 +2216,7 @@ function weibo($q, $http, $cordovaOauthUtility) {
   function oauthWeibo(clientId, clientSecret, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -2317,8 +2285,7 @@ function windowslive($q, $http, $cordovaOauthUtility) {
   function oauthWindowslive(clientId, appScope, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "https://login.live.com/oauth20_desktop.srf";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -2378,8 +2345,7 @@ function withings($q, $http, $cordovaOauthUtility) {
   function oauthWithings(clientId, clientSecret) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         if(typeof jsSHA !== "undefined") {
 
           // Step 1 : get a oAuth "request token"
@@ -2397,7 +2363,7 @@ function withings($q, $http, $cordovaOauthUtility) {
 
               // Step 2 : End-user authorization
               var parameterMap = $cordovaOauthUtility.parseResponseParameters(requestTokenResult);
-              if(parameterMap.hasOwnProperty("oauth_token") === false) {
+              if(!parameterMap.oauth_token) {
                 deferred.reject("Oauth request token was not received");
               }
               var oauthObject = $cordovaOauthUtility.generateOauthParametersInstance(clientId);
@@ -2418,7 +2384,7 @@ function withings($q, $http, $cordovaOauthUtility) {
                 if((event.url).indexOf("http://localhost/callback") === 0) {
                   var callbackResponse = (event.url).split("?")[1];
                   parameterMap = $cordovaOauthUtility.parseResponseParameters(callbackResponse);
-                  if(parameterMap.hasOwnProperty("oauth_verifier") === false) {
+                  if(!parameterMap.oauth_verifier) {
                     deferred.reject("Browser authentication failed to complete.  No oauth_verifier was returned");
                   }
 
@@ -2434,7 +2400,7 @@ function withings($q, $http, $cordovaOauthUtility) {
                   $http({method: "get", url: accessTokenUrlBase + '?' + accessTokenParameters})
                     .success(function(result) {
                       var parameterMap = $cordovaOauthUtility.parseResponseParameters(result);
-                      if(parameterMap.hasOwnProperty("oauth_token_secret") === false) {
+                      if(!parameterMap.oauth_token_secret) {
                         deferred.reject("Oauth access token was not received");
                       }
                       deferred.resolve(parameterMap);
@@ -2488,8 +2454,7 @@ function yammer($q, $http, $cordovaOauthUtility) {
   function oauthYammer(clientId, options) {
     var deferred = $q.defer();
     if(window.cordova) {
-      var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
-      if($cordovaOauthUtility.isInAppBrowserInstalled(cordovaMetadata) === true) {
+      if($cordovaOauthUtility.isInAppBrowserInstalled()) {
         var redirect_uri = "http://localhost/callback";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
@@ -2612,11 +2577,15 @@ function cordovaOauthUtility($q) {
    * @param
    * @return   boolean
    */
-  function isInAppBrowserInstalled(cordovaMetadata) {
+  function isInAppBrowserInstalled() {
+    var cordovaMetadata = cordova.require("cordova/plugin_list").map(
+      function(plugin) {
+        return plugin.pluginId;
+      });
     var inAppBrowserNames = ["cordova-plugin-inappbrowser", "org.apache.cordova.inappbrowser"];
 
     return inAppBrowserNames.some(function(name) {
-      return cordovaMetadata.hasOwnProperty(name);
+      return cordovaMetadata.indexOf(name) != -1 ? true : false;
     });
   }
 

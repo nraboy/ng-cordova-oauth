@@ -18,11 +18,14 @@ function cordovaOauthUtility($q) {
    * @return   boolean
    */
   function isInAppBrowserInstalled() {
-    var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
+    var cordovaMetadata = cordova.require("cordova/plugin_list").map(
+      function(plugin) {
+        return plugin.pluginId;
+      });
     var inAppBrowserNames = ["cordova-plugin-inappbrowser", "org.apache.cordova.inappbrowser"];
 
     return inAppBrowserNames.some(function(name) {
-      return cordovaMetadata.hasOwnProperty(name);
+      return cordovaMetadata.indexOf(name) != -1 ? true : false;
     });
   }
 
