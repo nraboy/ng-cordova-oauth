@@ -8,6 +8,24 @@ describe('oauth.utils tests', function() {
   }));
 
   describe('Testing function isInAppBrowserInstalled: ', function() {
+    it('Should return false if metadata is empty', function() {
+      spyOn(window.cordova, 'require').and.returnValue({ metadata: {}});
+      expect(oauthUtils.isInAppBrowserInstalled()).toBeFalsy();
+      expect(window.cordova.require).toHaveBeenCalledWith('cordova/plugin_list');
+    });
+
+    it('Should return true if metadata return the inAppBrowser plugin on the list', function() {
+      spyOn(window.cordova, 'require').and.returnValue({ metadata: {'cordova-plugin-inappbrowser': '1.0'}});
+      expect(oauthUtils.isInAppBrowserInstalled()).toBeTruthy();
+      expect(window.cordova.require).toHaveBeenCalledWith('cordova/plugin_list');
+    });
+
+    it('Should return false if the metadata does not have the plugin on the list', function() {
+      spyOn(window.cordova, 'require').and.returnValue({ metadata: {'cordova-plugin-keyboard': '1.0'}});
+      expect(oauthUtils.isInAppBrowserInstalled()).toBeFalsy();
+      expect(window.cordova.require).toHaveBeenCalledWith('cordova/plugin_list');
+    });
+
     it('Should return false if plugin not installed', function() {
       spyOn(window.cordova, 'require').and.returnValue([]);
       expect(oauthUtils.isInAppBrowserInstalled()).toBeFalsy();
