@@ -21,7 +21,7 @@ function cordovaOauthUtility($q) {
     var cordovaPluginList = cordova.require("cordova/plugin_list");
     var inAppBrowserNames = ["cordova-plugin-inappbrowser", "org.apache.cordova.inappbrowser"];
 
-    if (!cordovaPluginList.metadata) {
+    if (Object.keys(cordovaPluginList.metadata).length === 0) {
       var formatedPluginList = cordovaPluginList.map(
         function(plugin) {
           return plugin.pluginId;

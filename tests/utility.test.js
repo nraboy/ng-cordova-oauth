@@ -9,37 +9,49 @@ describe('oauth.utils tests', function() {
 
   describe('Testing function isInAppBrowserInstalled: ', function() {
     it('Should return false if metadata is empty', function() {
-      spyOn(window.cordova, 'require').and.returnValue({ metadata: {}});
+      var cordovaPluginList = [{id: 'com.ionic.keyboard.keyboard', pluginId: 'com.ionic.keyboard'}];
+      cordovaPluginList.metadata = {};
+      spyOn(window.cordova, 'require').and.returnValue(cordovaPluginList);
       expect(oauthUtils.isInAppBrowserInstalled()).toBeFalsy();
       expect(window.cordova.require).toHaveBeenCalledWith('cordova/plugin_list');
     });
 
     it('Should return true if metadata return the inAppBrowser plugin on the list', function() {
-      spyOn(window.cordova, 'require').and.returnValue({ metadata: {'cordova-plugin-inappbrowser': '1.0'}});
+      var cordovaPluginList = [{id: 'cordova-plugin-inappbrowser.inappbrowser', pluginId: 'cordova-plugin-inappbrowser'}];
+      cordovaPluginList.metadata = {'cordova-plugin-inappbrowser': '1.0'};
+      spyOn(window.cordova, 'require').and.returnValue(cordovaPluginList);
       expect(oauthUtils.isInAppBrowserInstalled()).toBeTruthy();
       expect(window.cordova.require).toHaveBeenCalledWith('cordova/plugin_list');
     });
 
     it('Should return false if the metadata does not have the plugin on the list', function() {
-      spyOn(window.cordova, 'require').and.returnValue({ metadata: {'cordova-plugin-keyboard': '1.0'}});
+      var cordovaPluginList = [{id: 'cordova-plugin-keyboard.keyboard', pluginId: 'cordova-plugin-keyboard'}];
+      cordovaPluginList.metadata = {'cordova-plugin-keyboard': '1.0'};
+      spyOn(window.cordova, 'require').and.returnValue(cordovaPluginList);
       expect(oauthUtils.isInAppBrowserInstalled()).toBeFalsy();
       expect(window.cordova.require).toHaveBeenCalledWith('cordova/plugin_list');
     });
 
     it('Should return false if plugin not installed', function() {
-      spyOn(window.cordova, 'require').and.returnValue([]);
+      var cordovaPluginList = [];
+      cordovaPluginList.metadata = {};
+      spyOn(window.cordova, 'require').and.returnValue(cordovaPluginList);
       expect(oauthUtils.isInAppBrowserInstalled()).toBeFalsy();
       expect(window.cordova.require).toHaveBeenCalledWith('cordova/plugin_list');
     });
 
     it('Should return true when the old version of plugin is installed', function() {
-      spyOn(window.cordova, 'require').and.returnValue([{ pluginId: "org.apache.cordova.inappbrowser"}]);
+      var cordovaPluginList = [{ pluginId: "org.apache.cordova.inappbrowser"}];
+      cordovaPluginList.metadata = {};
+      spyOn(window.cordova, 'require').and.returnValue(cordovaPluginList);
       expect(oauthUtils.isInAppBrowserInstalled()).toBeTruthy();
       expect(window.cordova.require).toHaveBeenCalledWith('cordova/plugin_list');
     });
 
     it('Should return true when the new version of plugin is installed', function() {
-      spyOn(window.cordova, 'require').and.returnValue([{ pluginId: "cordova-plugin-inappbrowser"}]);
+      var cordovaPluginList = [{ pluginId: "cordova-plugin-inappbrowser"}];
+      cordovaPluginList.metadata = {};
+      spyOn(window.cordova, 'require').and.returnValue(cordovaPluginList);
       expect(oauthUtils.isInAppBrowserInstalled()).toBeTruthy();
       expect(window.cordova.require).toHaveBeenCalledWith('cordova/plugin_list');
     });
