@@ -23,7 +23,7 @@ function reddit($q, $http, $cordovaOauthUtility) {
               redirect_uri = options.redirect_uri;
           }
         }
-        var browserRef = window.open('https://ssl.reddit.com/api/v1/authorize' + (compact ? '.compact' : '') + '?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&duration=permanent&state=ngcordovaoauth&scope=' + appScope.join(",") + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+        var browserRef = window.cordova.InAppBrowser.open('https://ssl.reddit.com/api/v1/authorize' + (compact ? '.compact' : '') + '?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&duration=permanent&state=ngcordovaoauth&scope=' + appScope.join(",") + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
         browserRef.addEventListener('loadstart', function(event) {
           if((event.url).indexOf(redirect_uri) === 0) {
             requestToken = (event.url).split("code=")[1];

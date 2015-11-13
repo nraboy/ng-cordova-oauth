@@ -21,7 +21,7 @@ function untappd($q, $http, $cordovaOauthUtility) {
             redirect_url = options.redirect_url;
           }
         }
-        var browserRef = window.open('https://untappd.com/oauth/authenticate/?client_id=' + clientId + '&redirect_url=' + redirect_url + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+        var browserRef = window.cordova.InAppBrowser.open('https://untappd.com/oauth/authenticate/?client_id=' + clientId + '&redirect_url=' + redirect_url + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
         browserRef.addEventListener('loadstart', function (event) {
           if ((event.url).indexOf(redirect_url) === 0) {
             browserRef.removeEventListener("exit",function(event){});

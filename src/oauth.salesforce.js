@@ -28,7 +28,7 @@ function salesforce($q, $http, $cordovaOauthUtility) {
     var deferred = $q.defer();
     if(window.cordova) {
       if($cordovaOauthUtility.isInAppBrowserInstalled()) {
-        var browserRef = window.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
+        var browserRef = window.cordova.InAppBrowser.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
         browserRef.addEventListener("loadstart", function(event) {
           if(startWith(event.url, redirectUri)) {
               var oauthResponse = {};

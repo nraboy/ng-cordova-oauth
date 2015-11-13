@@ -37,7 +37,7 @@ function instagram($q, $http, $cordovaOauthUtility) {
           scope = '&scope' + appScope.join('+');
         }
 
-        var browserRef = window.open('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + scope + '&response_type='+response_type, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+        var browserRef = window.cordova.InAppBrowser.open('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + scope + '&response_type='+response_type, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
         browserRef.addEventListener('loadstart', function(event) {
           if((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});

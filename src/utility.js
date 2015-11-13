@@ -18,12 +18,23 @@ function cordovaOauthUtility($q) {
    * @return   boolean
    */
   function isInAppBrowserInstalled() {
-    var cordovaMetadata = cordova.require("cordova/plugin_list").metadata;
+    var cordovaPluginList = cordova.require("cordova/plugin_list");
     var inAppBrowserNames = ["cordova-plugin-inappbrowser", "org.apache.cordova.inappbrowser"];
 
-    return inAppBrowserNames.some(function(name) {
-      return cordovaMetadata.hasOwnProperty(name);
-    });
+    if (Object.keys(cordovaPluginList.metadata).length === 0) {
+      var formatedPluginList = cordovaPluginList.map(
+        function(plugin) {
+          return plugin.pluginId;
+        });
+
+      return inAppBrowserNames.some(function(name) {
+        return formatedPluginList.indexOf(name) != -1 ? true : false;
+      });
+    } else {
+      return inAppBrowserNames.some(function(name) {
+        return cordovaPluginList.metadata.hasOwnProperty(name);
+      });
+    }
   }
 
   /*
