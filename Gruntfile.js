@@ -47,6 +47,6 @@ module.exports = function(grunt) {
   grunt.registerTask('test:dev', ['clean', 'jshint', 'karma:dev']);
   grunt.registerTask('test', ['clean', 'jshint', 'karma:continuos']);
   grunt.registerTask('build', ['clean', 'jshint', 'concat', 'uglify']);
-  grunt.registerTask('default', ['clean', 'jshint', 'karma', 'concat', 'uglify']);
+  grunt.registerTask('default', ['clean', 'jshint', 'karma:continuos', 'concat', 'uglify']);
 
 };
