@@ -2713,3 +2713,5 @@ function cordovaOauthUtility($q) {
     return oauthObject;
   }
 }
+
+cordovaOauthUtility.$inject = ['$q'];
