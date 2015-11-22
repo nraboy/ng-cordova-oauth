@@ -1,3 +1,9 @@
+0.2.0 - November 22, 2015
+
+* Fix InAppBrowser issue with Apache Cordova 5.4.0
+* Complete code refactor for future maintainability
+* Add a few test cases
+
 0.1.4 - June 28, 2015
 
 * Add Envato support

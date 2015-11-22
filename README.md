@@ -114,7 +114,7 @@ This library will NOT work with a web browser, ionic serve, or ionic view.  It m
 
 All contributions must be made via the `development` branch.  This keeps the project more maintainable in terms of versioning as well as code control.
 
-If you want to contribute please use the new architecture of files. Each provider need to be in a separated file following this pattern: `oauth.<provider name>.js` and add it to the `oauth.provider` module as a dependecy.
+If you want to contribute please use the new architecture of files. Each provider need to be in a separated file following this pattern: `oauth.<provider name>.js` and add it to the `oauth.provider` module as a dependency.
 
 (If you have any doubt about the architecture take a look other providers to see how it is.)
 
@@ -160,7 +160,10 @@ If you want to contribute please use the new architecture of files. Each provide
 
 ## Have a question or found a bug (compliments work too)?
 
-Tweet me on Twitter - [@nraboy](https://www.twitter.com/nraboy)
+This project is maintained by **Nic Raboy** and **Matheus Rocha**.
+
+Tweet Nic Raboy on Twitter - [@nraboy](https://www.twitter.com/nraboy)
+Tweet Matheus Rocha on Twitter - [@matheusrocha](https://www.twitter.com/matheusrocha)
 
 
 ## Resources
