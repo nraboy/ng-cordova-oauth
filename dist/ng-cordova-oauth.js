@@ -306,7 +306,7 @@ dribble.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 angular.module('oauth.dropbox', ['oauth.utils'])
   .factory('$dropbox', dropbox);
 
-function dropbox() {
+function dropbox($q, $http, $cordovaOauthUtility) {
   return { signin: oauthDropbox };
 
   /*
