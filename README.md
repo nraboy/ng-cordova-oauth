@@ -91,12 +91,13 @@ Each web service API acts independently in this library.  However, when configur
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
-
+```javascript
     $cordovaOauth.google("CLIENT_ID_HERE", ["email"]).then(function(result) {
         console.log("Response Object -> " + JSON.stringify(result));
     }, function(error) {
         console.log("Error -> " + error);
     });
+```
 
 To authenticate with Twitter, Withings, and Magento an additional library is required.  These services require HMAC-SHA1 signatures in their Oauth implementation.  Including the sha1.js component of jsSHA will accomplish this task.
 
