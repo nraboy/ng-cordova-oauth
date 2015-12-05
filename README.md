@@ -91,12 +91,13 @@ Each web service API acts independently in this library.  However, when configur
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
+
 ```javascript
-    $cordovaOauth.google("CLIENT_ID_HERE", ["email"]).then(function(result) {
-        console.log("Response Object -> " + JSON.stringify(result));
-    }, function(error) {
-        console.log("Error -> " + error);
-    });
+$cordovaOauth.google("CLIENT_ID_HERE", ["email"]).then(function(result) {
+    console.log("Response Object -> " + JSON.stringify(result));
+}, function(error) {
+    console.log("Error -> " + error);
+});
 ```
 
 To authenticate with Twitter, Withings, and Magento an additional library is required.  These services require HMAC-SHA1 signatures in their Oauth implementation.  Including the sha1.js component of jsSHA will accomplish this task.
@@ -121,42 +122,42 @@ If you want to contribute please use the new architecture of files. Each provide
 
 
 ```javascript
-    //oauth.js
+//oauth.js
 
-    angular.module("oauth.providers", [
-      "oauth.utils", "oauth.azuread", "oauth.adfs", 'oauth.dropbox',
-      'oauth.digitalOcean', 'oauth.google', 'oauth.github', 'oauth.facebook',
-      'oauth.linkedin', 'oauth.instagram', 'oauth.box', 'oauth.reddit', 'oauth.slack',
-      'oauth.twitter', 'oauth.meetup', 'oauth.salesforce', 'oauth.strava',
-      'oauth.withings', 'oauth.foursquare', 'oauth.magento', 'oauth.vkontakte',
-      'oauth.odnoklassniki', 'oauth.imgur', 'oauth.spotify', 'oauth.uber',
-      'oauth.windowslive', 'oauth.yammer', 'oauth.venmo', 'oauth.stripe', 'oauth.rally',
-      'oauth.familySearch', 'oauth.envato', 'oauth.weibo', 'oauth.jawbone', 'oauth.untappd',
-      'oauth.dribble', '<YOUR PROVIDER MODULE HERE>']).factory("$cordovaOauth", cordovaOauth);
+angular.module("oauth.providers", [
+  "oauth.utils", "oauth.azuread", "oauth.adfs", 'oauth.dropbox',
+  'oauth.digitalOcean', 'oauth.google', 'oauth.github', 'oauth.facebook',
+  'oauth.linkedin', 'oauth.instagram', 'oauth.box', 'oauth.reddit', 'oauth.slack',
+  'oauth.twitter', 'oauth.meetup', 'oauth.salesforce', 'oauth.strava',
+  'oauth.withings', 'oauth.foursquare', 'oauth.magento', 'oauth.vkontakte',
+  'oauth.odnoklassniki', 'oauth.imgur', 'oauth.spotify', 'oauth.uber',
+  'oauth.windowslive', 'oauth.yammer', 'oauth.venmo', 'oauth.stripe', 'oauth.rally',
+  'oauth.familySearch', 'oauth.envato', 'oauth.weibo', 'oauth.jawbone', 'oauth.untappd',
+  'oauth.dribble', '<YOUR PROVIDER MODULE HERE>']).factory("$cordovaOauth", cordovaOauth);
 
-    function cordovaOauth(
-        $q, $http, $cordovaOauthUtility, $azureAD, $adfs, $dropbox, $digitalOcean,
-        $google, $github, $facebook, $linkedin, $instagram, $box, $reddit, $slack,
-        $twitter, $meetup, $salesforce, $strava, $withings, $foursquare, $magento
-        $vkontakte, $odnoklassniki, $imgur, $spotify, $uber, $windowslive, $yammer,
-        $venmo, $stripe, $rally, $familySearch, $envato, $weibo, $jawbone, $untappd,
-        $dribble, <YOUR FACTORY NAME>) {
+function cordovaOauth(
+    $q, $http, $cordovaOauthUtility, $azureAD, $adfs, $dropbox, $digitalOcean,
+    $google, $github, $facebook, $linkedin, $instagram, $box, $reddit, $slack,
+    $twitter, $meetup, $salesforce, $strava, $withings, $foursquare, $magento
+    $vkontakte, $odnoklassniki, $imgur, $spotify, $uber, $windowslive, $yammer,
+    $venmo, $stripe, $rally, $familySearch, $envato, $weibo, $jawbone, $untappd,
+    $dribble, <YOUR FACTORY NAME>) {
 
-        return {
-            // A lot of providers...
-            yourProvider: $yourProvider.signinFuncion,
-        }
+    return {
+        // A lot of providers...
+        yourProvider: $yourProvider.signinFuncion,
     }
+}
 
-    $cordovaOauth.$inject = [
-      "$q", '$http', "$cordovaOauthUtility", "$azureAD", "$adfs", '$dropbox',
-      '$digitalOcean', '$google', '$github', '$facebook', '$linkedin',
-      '$instagram', '$box', '$reddit', '$slack', '$twitter' '$meetup', '$salesforce',
-      '$strava', '$withings', '$foursquare', '$magento', '$vkontakte',
-      '$odnoklassniki', '$imgur', '$spotify', '$uber', '$windowslive', '$yammer',
-      '$venmo', '$stripe', '$rally', '$familySearch', '$envato', '$weibo',
-      '$jawbone', '$untappd', '$dribble', '<YOUR FACTORY NAME>'
-    ];
+$cordovaOauth.$inject = [
+  "$q", '$http', "$cordovaOauthUtility", "$azureAD", "$adfs", '$dropbox',
+  '$digitalOcean', '$google', '$github', '$facebook', '$linkedin',
+  '$instagram', '$box', '$reddit', '$slack', '$twitter' '$meetup', '$salesforce',
+  '$strava', '$withings', '$foursquare', '$magento', '$vkontakte',
+  '$odnoklassniki', '$imgur', '$spotify', '$uber', '$windowslive', '$yammer',
+  '$venmo', '$stripe', '$rally', '$familySearch', '$envato', '$weibo',
+  '$jawbone', '$untappd', '$dribble', '<YOUR FACTORY NAME>'
+];
 ```
 
 ## Have a question or found a bug (compliments work too)?
@@ -164,6 +165,7 @@ If you want to contribute please use the new architecture of files. Each provide
 This project is maintained by **Nic Raboy** and **Matheus Rocha**.
 
 Tweet Nic Raboy on Twitter - [@nraboy](https://www.twitter.com/nraboy)
+
 Tweet Matheus Rocha on Twitter - [@matheusrocha](https://www.twitter.com/matheusrocha)
 
 
