@@ -1680,7 +1680,7 @@ function spotify($q, $http, $cordovaOauthUtility) {
         var redirect_uri = "http://localhost/callback";
         var response_type = "token";
         var state = "";
-        var show_dialog = false;
+        var show_dialog = "";
         if(options !== undefined) {
           if(options.hasOwnProperty("redirect_uri")) {
             redirect_uri = options.redirect_uri;
