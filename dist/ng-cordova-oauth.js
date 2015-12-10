@@ -1700,7 +1700,7 @@ function spotify($q, $http, $cordovaOauthUtility) {
           if((event.url).indexOf(redirect_uri) === 0) {
             browserRef.removeEventListener("exit",function(event){});
             browserRef.close();
-            var splitChar = (response_type === "code") ? "#" : "?";
+            var splitChar = (response_type === "code") ? "?" : "#";
             var callbackResponse = (event.url).split(splitChar)[1];
             var responseParameters = (callbackResponse).split("&");
             var parameterMap = [];
