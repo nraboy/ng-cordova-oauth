@@ -1,3 +1,7 @@
+0.2.2 - January 6, 2016
+
+* Update Karma
+
 0.2.1 - January 6, 2016
 
 * Add support for authorization code flow for Spotify
