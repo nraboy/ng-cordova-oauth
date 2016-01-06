@@ -5,10 +5,13 @@
 
 ngCordovaOauth is an AngularJS Apache Cordova Oauth library.  The purpose of this library is to quickly and easily obtain an access token from various web services to use their APIs.
 
+If you are using Angular 2, you should check out [ng2-cordova-oauth](https://github.com/nraboy/ng2-cordova-oauth) instead.
+
 
 ## Requirements
 
 * Apache Cordova 3.5+
+* AngularJS
 * [Apache Cordova InAppBrowser Plugin](http://cordova.apache.org/docs/en/3.0.0/cordova_inappbrowser_inappbrowser.md.html)
 * [Apache Cordova Whitelist Plugin](https://github.com/apache/cordova-plugin-whitelist)
 * [jsSHA 1.6.0](https://github.com/Caligatio/jsSHA) Secure Hash Library (Twitter, Withings, and Magento only)
@@ -104,7 +107,7 @@ To authenticate with Twitter, Withings, and Magento an additional library is req
 
 As of Apache Cordova 5.0.0, the [whitelist plugin](https://blog.nraboy.com/2015/05/whitelist-external-resources-for-use-in-ionic-framework/) must be used in order to reach external web services.
 
-This library will NOT work with a web browser, ionic serve, or ionic view.  It must be used via installing to a device or simulator.
+This library will **NOT** work with a web browser, ionic serve, or ionic view.  It **MUST** be used via installing to a device or simulator.
 
 
 ## Version History

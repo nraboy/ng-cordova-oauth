@@ -1,3 +1,7 @@
+0.2.1 - January 6, 2016
+
+* Add support for authorization code flow for Spotify
+
 0.2.0 - November 22, 2015
 
 * Fix InAppBrowser issue with Apache Cordova 5.4.0
