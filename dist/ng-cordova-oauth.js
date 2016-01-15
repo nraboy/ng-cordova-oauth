@@ -2126,7 +2126,7 @@ function venmo($q, $http, $cordovaOauthUtility) {
           if((event.url).indexOf(redirect_uri) === 0) {
             browserRef.removeEventListener("exit",function(event){});
             browserRef.close();
-            var callbackResponse = (event.url).split("#")[1];
+            var callbackResponse = (event.url).split("?")[1];
             var responseParameters = (callbackResponse).split("&");
             var parameterMap = [];
 
@@ -2135,7 +2135,9 @@ function venmo($q, $http, $cordovaOauthUtility) {
             }
 
             if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
-              deferred.resolve({ access_token: parameterMap.access_token, expires_in: parameterMap.expires_in });
+              deferred.resolve({ access_token: parameterMap.access_token });
+            } else if(parameterMap.error !== undefined && parameterMap.error !== null) {
+              deferred.reject((parameterMap.error).replace("+", " "));
             } else {
               deferred.reject("Problem authenticating");
             }
