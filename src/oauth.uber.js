@@ -1,5 +1,5 @@
 angular.module('oauth.uber', ['oauth.utils'])
-  .factory('$uber', uber);
+  .factory('$ngCordovaUber', uber);
 
 function uber($q, $http, $cordovaOauthUtility) {
   return { signin: oauthUber };

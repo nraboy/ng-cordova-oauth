@@ -1,5 +1,5 @@
 angular.module('oauth.vkontakte', ['oauth.utils'])
-  .factory('$vkontakte', vkontakte);
+  .factory('$ngCordovnaVkontakte', vkontakte);
 
 function vkontakte($q, $http, $cordovaOauthUtility) {
   return { signin: oauthvKontakte };

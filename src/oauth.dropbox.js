@@ -1,5 +1,5 @@
 angular.module('oauth.dropbox', ['oauth.utils'])
-  .factory('$dropbox', dropbox);
+  .factory('$ngCordovaDropbox', dropbox);
 
 function dropbox($q, $http, $cordovaOauthUtility) {
   return { signin: oauthDropbox };

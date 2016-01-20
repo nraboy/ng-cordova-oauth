@@ -1,5 +1,5 @@
 angular.module('oauth.jawbone', ['oauth.utils'])
-  .factory('$jawbone', jawbone);
+  .factory('$ngCordovaJawbone', jawbone);
 
 function jawbone($q, $http, $cordovaOauthUtility) {
   return { signin: oauthJawbone };

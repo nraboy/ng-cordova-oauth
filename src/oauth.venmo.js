@@ -1,5 +1,5 @@
 angular.module('oauth.venmo', ['oauth.utils'])
-  .factory('$venmo', venmo);
+  .factory('$ngCordovaVenmo', venmo);
 
 function venmo($q, $http, $cordovaOauthUtility) {
   return { signin: oauthVenmo };

@@ -1,5 +1,5 @@
 angular.module('oauth.untappd', ['oauth.utils'])
-  .factory('$untappd', untappd);
+  .factory('$ngCordovaUntappd', untappd);
 
 function untappd($q, $http, $cordovaOauthUtility) {
   return { signin: oauthUntappd };

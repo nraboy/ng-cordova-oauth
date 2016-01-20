@@ -1,5 +1,5 @@
 angular.module('oauth.google', ['oauth.utils'])
-  .factory('$google', google);
+  .factory('$ngCordovaGoogle', google);
 
 function google($q, $http, $cordovaOauthUtility) {
   return { signin: oauthGoogle };

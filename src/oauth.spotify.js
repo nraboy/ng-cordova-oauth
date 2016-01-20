@@ -1,5 +1,5 @@
 angular.module('oauth.spotify', ['oauth.utils'])
-  .factory('$spotify', spotify);
+  .factory('$ngCordovaSpotify', spotify);
 
 function spotify($q, $http, $cordovaOauthUtility) {
   return { signin: oauthSpotify };

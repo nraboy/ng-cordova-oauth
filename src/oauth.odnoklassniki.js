@@ -1,5 +1,5 @@
 angular.module('oauth.odnoklassniki', ['oauth.utils'])
-  .factory('$odnoklassniki', odnoklassniki);
+  .factory('$ngCordovaOdnoklassniki', odnoklassniki);
 
 function odnoklassniki($q, $http, $cordovaOauthUtility) {
   return { signin: oauthOdnoklassniki };

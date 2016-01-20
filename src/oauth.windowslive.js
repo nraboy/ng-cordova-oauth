@@ -1,5 +1,5 @@
 angular.module('oauth.windowslive', ['oauth.utils'])
-  .factory('$windowslive', windowslive);
+  .factory('$ngCordovaWindowslive', windowslive);
 
 function windowslive($q, $http, $cordovaOauthUtility) {
   return { signin: oauthWindowslive };

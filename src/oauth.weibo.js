@@ -1,5 +1,5 @@
 angular.module('oauth.weibo', ['oauth.utils'])
-  .factory('$weibo', weibo);
+  .factory('$ngCordovaWeibo', weibo);
 
 function weibo($q, $http, $cordovaOauthUtility) {
   return { signin: oauthWeibo };

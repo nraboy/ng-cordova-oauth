@@ -1,5 +1,5 @@
 angular.module('oauth.box', ['oauth.utils'])
-  .factory('$box', box);
+  .factory('$ngCordovaBox', box);
 
 function box($q, $http, $cordovaOauthUtility) {
   return { signin: oauthBox };

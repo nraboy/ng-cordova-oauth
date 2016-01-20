@@ -1,5 +1,5 @@
 angular.module('oauth.twitter', ['oauth.utils'])
-  .factory('$twitter', twitter);
+  .factory('$ngCordovaTwitter', twitter);
 
 function twitter($q, $http, $cordovaOauthUtility) {
   return { signin: oauthTwitter };

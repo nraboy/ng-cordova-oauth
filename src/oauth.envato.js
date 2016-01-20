@@ -1,5 +1,5 @@
 angular.module('oauth.envato', ['oauth.utils'])
-  .factory('$envato', envato);
+  .factory('$ngCordovaEnvato', envato);
 
 function envato($q, $http, $cordovaOauthUtility) {
   return { signin: oauthEnvato };

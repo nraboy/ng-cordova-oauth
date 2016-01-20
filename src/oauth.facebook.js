@@ -1,5 +1,5 @@
 angular.module('oauth.facebook', ['oauth.utils'])
-  .factory('$facebook', facebook);
+  .factory('$ngCordovaFacebook', facebook);
 
 function facebook($q, $http, $cordovaOauthUtility) {
   return { signin: oauthFacebook };

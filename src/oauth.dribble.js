@@ -1,5 +1,5 @@
 angular.module('oauth.dribble', ['oauth.utils'])
-  .factory('$dribble', dribble);
+  .factory('$ngCordovaDribble', dribble);
 
 function dribble($q, $http, $cordovaOauthUtility) {
   return { signin: oauthDribble };

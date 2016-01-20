@@ -1,5 +1,5 @@
 angular.module('oauth.azuread', ['oauth.utils'])
-  .factory('$azureAD', azureAD);
+  .factory('$ngCordovaAzureAD', azureAD);
 
 function azureAD($q, $http, $cordovaOauthUtility) {
   return { signin: oauthAzureAD };

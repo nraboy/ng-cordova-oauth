@@ -1,5 +1,5 @@
 angular.module('oauth.adfs', ['oauth.utils'])
-  .factory('$adfs', adfs);
+  .factory('$ngCordovaAdfs', adfs);
 
 function adfs($q, $http, $cordovaOauthUtility) {
   return { signin: oauthAdfs };
