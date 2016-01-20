@@ -39,7 +39,7 @@ angular.module("oauth.providers", [
   .factory("$cordovaOauth", cordovaOauth);
 
 function cordovaOauth(
-  $q, $http, $cordovaOauthUtility, $ngCordovaAzureAD, $ngCordovaAdfs, $ngCordovaDropbox, $digitalOcean,
+  $q, $http, $cordovaOauthUtility, $ngCordovaAzureAD, $ngCordovaAdfs, $ngCordovaDropbox, $ngCordovaDigitalOcean,
   $ngCordovaGoogle, $ngCordovaGithub, $ngCordovaFacebook, $ngCordovaLinkedin, $ngCordovaInstagram, $ngCordovaBox, $ngCordovaReddit, $ngCordovaSlack,
   $ngCordovaTwitter, $ngCordovaMeetup, $ngCordovaSalesforce, $ngCordovaStrava, $ngCordovaWithings, $ngCordovaFoursquare, $ngCordovaMagento,
   $ngCordovaVkontakte, $ngCordovaOdnoklassniki, $ngCordovaImgur, $ngCordovaSpotify, $ngCordovaUber, $ngCordovaWindowslive, $ngCordovaYammer,
@@ -50,7 +50,7 @@ function cordovaOauth(
     azureAD: $ngCordovaAzureAD.signin,
     adfs: $ngCordovaAdfs.signin,
     dropbox: $ngCordovaDropbox.signin,
-    digitalOcean: $digitalOcean.signin,
+    digitalOcean: $ngCordovaDigitalOcean.signin,
     google: $ngCordovaGoogle.signin,
     github: $ngCordovaGithub.signin,
     facebook: $ngCordovaFacebook.signin,
@@ -91,7 +91,7 @@ cordovaOauth.$inject = [
   "$ngCordovaAzureAD",
   "$ngCordovaAdfs",
   '$ngCordovaDropbox',
-  '$digitalOcean',
+  '$ngCordovaDigitalOcean',
   '$ngCordovaGoogle',
   '$ngCordovaGithub',
   '$ngCordovaFacebook',

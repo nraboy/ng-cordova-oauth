@@ -1,5 +1,5 @@
 angular.module('oauth.digitalOcean', ['oauth.utils'])
-  .factory('$digitalOcean', digitalOcean);
+  .factory('$ngCordovaDigitalOcean', digitalOcean);
 
 function digitalOcean($q, $http, $cordovaOauthUtility) {
   return { signin: oauthDigitalOcean };
