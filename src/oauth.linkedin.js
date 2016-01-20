@@ -1,5 +1,5 @@
 angular.module('oauth.linkedin', ['oauth.utils'])
-  .factory('$linkedin', linkedin);
+  .factory('$ngCordovaLinkedin', linkedin);
 
 function linkedin($q, $http, $cordovaOauthUtility) {
   return { signin: oauthLinkedin };

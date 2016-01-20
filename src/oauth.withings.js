@@ -1,5 +1,5 @@
 angular.module('oauth.withings', ['oauth.utils'])
-  .factory('$withings', withings);
+  .factory('$ngCordovaWithings', withings);
 
 function withings($q, $http, $cordovaOauthUtility) {
   return { signin: oauthWithings };

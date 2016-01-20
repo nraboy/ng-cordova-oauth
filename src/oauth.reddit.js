@@ -1,5 +1,5 @@
 angular.module('oauth.reddit', ['oauth.utils'])
-  .factory('$reddit', reddit);
+  .factory('$ngCordovaReddit', reddit);
 
 function reddit($q, $http, $cordovaOauthUtility) {
   return { signin: oauthReddit };

@@ -1,5 +1,5 @@
 angular.module('oauth.pocket', ['oauth.utils'])
-  .factory('$pocket', pocket);
+  .factory('$ngCordovaPocket', pocket);
 
 function pocket($q, $http, $cordovaOauthUtility) {
   return { signin: oauthPocket };

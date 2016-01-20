@@ -1,5 +1,5 @@
 angular.module('oauth.imgur', ['oauth.utils'])
-  .factory('$imgur', imgur);
+  .factory('$ngCordovaImgur', imgur);
 
 function imgur($q, $http, $cordovaOauthUtility) {
   return { signin: oauthImgur };

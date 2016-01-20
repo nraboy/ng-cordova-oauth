@@ -1,5 +1,5 @@
 angular.module('oauth.foursquare', ['oauth.utils'])
-  .factory('$foursquare', foursquare);
+  .factory('$ngCordovaFoursquare', foursquare);
 
 function foursquare($q, $http, $cordovaOauthUtility) {
   return { signin: oauthFoursquare };

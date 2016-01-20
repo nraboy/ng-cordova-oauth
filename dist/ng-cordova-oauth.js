@@ -1,5 +1,5 @@
 angular.module('oauth.adfs', ['oauth.utils'])
-  .factory('$adfs', adfs);
+  .factory('$ngCordovaAdfs', adfs);
 
 function adfs($q, $http, $cordovaOauthUtility) {
   return { signin: oauthAdfs };
@@ -52,7 +52,7 @@ function adfs($q, $http, $cordovaOauthUtility) {
 adfs.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.azuread', ['oauth.utils'])
-  .factory('$azureAD', azureAD);
+  .factory('$ngCordovaAzureAD', azureAD);
 
 function azureAD($q, $http, $cordovaOauthUtility) {
   return { signin: oauthAzureAD };
@@ -112,7 +112,7 @@ function azureAD($q, $http, $cordovaOauthUtility) {
 azureAD.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.box', ['oauth.utils'])
-  .factory('$box', box);
+  .factory('$ngCordovaBox', box);
 
 function box($q, $http, $cordovaOauthUtility) {
   return { signin: oauthBox };
@@ -172,7 +172,7 @@ function box($q, $http, $cordovaOauthUtility) {
 box.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.digitalOcean', ['oauth.utils'])
-  .factory('$digitalOcean', digitalOcean);
+  .factory('$ngCordovaDigitalOcean', digitalOcean);
 
 function digitalOcean($q, $http, $cordovaOauthUtility) {
   return { signin: oauthDigitalOcean };
@@ -230,7 +230,7 @@ function digitalOcean($q, $http, $cordovaOauthUtility) {
 digitalOcean.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.dribble', ['oauth.utils'])
-  .factory('$dribble', dribble);
+  .factory('$ngCordovaDribble', dribble);
 
 function dribble($q, $http, $cordovaOauthUtility) {
   return { signin: oauthDribble };
@@ -304,7 +304,7 @@ function dribble($q, $http, $cordovaOauthUtility) {
 dribble.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.dropbox', ['oauth.utils'])
-  .factory('$dropbox', dropbox);
+  .factory('$ngCordovaDropbox', dropbox);
 
 function dropbox($q, $http, $cordovaOauthUtility) {
   return { signin: oauthDropbox };
@@ -360,7 +360,7 @@ function dropbox($q, $http, $cordovaOauthUtility) {
 dropbox.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.envato', ['oauth.utils'])
-  .factory('$envato', envato);
+  .factory('$ngCordovaEnvato', envato);
 
 function envato($q, $http, $cordovaOauthUtility) {
   return { signin: oauthEnvato };
@@ -419,7 +419,7 @@ function envato($q, $http, $cordovaOauthUtility) {
 envato.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.facebook', ['oauth.utils'])
-  .factory('$facebook', facebook);
+  .factory('$ngCordovaFacebook', facebook);
 
 function facebook($q, $http, $cordovaOauthUtility) {
   return { signin: oauthFacebook };
@@ -484,7 +484,7 @@ function facebook($q, $http, $cordovaOauthUtility) {
 facebook.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.familySearch', ['oauth.utils'])
-  .factory('$familySearch', familySearch);
+  .factory('$ngCordovaFamilySearch', familySearch);
 
 function familySearch($q, $http, $cordovaOauthUtility) {
   return { signin: oauthFamilySearch };
@@ -542,7 +542,7 @@ function familySearch($q, $http, $cordovaOauthUtility) {
 familySearch.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.foursquare', ['oauth.utils'])
-  .factory('$foursquare', foursquare);
+  .factory('$ngCordovaFoursquare', foursquare);
 
 function foursquare($q, $http, $cordovaOauthUtility) {
   return { signin: oauthFoursquare };
@@ -605,7 +605,7 @@ function foursquare($q, $http, $cordovaOauthUtility) {
 foursquare.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.github', ['oauth.utils'])
-  .factory('$github', github);
+  .factory('$ngCordovaGithub', github);
 
 function github($q, $http, $cordovaOauthUtility) {
   return { signin: oauthGithub };
@@ -666,7 +666,7 @@ function github($q, $http, $cordovaOauthUtility) {
 github.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.google', ['oauth.utils'])
-  .factory('$google', google);
+  .factory('$ngCordovaGoogle', google);
 
 function google($q, $http, $cordovaOauthUtility) {
   return { signin: oauthGoogle };
@@ -723,7 +723,7 @@ function google($q, $http, $cordovaOauthUtility) {
 google.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.imgur', ['oauth.utils'])
-  .factory('$imgur', imgur);
+  .factory('$ngCordovaImgur', imgur);
 
 function imgur($q, $http, $cordovaOauthUtility) {
   return { signin: oauthImgur };
@@ -780,7 +780,7 @@ function imgur($q, $http, $cordovaOauthUtility) {
 imgur.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.instagram', ['oauth.utils'])
-  .factory('$instagram', instagram);
+  .factory('$ngCordovaInstagram', instagram);
 
 function instagram($q, $http, $cordovaOauthUtility) {
   return { signin: oauthInstagram };
@@ -851,7 +851,7 @@ function instagram($q, $http, $cordovaOauthUtility) {
 instagram.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.jawbone', ['oauth.utils'])
-  .factory('$jawbone', jawbone);
+  .factory('$ngCordovaJawbone', jawbone);
 
 function jawbone($q, $http, $cordovaOauthUtility) {
   return { signin: oauthJawbone };
@@ -954,95 +954,95 @@ angular.module("oauth.providers", [
   .factory("$cordovaOauth", cordovaOauth);
 
 function cordovaOauth(
-  $q, $http, $cordovaOauthUtility, $azureAD, $adfs, $dropbox, $digitalOcean,
-  $google, $github, $facebook, $linkedin, $instagram, $box, $reddit, $slack,
-  $twitter, $meetup, $salesforce, $strava, $withings, $foursquare, $magento,
-  $vkontakte, $odnoklassniki, $imgur, $spotify, $uber, $windowslive, $yammer,
-  $venmo, $stripe, $rally, $familySearch, $envato, $weibo, $jawbone, $untappd,
-  $dribble, $pocket) {
+  $q, $http, $cordovaOauthUtility, $ngCordovaAzureAD, $ngCordovaAdfs, $ngCordovaDropbox, $ngCordovaDigitalOcean,
+  $ngCordovaGoogle, $ngCordovaGithub, $ngCordovaFacebook, $ngCordovaLinkedin, $ngCordovaInstagram, $ngCordovaBox, $ngCordovaReddit, $ngCordovaSlack,
+  $ngCordovaTwitter, $ngCordovaMeetup, $ngCordovaSalesforce, $ngCordovaStrava, $ngCordovaWithings, $ngCordovaFoursquare, $ngCordovaMagento,
+  $ngCordovaVkontakte, $ngCordovaOdnoklassniki, $ngCordovaImgur, $ngCordovaSpotify, $ngCordovaUber, $ngCordovaWindowslive, $ngCordovaYammer,
+  $ngCordovaVenmo, $ngCordovaStripe, $ngCordovaRally, $ngCordovaFamilySearch, $ngCordovaEnvato, $ngCordovaWeibo, $ngCordovaJawbone, $ngCordovaUntappd,
+  $ngCordovaDribble, $ngCordovaPocket) {
 
   return {
-    azureAD: $azureAD.signin,
-    adfs: $adfs.signin,
-    dropbox: $dropbox.signin,
-    digitalOcean: $digitalOcean.signin,
-    google: $google.signin,
-    github: $github.signin,
-    facebook: $facebook.signin,
-    linkedin: $linkedin.signin,
-    instagram: $instagram.signin,
-    box: $box.signin,
-    reddit: $reddit.signin,
-    slack: $slack.signin,
-    twitter: $twitter.signin,
-    meetup: $meetup.signin,
-    salesforce: $salesforce.signin,
-    strava: $strava.signin,
-    withings: $withings.signin,
-    foursquare: $foursquare.signin,
-    magento: $magento.signin,
-    vkontakte: $vkontakte.signin,
-    odnoklassniki: $odnoklassniki.signin,
-    imgur: $imgur.signin,
-    spotify: $spotify.signin,
-    uber: $uber.signin,
-    windowsLive: $windowslive.signin,
-    yammer: $yammer.signin,
-    venmo: $venmo.signin,
-    stripe: $stripe.signin,
-    rally: $rally.signin,
-    familySearch: $familySearch.signin,
-    envato: $envato.signin,
-    weibo: $weibo.sigin,
-    jawbone: $jawbone.signin,
-    untappd: $untappd.signin,
-    dribble: $dribble.signin,
-    pocket: $pocket.signin,
+    azureAD: $ngCordovaAzureAD.signin,
+    adfs: $ngCordovaAdfs.signin,
+    dropbox: $ngCordovaDropbox.signin,
+    digitalOcean: $ngCordovaDigitalOcean.signin,
+    google: $ngCordovaGoogle.signin,
+    github: $ngCordovaGithub.signin,
+    facebook: $ngCordovaFacebook.signin,
+    linkedin: $ngCordovaLinkedin.signin,
+    instagram: $ngCordovaInstagram.signin,
+    box: $ngCordovaBox.signin,
+    reddit: $ngCordovaReddit.signin,
+    slack: $ngCordovaSlack.signin,
+    twitter: $ngCordovaTwitter.signin,
+    meetup: $ngCordovaMeetup.signin,
+    salesforce: $ngCordovaSalesforce.signin,
+    strava: $ngCordovaStrava.signin,
+    withings: $ngCordovaWithings.signin,
+    foursquare: $ngCordovaFoursquare.signin,
+    magento: $ngCordovaMagento.signin,
+    vkontakte: $ngCordovaVkontakte.signin,
+    odnoklassniki: $ngCordovaOdnoklassniki.signin,
+    imgur: $ngCordovaImgur.signin,
+    spotify: $ngCordovaSpotify.signin,
+    uber: $ngCordovaUber.signin,
+    windowsLive: $ngCordovaWindowslive.signin,
+    yammer: $ngCordovaYammer.signin,
+    venmo: $ngCordovaVenmo.signin,
+    stripe: $ngCordovaStripe.signin,
+    rally: $ngCordovaRally.signin,
+    familySearch: $ngCordovaFamilySearch.signin,
+    envato: $ngCordovaEnvato.signin,
+    weibo: $ngCordovaWeibo.sigin,
+    jawbone: $ngCordovaJawbone.signin,
+    untappd: $ngCordovaUntappd.signin,
+    dribble: $ngCordovaDribble.signin,
+    pocket: $ngCordovaPocket.signin,
   };
 }
 
 cordovaOauth.$inject = [
   "$q", '$http', "$cordovaOauthUtility",
-  "$azureAD",
-  "$adfs",
-  '$dropbox',
-  '$digitalOcean',
-  '$google',
-  '$github',
-  '$facebook',
-  '$linkedin',
-  '$instagram',
-  '$box',
-  '$reddit',
-  '$slack',
-  '$twitter',
-  '$meetup',
-  '$salesforce',
-  '$strava',
-  '$withings',
-  '$foursquare',
-  '$magento',
-  '$vkontakte',
-  '$odnoklassniki',
-  '$imgur',
-  '$spotify',
-  '$uber',
-  '$windowslive',
-  '$yammer',
-  '$venmo',
-  '$stripe',
-  '$rally',
-  '$familySearch',
-  '$envato',
-  '$weibo',
-  '$jawbone',
-  '$untappd',
-  '$dribble',
-  '$pocket'
+  "$ngCordovaAzureAD",
+  "$ngCordovaAdfs",
+  '$ngCordovaDropbox',
+  '$ngCordovaDigitalOcean',
+  '$ngCordovaGoogle',
+  '$ngCordovaGithub',
+  '$ngCordovaFacebook',
+  '$ngCordovaLinkedin',
+  '$ngCordovaInstagram',
+  '$ngCordovaBox',
+  '$ngCordovaReddit',
+  '$ngCordovaSlack',
+  '$ngCordovaTwitter',
+  '$ngCordovaMeetup',
+  '$ngCordovaSalesforce',
+  '$ngCordovaStrava',
+  '$ngCordovaWithings',
+  '$ngCordovaFoursquare',
+  '$ngCordovaMagento',
+  '$ngCordovaVkontakte',
+  '$ngCordovaOdnoklassniki',
+  '$ngCordovaImgur',
+  '$ngCordovaSpotify',
+  '$ngCordovaUber',
+  '$ngCordovaWindowslive',
+  '$ngCordovaYammer',
+  '$ngCordovaVenmo',
+  '$ngCordovaStripe',
+  '$ngCordovaRally',
+  '$ngCordovaFamilySearch',
+  '$ngCordovaEnvato',
+  '$ngCordovaWeibo',
+  '$ngCordovaJawbone',
+  '$ngCordovaUntappd',
+  '$ngCordovaDribble',
+  '$ngCordovaPocket'
 ];
 
 angular.module('oauth.linkedin', ['oauth.utils'])
-  .factory('$linkedin', linkedin);
+  .factory('$ngCordovaLinkedin', linkedin);
 
 function linkedin($q, $http, $cordovaOauthUtility) {
   return { signin: oauthLinkedin };
@@ -1103,7 +1103,7 @@ function linkedin($q, $http, $cordovaOauthUtility) {
 linkedin.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.magento', ['oauth.utils'])
-  .factory('$magento', magento);
+  .factory('$ngCordovaMagento', magento);
 
 function magento($q, $http, $cordovaOauthUtility) {
   return { signin: oauthMagento };
@@ -1216,7 +1216,7 @@ function magento($q, $http, $cordovaOauthUtility) {
 magento.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.meetup', ['oauth.utils'])
-  .factory('$meetup', meetup);
+  .factory('$ngCordovaMeetup', meetup);
 
 function meetup($q, $http, $cordovaOauthUtility) {
   return { signin: oauthMeetup };
@@ -1272,7 +1272,7 @@ function meetup($q, $http, $cordovaOauthUtility) {
 meetup.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.odnoklassniki', ['oauth.utils'])
-  .factory('$odnoklassniki', odnoklassniki);
+  .factory('$ngCordovaOdnoklassniki', odnoklassniki);
 
 function odnoklassniki($q, $http, $cordovaOauthUtility) {
   return { signin: oauthOdnoklassniki };
@@ -1324,7 +1324,7 @@ function odnoklassniki($q, $http, $cordovaOauthUtility) {
 odnoklassniki.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.pocket', ['oauth.utils'])
-  .factory('$pocket', pocket);
+  .factory('$ngCordovaPocket', pocket);
 
 function pocket($q, $http, $cordovaOauthUtility) {
   return { signin: oauthPocket };
@@ -1408,7 +1408,7 @@ function pocket($q, $http, $cordovaOauthUtility) {
 pocket.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.rally', ['oauth.utils'])
-  .factory('$rally', rally);
+  .factory('$ngCordovaRally', rally);
 
 function rally($q, $http, $cordovaOauthUtility) {
   return { signin: oauthRally };
@@ -1468,7 +1468,7 @@ function rally($q, $http, $cordovaOauthUtility) {
 rally.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.reddit', ['oauth.utils'])
-  .factory('$reddit', reddit);
+  .factory('$ngCordovaReddit', reddit);
 
 function reddit($q, $http, $cordovaOauthUtility) {
   return { signin: oauthReddit };
@@ -1528,7 +1528,7 @@ function reddit($q, $http, $cordovaOauthUtility) {
 reddit.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.salesforce', ['oauth.utils'])
-  .factory('$salesforce', salesforce);
+  .factory('$ngCordovaSalesforce', salesforce);
 
 function salesforce($q, $http, $cordovaOauthUtility) {
   return { signin: oauthSalesforce };
@@ -1599,7 +1599,7 @@ function salesforce($q, $http, $cordovaOauthUtility) {
 salesforce.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.slack', ['oauth.utils'])
-  .factory('$slack', slack);
+  .factory('$ngCordovaSlack', slack);
 
 function slack($q, $http, $cordovaOauthUtility) {
   return { signin: oauthSlack };
@@ -1661,7 +1661,7 @@ function slack($q, $http, $cordovaOauthUtility) {
 slack.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.spotify', ['oauth.utils'])
-  .factory('$spotify', spotify);
+  .factory('$ngCordovaSpotify', spotify);
 
 function spotify($q, $http, $cordovaOauthUtility) {
   return { signin: oauthSpotify };
@@ -1733,7 +1733,7 @@ function spotify($q, $http, $cordovaOauthUtility) {
 spotify.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.strava', ['oauth.utils'])
-  .factory('$strava', strava);
+  .factory('$ngCordovaStrava', strava);
 
 function strava($q, $http, $cordovaOauthUtility) {
   return { signin: oauthStrava };
@@ -1793,7 +1793,7 @@ function strava($q, $http, $cordovaOauthUtility) {
 strava.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.stripe', ['oauth.utils'])
-  .factory('$stripe', stripe);
+  .factory('$ngCordovaStripe', stripe);
 
 function stripe($q, $http, $cordovaOauthUtility) {
   return { signin: oauthStripe };
@@ -1853,7 +1853,7 @@ function stripe($q, $http, $cordovaOauthUtility) {
 stripe.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.twitter', ['oauth.utils'])
-  .factory('$twitter', twitter);
+  .factory('$ngCordovaTwitter', twitter);
 
 function twitter($q, $http, $cordovaOauthUtility) {
   return { signin: oauthTwitter };
@@ -1974,7 +1974,7 @@ function twitter($q, $http, $cordovaOauthUtility) {
 twitter.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.uber', ['oauth.utils'])
-  .factory('$uber', uber);
+  .factory('$ngCordovaUber', uber);
 
 function uber($q, $http, $cordovaOauthUtility) {
   return { signin: oauthUber };
@@ -2036,7 +2036,7 @@ function uber($q, $http, $cordovaOauthUtility) {
 uber.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.untappd', ['oauth.utils'])
-  .factory('$untappd', untappd);
+  .factory('$ngCordovaUntappd', untappd);
 
 function untappd($q, $http, $cordovaOauthUtility) {
   return { signin: oauthUntappd };
@@ -2098,7 +2098,7 @@ function untappd($q, $http, $cordovaOauthUtility) {
 untappd.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.venmo', ['oauth.utils'])
-  .factory('$venmo', venmo);
+  .factory('$ngCordovaVenmo', venmo);
 
 function venmo($q, $http, $cordovaOauthUtility) {
   return { signin: oauthVenmo };
@@ -2160,7 +2160,7 @@ function venmo($q, $http, $cordovaOauthUtility) {
 venmo.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.vkontakte', ['oauth.utils'])
-  .factory('$vkontakte', vkontakte);
+  .factory('$ngCordovaVkontakte', vkontakte);
 
 function vkontakte($q, $http, $cordovaOauthUtility) {
   return { signin: oauthvKontakte };
@@ -2216,7 +2216,7 @@ function vkontakte($q, $http, $cordovaOauthUtility) {
 vkontakte.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.weibo', ['oauth.utils'])
-  .factory('$weibo', weibo);
+  .factory('$ngCordovaWeibo', weibo);
 
 function weibo($q, $http, $cordovaOauthUtility) {
   return { signin: oauthWeibo };
@@ -2286,7 +2286,7 @@ function weibo($q, $http, $cordovaOauthUtility) {
 weibo.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.windowslive', ['oauth.utils'])
-  .factory('$windowslive', windowslive);
+  .factory('$ngCordovaWindowslive', windowslive);
 
 function windowslive($q, $http, $cordovaOauthUtility) {
   return { signin: oauthWindowslive };
@@ -2346,7 +2346,7 @@ function windowslive($q, $http, $cordovaOauthUtility) {
 windowslive.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.withings', ['oauth.utils'])
-  .factory('$withings', withings);
+  .factory('$ngCordovaWithings', withings);
 
 function withings($q, $http, $cordovaOauthUtility) {
   return { signin: oauthWithings };
@@ -2456,7 +2456,7 @@ function withings($q, $http, $cordovaOauthUtility) {
 withings.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.yammer', ['oauth.utils'])
-  .factory('$yammer', yammer);
+  .factory('$ngCordovaYammer', yammer);
 
 function yammer($q, $http, $cordovaOauthUtility) {
   return { signin: oauthYammer };

@@ -1,5 +1,5 @@
 angular.module('oauth.slack', ['oauth.utils'])
-  .factory('$slack', slack);
+  .factory('$ngCordovaSlack', slack);
 
 function slack($q, $http, $cordovaOauthUtility) {
   return { signin: oauthSlack };

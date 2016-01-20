@@ -1,5 +1,5 @@
 angular.module('oauth.meetup', ['oauth.utils'])
-  .factory('$meetup', meetup);
+  .factory('$ngCordovaMeetup', meetup);
 
 function meetup($q, $http, $cordovaOauthUtility) {
   return { signin: oauthMeetup };

@@ -1,5 +1,5 @@
 angular.module('oauth.rally', ['oauth.utils'])
-  .factory('$rally', rally);
+  .factory('$ngCordovaRally', rally);
 
 function rally($q, $http, $cordovaOauthUtility) {
   return { signin: oauthRally };

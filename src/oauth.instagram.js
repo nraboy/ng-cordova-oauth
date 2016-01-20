@@ -1,5 +1,5 @@
 angular.module('oauth.instagram', ['oauth.utils'])
-  .factory('$instagram', instagram);
+  .factory('$ngCordovaInstagram', instagram);
 
 function instagram($q, $http, $cordovaOauthUtility) {
   return { signin: oauthInstagram };

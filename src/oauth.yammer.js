@@ -1,5 +1,5 @@
 angular.module('oauth.yammer', ['oauth.utils'])
-  .factory('$yammer', yammer);
+  .factory('$ngCordovaYammer', yammer);
 
 function yammer($q, $http, $cordovaOauthUtility) {
   return { signin: oauthYammer };

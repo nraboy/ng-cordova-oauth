@@ -1,5 +1,5 @@
 angular.module('oauth.strava', ['oauth.utils'])
-  .factory('$strava', strava);
+  .factory('$ngCordovaStrava', strava);
 
 function strava($q, $http, $cordovaOauthUtility) {
   return { signin: oauthStrava };

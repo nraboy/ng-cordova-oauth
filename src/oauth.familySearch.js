@@ -1,5 +1,5 @@
 angular.module('oauth.familySearch', ['oauth.utils'])
-  .factory('$familySearch', familySearch);
+  .factory('$ngCordovaFamilySearch', familySearch);
 
 function familySearch($q, $http, $cordovaOauthUtility) {
   return { signin: oauthFamilySearch };

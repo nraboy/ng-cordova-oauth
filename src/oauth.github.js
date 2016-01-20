@@ -1,5 +1,5 @@
 angular.module('oauth.github', ['oauth.utils'])
-  .factory('$github', github);
+  .factory('$ngCordovaGithub', github);
 
 function github($q, $http, $cordovaOauthUtility) {
   return { signin: oauthGithub };

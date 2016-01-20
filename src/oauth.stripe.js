@@ -1,5 +1,5 @@
 angular.module('oauth.stripe', ['oauth.utils'])
-  .factory('$stripe', stripe);
+  .factory('$ngCordovaStripe', stripe);
 
 function stripe($q, $http, $cordovaOauthUtility) {
   return { signin: oauthStripe };
