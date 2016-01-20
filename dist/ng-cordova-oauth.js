@@ -2160,7 +2160,7 @@ function venmo($q, $http, $cordovaOauthUtility) {
 venmo.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 
 angular.module('oauth.vkontakte', ['oauth.utils'])
-  .factory('$ngCordovnaVkontakte', vkontakte);
+  .factory('$ngCordovaVkontakte', vkontakte);
 
 function vkontakte($q, $http, $cordovaOauthUtility) {
   return { signin: oauthvKontakte };
