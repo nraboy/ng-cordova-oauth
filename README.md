@@ -66,6 +66,7 @@ Each web service API acts independently in this library.  However, when configur
     $cordovaOauth.facebook(string clientId, array appScope, object options);
     $cordovaOauth.linkedin(string clientId, string clientSecret, array appScope, string state);
     $cordovaOauth.instagram(string clientId, array appScope, object options);
+    $cordovaOauth.instagram2(string clientId, string clientSecret, array appScope, object options);
     $cordovaOauth.box(string clientId, string clientSecret, string state, object options);
     $cordovaOauth.reddit(string clientId, string clientSecret, array appScope, object options);
     $cordovaOauth.twitter(string consumerKey, string consumerSecretKey, object options);
@@ -130,7 +131,7 @@ If you want to contribute please use the new architecture of files. Each provide
 angular.module("oauth.providers", [
   "oauth.utils", "oauth.azuread", "oauth.adfs", 'oauth.dropbox',
   'oauth.digitalOcean', 'oauth.google', 'oauth.github', 'oauth.facebook',
-  'oauth.linkedin', 'oauth.instagram', 'oauth.box', 'oauth.reddit', 'oauth.slack',
+  'oauth.linkedin', 'oauth.instagram', 'oauth.instagram2', 'oauth.box', 'oauth.reddit', 'oauth.slack',
   'oauth.twitter', 'oauth.meetup', 'oauth.salesforce', 'oauth.strava',
   'oauth.withings', 'oauth.foursquare', 'oauth.magento', 'oauth.vkontakte',
   'oauth.odnoklassniki', 'oauth.imgur', 'oauth.spotify', 'oauth.uber',
@@ -140,7 +141,7 @@ angular.module("oauth.providers", [
 
 function cordovaOauth(
     $q, $http, $cordovaOauthUtility, $azureAD, $adfs, $dropbox, $digitalOcean,
-    $google, $github, $facebook, $linkedin, $instagram, $box, $reddit, $slack,
+    $google, $github, $facebook, $linkedin, $instagram, $instagram2, $box, $reddit, $slack,
     $twitter, $meetup, $salesforce, $strava, $withings, $foursquare, $magento
     $vkontakte, $odnoklassniki, $imgur, $spotify, $uber, $windowslive, $yammer,
     $venmo, $stripe, $rally, $familySearch, $envato, $weibo, $jawbone, $untappd,
@@ -155,7 +156,7 @@ function cordovaOauth(
 $cordovaOauth.$inject = [
   "$q", '$http', "$cordovaOauthUtility", "$azureAD", "$adfs", '$dropbox',
   '$digitalOcean', '$google', '$github', '$facebook', '$linkedin',
-  '$instagram', '$box', '$reddit', '$slack', '$twitter' '$meetup', '$salesforce',
+  '$instagram', '$instagram2', '$box', '$reddit', '$slack', '$twitter' '$meetup', '$salesforce',
   '$strava', '$withings', '$foursquare', '$magento', '$vkontakte',
   '$odnoklassniki', '$imgur', '$spotify', '$uber', '$windowslive', '$yammer',
   '$venmo', '$stripe', '$rally', '$familySearch', '$envato', '$weibo',

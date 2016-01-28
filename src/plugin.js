@@ -26,7 +26,7 @@
  *    GitHub
  *    Facebook
  *    LinkedIn
- *    Instagram
+ *    Instagram (implicit) / Instagram2 (explicit)
  *    Box
  *    Reddit
  *    Twitter
