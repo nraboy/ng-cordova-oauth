@@ -9,6 +9,7 @@ angular.module("oauth.providers", [
   'oauth.facebook',
   'oauth.linkedin',
   'oauth.instagram',
+  'oauth.instagram2',
   'oauth.box',
   'oauth.reddit',
   'oauth.slack',
@@ -40,7 +41,7 @@ angular.module("oauth.providers", [
 
 function cordovaOauth(
   $q, $http, $cordovaOauthUtility, $ngCordovaAzureAD, $ngCordovaAdfs, $ngCordovaDropbox, $ngCordovaDigitalOcean,
-  $ngCordovaGoogle, $ngCordovaGithub, $ngCordovaFacebook, $ngCordovaLinkedin, $ngCordovaInstagram, $ngCordovaBox, $ngCordovaReddit, $ngCordovaSlack,
+  $ngCordovaGoogle, $ngCordovaGithub, $ngCordovaFacebook, $ngCordovaLinkedin, $ngCordovaInstagram, $ngCordovaInstagram2, $ngCordovaBox, $ngCordovaReddit, $ngCordovaSlack,
   $ngCordovaTwitter, $ngCordovaMeetup, $ngCordovaSalesforce, $ngCordovaStrava, $ngCordovaWithings, $ngCordovaFoursquare, $ngCordovaMagento,
   $ngCordovaVkontakte, $ngCordovaOdnoklassniki, $ngCordovaImgur, $ngCordovaSpotify, $ngCordovaUber, $ngCordovaWindowslive, $ngCordovaYammer,
   $ngCordovaVenmo, $ngCordovaStripe, $ngCordovaRally, $ngCordovaFamilySearch, $ngCordovaEnvato, $ngCordovaWeibo, $ngCordovaJawbone, $ngCordovaUntappd,
@@ -56,6 +57,7 @@ function cordovaOauth(
     facebook: $ngCordovaFacebook.signin,
     linkedin: $ngCordovaLinkedin.signin,
     instagram: $ngCordovaInstagram.signin,
+    instagram2: $ngCordovaInstagram2.signin,
     box: $ngCordovaBox.signin,
     reddit: $ngCordovaReddit.signin,
     slack: $ngCordovaSlack.signin,
@@ -97,6 +99,7 @@ cordovaOauth.$inject = [
   '$ngCordovaFacebook',
   '$ngCordovaLinkedin',
   '$ngCordovaInstagram',
+  '$ngCordovaInstagram2',
   '$ngCordovaBox',
   '$ngCordovaReddit',
   '$ngCordovaSlack',
