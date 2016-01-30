@@ -78,7 +78,7 @@ function cordovaOauth(
     rally: $ngCordovaRally.signin,
     familySearch: $ngCordovaFamilySearch.signin,
     envato: $ngCordovaEnvato.signin,
-    weibo: $ngCordovaWeibo.sigin,
+    weibo: $ngCordovaWeibo.signin,
     jawbone: $ngCordovaJawbone.signin,
     untappd: $ngCordovaUntappd.signin,
     dribble: $ngCordovaDribble.signin,
