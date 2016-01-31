@@ -34,7 +34,7 @@ function instagram($q, $http, $cordovaOauthUtility) {
 
         var scope = '';
         if (appScope && appScope.length > 0) {
-          scope = '&scope' + appScope.join('+');
+          scope = '&scope=' + appScope.join('+');
         }
 
         var browserRef = window.cordova.InAppBrowser.open('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + scope + '&response_type='+response_type, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
