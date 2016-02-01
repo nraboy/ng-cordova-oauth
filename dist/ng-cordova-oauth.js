@@ -2601,7 +2601,7 @@ function cordovaOauthUtility($q) {
     if (Object.keys(cordovaPluginList.metadata).length === 0) {
       var formatedPluginList = cordovaPluginList.map(
         function(plugin) {
-          return plugin.pluginId;
+          return plugin.id || plugin.pluginId;
         });
 
       return inAppBrowserNames.some(function(name) {
