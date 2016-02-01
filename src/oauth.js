@@ -35,6 +35,7 @@ angular.module("oauth.providers", [
   'oauth.jawbone',
   'oauth.untappd',
   'oauth.dribble',
+  'oauth.pinterest',
   'oauth.pocket'])
   .factory("$cordovaOauth", cordovaOauth);
 
@@ -44,7 +45,7 @@ function cordovaOauth(
   $ngCordovaTwitter, $ngCordovaMeetup, $ngCordovaSalesforce, $ngCordovaStrava, $ngCordovaWithings, $ngCordovaFoursquare, $ngCordovaMagento,
   $ngCordovaVkontakte, $ngCordovaOdnoklassniki, $ngCordovaImgur, $ngCordovaSpotify, $ngCordovaUber, $ngCordovaWindowslive, $ngCordovaYammer,
   $ngCordovaVenmo, $ngCordovaStripe, $ngCordovaRally, $ngCordovaFamilySearch, $ngCordovaEnvato, $ngCordovaWeibo, $ngCordovaJawbone, $ngCordovaUntappd,
-  $ngCordovaDribble, $ngCordovaPocket) {
+  $ngCordovaDribble, $ngCordovaPinterest, $ngCordovaPocket) {
 
   return {
     azureAD: $ngCordovaAzureAD.signin,
@@ -82,6 +83,7 @@ function cordovaOauth(
     jawbone: $ngCordovaJawbone.signin,
     untappd: $ngCordovaUntappd.signin,
     dribble: $ngCordovaDribble.signin,
+    pinterest: $ngCordovaPinterest.signin,
     pocket: $ngCordovaPocket.signin,
   };
 }
@@ -123,5 +125,6 @@ cordovaOauth.$inject = [
   '$ngCordovaJawbone',
   '$ngCordovaUntappd',
   '$ngCordovaDribble',
+  '$ngCordovaPinterest',
   '$ngCordovaPocket'
 ];
