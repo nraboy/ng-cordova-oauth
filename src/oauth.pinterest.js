@@ -27,7 +27,7 @@ function pinterest($q, $http, $cordovaOauthUtility) {
         browserRef.addEventListener('loadstart', function(event) {
           if((event.url).indexOf(redirect_uri) === 0) {
             requestToken = (event.url).split("code=")[1];
-            $http({method: "post", url: "https://api.pinterest.com/v1/oauth/token", data: "grant_type=authorization_code&client_id=" + clientId + "&client_secret=" + clientSecret + "&code=" + requestToken })
+            $http({method: "post", url: "https://api.pinterest.com/v1/oauth/token?grant_type=authorization_code&client_id=" + clientId + "&client_secret=" + clientSecret + "&code=" + requestToken})
               .success(function(data) {
                 deferred.resolve(data);
               })
