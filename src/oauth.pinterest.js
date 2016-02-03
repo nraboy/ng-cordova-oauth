@@ -9,7 +9,7 @@ function pinterest($q, $http, $cordovaOauthUtility) {
    *
    * @param    string clientId
    * @param    string clientSecret
-   * @param    array appScope (for example: "VALUABLE_ACCESS ,GROUP_CONTENT,VIDEO_CONTENT")
+   * @param    array appScope (for example: "read_public, write_public, read_relationships, write_relationships")
    * @param    object options
    * @return   promise
    */
@@ -23,6 +23,7 @@ function pinterest($q, $http, $cordovaOauthUtility) {
               redirect_uri = options.redirect_uri;
           }
         }
+
         var browserRef = window.cordova.InAppBrowser.open('https://api.pinterest.com/oauth/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&state=ngcordovaoauth&scope=' + appScope.join(",") + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
         browserRef.addEventListener('loadstart', function(event) {
           if((event.url).indexOf(redirect_uri) === 0) {
