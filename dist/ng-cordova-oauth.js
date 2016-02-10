@@ -993,7 +993,7 @@ function cordovaOauth(
     rally: $ngCordovaRally.signin,
     familySearch: $ngCordovaFamilySearch.signin,
     envato: $ngCordovaEnvato.signin,
-    weibo: $ngCordovaWeibo.sigin,
+    weibo: $ngCordovaWeibo.signin,
     jawbone: $ngCordovaJawbone.signin,
     untappd: $ngCordovaUntappd.signin,
     dribble: $ngCordovaDribble.signin,
@@ -2596,7 +2596,7 @@ function cordovaOauthUtility($q) {
    */
   function isInAppBrowserInstalled() {
     var cordovaPluginList = cordova.require("cordova/plugin_list");
-    var inAppBrowserNames = ["cordova-plugin-inappbrowser", "org.apache.cordova.inappbrowser"];
+    var inAppBrowserNames = ["cordova-plugin-inappbrowser", "cordova-plugin-inappbrowser.inappbrowser", "org.apache.cordova.inappbrowser"];
 
     if (Object.keys(cordovaPluginList.metadata).length === 0) {
       var formatedPluginList = cordovaPluginList.map(
