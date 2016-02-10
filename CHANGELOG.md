@@ -1,3 +1,8 @@
+0.2.3 - February 10, 2016
+
+* Fix issue with Apache Cordova 6.0 where the InAppBrowser plugin now holds a new name
+* Rename all factories to avoid conflict with other libraries
+
 0.2.2 - January 6, 2016
 
 * Update Karma
