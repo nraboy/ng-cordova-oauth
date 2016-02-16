@@ -42,5 +42,8 @@ angular.module('oauth.mojio', ['oauth.utils'])
 }
 
 mojio.$inject = ['$q', '$http', '$cordovaOauthUtility'];
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 211fad0... Added Mojio oAuth
