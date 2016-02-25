@@ -109,6 +109,12 @@ As of Apache Cordova 5.0.0, the [whitelist plugin](https://blog.nraboy.com/2015/
 
 This library will **NOT** work with a web browser, ionic serve, or ionic view.  It **MUST** be used via installing to a device or simulator.
 
+## Content-Security-Policy
+
+When using the Content-Security-Policy as mentioned in the [Apache Cordova Whitelist Plugin](https://github.com/apache/cordova-plugin-whitelist) documentation, you'll need to allow content from the OAuth Provider. For example, if using Google Login, you'll need to add `https://www.googleapis.com` to your `default-src` list. Your meta tag would look something like this for Google and Facebook: 
+```html
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://www.googleapis.com https://graph.facebook.com">
+```
 
 ## Version History
 
