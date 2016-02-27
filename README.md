@@ -91,6 +91,7 @@ Each web service API acts independently in this library.  However, when configur
     $cordovaOauth.weibo(string clientId, string clientSecret, array appScope, object options);
     $cordovaOauth.untappd(string clientId, object options);
     $cordovaOauth.pocket(string clientId, object options);
+    $cordovaOauth.mojio(string clientId , object options)
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
@@ -101,7 +102,6 @@ $cordovaOauth.google("CLIENT_ID_HERE", ["email"]).then(function(result) {
 }, function(error) {
     console.log("Error -> " + error);
 });
-```
 
 To authenticate with Twitter, Withings, and Magento an additional library is required.  These services require HMAC-SHA1 signatures in their Oauth implementation.  Including the sha1.js component of jsSHA will accomplish this task.
 
@@ -142,7 +142,7 @@ angular.module("oauth.providers", [
   'oauth.odnoklassniki', 'oauth.imgur', 'oauth.spotify', 'oauth.uber',
   'oauth.windowslive', 'oauth.yammer', 'oauth.venmo', 'oauth.stripe', 'oauth.rally',
   'oauth.familySearch', 'oauth.envato', 'oauth.weibo', 'oauth.jawbone', 'oauth.untappd',
-  'oauth.dribble', '<YOUR PROVIDER MODULE HERE>']).factory("$cordovaOauth", cordovaOauth);
+  'oauth.dribble','oauth.mojio', '<YOUR PROVIDER MODULE HERE>']).factory("$cordovaOauth", cordovaOauth);
 
 function cordovaOauth(
     $q, $http, $cordovaOauthUtility, $azureAD, $adfs, $dropbox, $digitalOcean,
@@ -150,7 +150,7 @@ function cordovaOauth(
     $twitter, $meetup, $salesforce, $strava, $withings, $foursquare, $magento
     $vkontakte, $odnoklassniki, $imgur, $spotify, $uber, $windowslive, $yammer,
     $venmo, $stripe, $rally, $familySearch, $envato, $weibo, $jawbone, $untappd,
-    $dribble, <YOUR FACTORY NAME>) {
+    $dribble,$mojio, <YOUR FACTORY NAME>) {
 
     return {
         // A lot of providers...
