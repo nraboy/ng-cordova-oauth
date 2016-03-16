@@ -60,4 +60,4 @@
   }
 
   azureAD.$inject = ['$q', '$http', '$cordovaOauthUtility'];
-});
+})();
