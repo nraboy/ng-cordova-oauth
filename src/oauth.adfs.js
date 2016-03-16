@@ -1,4 +1,6 @@
-(function() {})(
+(function() {
+  'use strict';
+
   angular.module('oauth.adfs', ['oauth.utils'])
     .factory('$ngCordovaAdfs', adfs);
 
@@ -51,4 +53,5 @@
   }
 
   adfs.$inject = ['$q', '$http', '$cordovaOauthUtility'];
-);
+
+})();
