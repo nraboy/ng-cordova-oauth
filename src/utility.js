@@ -1,6 +1,4 @@
 (function() {
-  'use strict';
-
   angular.module("oauth.utils", [])
     .factory("$cordovaOauthUtility", cordovaOauthUtility);
 
