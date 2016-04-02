@@ -1,20 +1,20 @@
 (function() {
   'use strict';
 
-  angular.module('oauth.imgur', ['oauth.utils'])
-    .factory('$ngCordovaImgur', imgur);
+  angular.module('oauth.mercadolibre', ['oauth.utils'])
+    .factory('$ngCordovaMercadolibre', mercadolibre);
 
-  function imgur($q, $http, $cordovaOauthUtility) {
-    return { signin: oauthImgur };
+  function mercadolibre($q, $http, $cordovaOauthUtility) {
+    return { signin: oauthMercadolibre };
 
     /*
-     * Sign into the Imgur service
+     * Sign into the Mercadolibre service
      *
-     * @param    string clientId
+     * @param    string appId
      * @param    object options
      * @return   promise
      */
-    function oauthImgur(clientId, options) {
+    function oauthMercadolibre(appId, options) {
       var deferred = $q.defer();
       if(window.cordova) {
         if($cordovaOauthUtility.isInAppBrowserInstalled()) {
@@ -24,9 +24,9 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://api.imgur.com/oauth2/authorize?client_id=' + clientId + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
-          browserRef.addEventListener('loadstart', function(event) {
-            if((event.url).indexOf(redirect_uri) === 0) {
+          var browserRef = window.cordova.InAppBrowser.open("http://auth.mercadolibre.com.ar/authorization?client_id=" + appId + "&redirect_uri=" + redirect_uri + "&response_type=token", "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
+          browserRef.addEventListener("loadstart", function(event) {
+            if ((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});
               browserRef.close();
               var callbackResponse = (event.url).split("#")[1];
@@ -36,7 +36,7 @@
                 parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
               }
               if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
-                deferred.resolve({ access_token: parameterMap.access_token, expires_in: parameterMap.expires_in, account_username: parameterMap.account_username });
+                deferred.resolve({ access_token: parameterMap.access_token, expires_in: parameterMap.expires_in, user_id: parameterMap.user_id, domains: parameterMap.domains });
               } else {
                 deferred.reject("Problem authenticating");
               }
@@ -51,10 +51,9 @@
       } else {
         deferred.reject("Cannot authenticate via a web browser");
       }
-
       return deferred.promise;
     }
   }
 
-  imgur.$inject = ['$q', '$http', '$cordovaOauthUtility'];
+  mercadolibre.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 })();
