@@ -1,3 +1,8 @@
+0.2.5 - April 1, 2016
+
+* Fix variable definitions that are conflicting with other libraries
+* Localize header settings
+
 0.2.3 - February 10, 2016
 
 * Fix issue with Apache Cordova 6.0 where the InAppBrowser plugin now holds a new name
