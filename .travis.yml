@@ -4,6 +4,7 @@ node_js:
     - 0.10
 before_script:
     - npm install -g grunt-cli
+    - npm config set strict-ssl false
 notifications:
     on_success: never
     on_failure: always
