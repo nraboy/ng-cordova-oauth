@@ -3,6 +3,7 @@
 
   angular.module("oauth.providers", [
     "oauth.utils",
+    "oauth.500px",
     "oauth.azuread",
     "oauth.adfs",
     'oauth.dropbox',

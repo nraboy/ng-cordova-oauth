@@ -20,6 +20,7 @@
  *
  * SUPPORTS:
  *
+ *    500px
  *    Dropbox
  *    Digital Ocean
  *    Google
