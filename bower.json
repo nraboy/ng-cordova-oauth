@@ -21,6 +21,7 @@
     "ionic framework"
   ],
   "license": "MIT",
+  "main" : "dist/ng-cordova-oauth.js",
   "ignore": [
     "**/.*",
     "node_modules",
