@@ -53,6 +53,7 @@
  *    Slack
  *    Jawbone
  *    Untappd
+ *    Xing
  */
 
 angular.module("ngCordovaOauth", [
