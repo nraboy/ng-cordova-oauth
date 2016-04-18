@@ -1,6 +1,6 @@
 {
   "name": "ng-cordova-oauth",
-  "main": ["dist/ng-cordova-oauth.js", "dist/ng-cordova-oauth.min.js"],
+  "main": "dist/ng-cordova-oauth.js",
   "version": "0.2.5",
   "homepage": "https://github.com/nraboy/ng-cordova-oauth",
   "authors": [
@@ -21,7 +21,6 @@
     "ionic framework"
   ],
   "license": "MIT",
-  "main" : "dist/ng-cordova-oauth.js",
   "ignore": [
     "**/.*",
     "node_modules",
