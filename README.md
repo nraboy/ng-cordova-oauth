@@ -91,6 +91,7 @@ Each web service API acts independently in this library.  However, when configur
     $cordovaOauth.weibo(string clientId, string clientSecret, array appScope, object options);
     $cordovaOauth.untappd(string clientId, object options);
     $cordovaOauth.pocket(string clientId, object options);
+    $cordovaOauth.pinterest(string clientId, string clientSecret, array appScope, object options);
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
