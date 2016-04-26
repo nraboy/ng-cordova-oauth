@@ -39,6 +39,7 @@
     'oauth.untappd',
     'oauth.dribble',
     'oauth.pocket',
+    'oauth.pinterest',
     'oauth.mercadolibre'])
     .factory("$cordovaOauth", cordovaOauth);
 
@@ -48,7 +49,7 @@
     $ngCordovaTwitter, $ngCordovaMeetup, $ngCordovaSalesforce, $ngCordovaStrava, $ngCordovaWithings, $ngCordovaFoursquare, $ngCordovaMagento,
     $ngCordovaVkontakte, $ngCordovaOdnoklassniki, $ngCordovaImgur, $ngCordovaSpotify, $ngCordovaUber, $ngCordovaWindowslive, $ngCordovaYammer,
     $ngCordovaVenmo, $ngCordovaStripe, $ngCordovaRally, $ngCordovaFamilySearch, $ngCordovaEnvato, $ngCordovaWeibo, $ngCordovaJawbone, $ngCordovaUntappd,
-    $ngCordovaDribble, $ngCordovaPocket, $ngCordovaMercadolibre) {
+    $ngCordovaDribble, $ngCordovaPocket, $ngCordovaPinterest, $ngCordovaMercadolibre) {
 
     return {
       azureAD: $ngCordovaAzureAD.signin,
@@ -87,6 +88,7 @@
       untappd: $ngCordovaUntappd.signin,
       dribble: $ngCordovaDribble.signin,
       pocket: $ngCordovaPocket.signin,
+      pinterest: $ngCordovaPinterest.signin,
       mercadolibre: $ngCordovaMercadolibre.signin,
     };
   }
@@ -129,6 +131,7 @@
     '$ngCordovaUntappd',
     '$ngCordovaDribble',
     '$ngCordovaPocket',
+    '$ngCordovaPinterest',
     '$ngCordovaMercadolibre'
   ];
 })();
