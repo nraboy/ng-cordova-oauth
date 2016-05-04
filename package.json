@@ -33,7 +33,6 @@
   ],
   "license": "MIT",
   "scripts": {
-    "test": "grunt test",
-    "grunt": "grunt"
+    "test": "grunt test"
   }
 }
