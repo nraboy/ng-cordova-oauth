@@ -1490,46 +1490,84 @@
      * @param    object options
      * @return   promise
      */
-    function oauthNetatmo(clientId,appScope, state) {
+    function oauthNetatmo(options) {
+      
       var deferred = $q.defer();
-      if(window.cordova) {
+      var fetchingToken = false;
+      var clientId = (options.clientId)? options.clientId: null;
+      var clientSecret = (options.clientSecret)? options.clientSecret: null;
+      var appScope = (options.appScope)? options.appScope: null;
+      var state = (options.state)? options.state: Math.random().toString(36).substr(2, 5);
+      var inappbrowserOptions = (options.inappbrowserOptions)? options.inappbrowserOptions: 'location=no,clearsessioncache=yes,clearcache=yes';
+
+      if(window.cordova) {        
         if($cordovaOauthUtility.isInAppBrowserInstalled()) {
+          
           var redirect_uri = "http://localhost/callback";
-          var browserRef = window.cordova.InAppBrowser.open('https://api.netatmo.com/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") +'&state='+ state, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var authorize_uri = 'https://api.netatmo.com/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope +'&state='+ state;
+          var browserRef = window.cordova.InAppBrowser.open(authorize_uri, '_blank', inappbrowserOptions);
 
-          browserRef.addEventListener('loadstart', function(event) {
-
-            var dbugThis = true;
-            if(dbugThis){console.log("%ccalled browserRef.addEventListener('loadstart')","color:orange");}
-            if(dbugThis){console.log("%c  event","color:grey",JSON.stringify(event, null, "\t"));}
-
-
-            // if((event.url).indexOf(redirect_uri) === 0) {
-            //   var requestToken = (event.url).split("code=")[1];
-
-            //   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-            //   $http({method: "post", url: "https://netatmo.com/auth/oauth2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&grant_type=authorization_code&code=" + requestToken })
-            //     .success(function(data) {
-            //       deferred.resolve(data);
-            //     })
-            //     .error(function(data, status) {
-            //       deferred.reject("Problem authenticating");
-            //     })
-            //     .finally(function() {
-            //       setTimeout(function() {
-            //         browserRef.close();
-            //       }, 10);
-            //     });
-            // }
-          });
-          browserRef.addEventListener('exit', function(event) {
-            deferred.reject("The sign in flow was canceled");
-          });
+          browserRef.addEventListener('loadstart', inappbrowserLoadStarted);          
+          browserRef.addEventListener('exit', inapbrowserExited);
         } else {
-          deferred.reject("Could not find InAppBrowser plugin");
+          deferred.reject({error: "no_inappbrowser_plugin"});
         }
       } else {
-        deferred.reject("Cannot authenticate via a web browser");
+        deferred.reject({error: "no_inappbrowser_plugin"});
+      }
+
+      function inappbrowserLoadStarted(event){
+
+        var hasNoRedirectUri = (event.url).indexOf(redirect_uri) === 0;
+        var redirectUriMatch = (event.url).split("?")[0] === redirect_uri;
+
+        if(hasNoRedirectUri && redirectUriMatch) {
+
+          fetchingToken = true;
+          browserRef.close();
+
+          //get response url parameters
+          var callbackResponse = (event.url).split("?")[1];
+          var responseParameters = (callbackResponse).split("&");
+          var urlParameters = [];
+          for(var i = 0; i < responseParameters.length; i++) {
+            urlParameters[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
+          }
+
+          var requestToken = urlParameters.code;
+          var responseState = urlParameters.state;
+
+          if(state === responseState){
+
+            var httpOptions = {
+              method: "post", 
+              url: "https://api.netatmo.com/oauth2/token", 
+              data: 'grant_type=authorization_code&client_id='+ clientId +'&client_secret='+ clientSecret +'&code='+ requestToken +'&scope='+ appScope +'&redirect_uri='+ redirect_uri,
+              headers: {
+                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+               },
+            };
+
+            $http(httpOptions).success(requestTokenSuccess).error(requestTokenError).finally(requestTokenFinally);
+          } else {
+            deferred.reject({error: "string_missmatch"});
+          }
+        }
+        function requestTokenSuccess(success){
+          deferred.resolve(success);
+        }
+        function requestTokenError(error){
+          deferred.reject(error);
+        }
+        function requestTokenFinally(){}
+      }
+      function inapbrowserExited(event){
+
+        if(!fetchingToken){
+
+          var error = {error: "flow_canceled"};
+          deferred.reject(error);
+        }
       }
 
       return deferred.promise;
