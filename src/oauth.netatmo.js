@@ -15,37 +15,37 @@
      * @param    object options
      * @return   promise
      */
-    function oauthNetatmo(clientId,clientSecret, appScope, options) {
+    function oauthNetatmo(clientId,appScope, state) {
       var deferred = $q.defer();
       if(window.cordova) {
         if($cordovaOauthUtility.isInAppBrowserInstalled()) {
           var redirect_uri = "http://localhost/callback";
-          if(options !== undefined) {
-            if(options.hasOwnProperty("redirect_uri")) {
-              redirect_uri = options.redirect_uri;
-            }
-          }
-          var browserRef = window.cordova.InAppBrowser.open('https://netatmo.com/auth/oauth2/auth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=code&scope=' + appScope.join(" "), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open('https://api.netatmo.com/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") +'&state='+ state, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
 
           browserRef.addEventListener('loadstart', function(event) {
-            if((event.url).indexOf(redirect_uri) === 0) {
-              var requestToken = (event.url).split("code=")[1];
 
-              $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-              $http({method: "post", url: "https://netatmo.com/auth/oauth2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&grant_type=authorization_code&code=" + requestToken })
-                .success(function(data) {
-                  deferred.resolve(data);
-                })
-                .error(function(data, status) {
-                  deferred.reject("Problem authenticating");
-                })
-                .finally(function() {
-                  setTimeout(function() {
-                    browserRef.close();
-                  }, 10);
-                });
+            var dbugThis = true;
+            if(dbugThis){console.log("%ccalled browserRef.addEventListener('loadstart')","color:orange");}
+            if(dbugThis){console.log("%c  event","color:grey",JSON.stringify(event, null, "\t"));}
 
-            }
+
+            // if((event.url).indexOf(redirect_uri) === 0) {
+            //   var requestToken = (event.url).split("code=")[1];
+
+            //   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+            //   $http({method: "post", url: "https://netatmo.com/auth/oauth2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&grant_type=authorization_code&code=" + requestToken })
+            //     .success(function(data) {
+            //       deferred.resolve(data);
+            //     })
+            //     .error(function(data, status) {
+            //       deferred.reject("Problem authenticating");
+            //     })
+            //     .finally(function() {
+            //       setTimeout(function() {
+            //         browserRef.close();
+            //       }, 10);
+            //     });
+            // }
           });
           browserRef.addEventListener('exit', function(event) {
             deferred.reject("The sign in flow was canceled");
