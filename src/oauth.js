@@ -41,7 +41,8 @@
     'oauth.dribble',
     'oauth.pocket',
     'oauth.mercadolibre',
-    'oauth.xing'])
+    'oauth.xing',
+    'oauth.netatmo'])
     .factory("$cordovaOauth", cordovaOauth);
 
   function cordovaOauth(
@@ -50,7 +51,7 @@
     $ngCordovaTwitter, $ngCordovaMeetup, $ngCordovaSalesforce, $ngCordovaStrava, $ngCordovaWithings, $ngCordovaFoursquare, $ngCordovaMagento,
     $ngCordovaVkontakte, $ngCordovaOdnoklassniki, $ngCordovaImgur, $ngCordovaSpotify, $ngCordovaUber, $ngCordovaWindowslive, $ngCordovaYammer,
     $ngCordovaVenmo, $ngCordovaStripe, $ngCordovaRally, $ngCordovaFamilySearch, $ngCordovaEnvato, $ngCordovaWeibo, $ngCordovaJawbone, $ngCordovaUntappd,
-    $ngCordovaDribble, $ngCordovaPocket, $ngCordovaMercadolibre, $ngCordovaXing) {
+    $ngCordovaDribble, $ngCordovaPocket, $ngCordovaMercadolibre, $ngCordovaXing, $ngCordovaNetatmo) {
 
     return {
       azureAD: $ngCordovaAzureAD.signin,
@@ -90,7 +91,8 @@
       dribble: $ngCordovaDribble.signin,
       pocket: $ngCordovaPocket.signin,
       mercadolibre: $ngCordovaMercadolibre.signin,
-      xing: $ngCordovaXing.signin
+      xing: $ngCordovaXing.signin,
+      netatmo: $ngCordovaNetatmo.signin
     };
   }
 
@@ -133,6 +135,7 @@
     '$ngCordovaDribble',
     '$ngCordovaPocket',
     '$ngCordovaMercadolibre',
-    '$ngCordovaXing'
+    '$ngCordovaXing',
+    '$ngCordovaNetatmo'
   ];
 })();

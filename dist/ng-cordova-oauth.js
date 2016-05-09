@@ -1067,7 +1067,9 @@
     'oauth.untappd',
     'oauth.dribble',
     'oauth.pocket',
-    'oauth.mercadolibre'])
+    'oauth.mercadolibre',
+    'oauth.xing',
+    'oauth.netatmo'])
     .factory("$cordovaOauth", cordovaOauth);
 
   function cordovaOauth(
@@ -1076,7 +1078,7 @@
     $ngCordovaTwitter, $ngCordovaMeetup, $ngCordovaSalesforce, $ngCordovaStrava, $ngCordovaWithings, $ngCordovaFoursquare, $ngCordovaMagento,
     $ngCordovaVkontakte, $ngCordovaOdnoklassniki, $ngCordovaImgur, $ngCordovaSpotify, $ngCordovaUber, $ngCordovaWindowslive, $ngCordovaYammer,
     $ngCordovaVenmo, $ngCordovaStripe, $ngCordovaRally, $ngCordovaFamilySearch, $ngCordovaEnvato, $ngCordovaWeibo, $ngCordovaJawbone, $ngCordovaUntappd,
-    $ngCordovaDribble, $ngCordovaPocket, $ngCordovaMercadolibre) {
+    $ngCordovaDribble, $ngCordovaPocket, $ngCordovaMercadolibre, $ngCordovaXing, $ngCordovaNetatmo) {
 
     return {
       azureAD: $ngCordovaAzureAD.signin,
@@ -1116,6 +1118,8 @@
       dribble: $ngCordovaDribble.signin,
       pocket: $ngCordovaPocket.signin,
       mercadolibre: $ngCordovaMercadolibre.signin,
+      xing: $ngCordovaXing.signin,
+      netatmo: $ngCordovaNetatmo.signin
     };
   }
 
@@ -1157,7 +1161,9 @@
     '$ngCordovaUntappd',
     '$ngCordovaDribble',
     '$ngCordovaPocket',
-    '$ngCordovaMercadolibre'
+    '$ngCordovaMercadolibre',
+    '$ngCordovaXing',
+    '$ngCordovaNetatmo'
   ];
 })();
 
@@ -1190,12 +1196,11 @@
               redirect_uri = options.redirect_uri;
             }
           }
-
           var browserRef = window.cordova.InAppBrowser.open('https://www.linkedin.com/uas/oauth2/authorization?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&response_type=code&state=' + state, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               try {
-                requestToken = (event.url).split("code=")[1].split("&")[0];
+                var requestToken = (event.url).split("code=")[1].split("&")[0];
                 $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, url: "https://www.linkedin.com/uas/oauth2/accessToken", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&grant_type=authorization_code" + "&code=" + requestToken })
                   .success(function(data) {
                     deferred.resolve(data);
@@ -1466,6 +1471,110 @@
   }
 
   mercadolibre.$inject = ['$q', '$http', '$cordovaOauthUtility'];
+})();
+
+(function() {
+  'use strict';
+
+  angular.module('oauth.netatmo', ['oauth.utils']).factory('$ngCordovaNetatmo', netatmo);
+
+  function netatmo($q, $http, $cordovaOauthUtility) {
+    return { signin: oauthNetatmo };
+
+    /*
+     * Sign into the Netatmo service
+     *
+     * @param    string clientId
+     * @param    string clientSecret
+     * @param    string appScope
+     * @param    object options
+     * @return   promise
+     */
+    function oauthNetatmo(options) {
+      
+      var deferred = $q.defer();
+      var fetchingToken = false;
+      var clientId = (options.clientId)? options.clientId: null;
+      var clientSecret = (options.clientSecret)? options.clientSecret: null;
+      var appScope = (options.appScope)? options.appScope: null;
+      var state = (options.state)? options.state: Math.random().toString(36).substr(2, 5);
+      var inappbrowserOptions = (options.inappbrowserOptions)? options.inappbrowserOptions: 'location=no,clearsessioncache=yes,clearcache=yes';
+
+      if(window.cordova) {        
+        if($cordovaOauthUtility.isInAppBrowserInstalled()) {
+          
+          var redirect_uri = "http://localhost/callback";
+          var authorize_uri = 'https://api.netatmo.com/oauth2/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope +'&state='+ state;
+          var browserRef = window.cordova.InAppBrowser.open(authorize_uri, '_blank', inappbrowserOptions);
+
+          browserRef.addEventListener('loadstart', inappbrowserLoadStarted);          
+          browserRef.addEventListener('exit', inapbrowserExited);
+        } else {
+          deferred.reject({error: "no_inappbrowser_plugin"});
+        }
+      } else {
+        deferred.reject({error: "no_inappbrowser_plugin"});
+      }
+
+      function inappbrowserLoadStarted(event){
+
+        var hasNoRedirectUri = (event.url).indexOf(redirect_uri) === 0;
+        var redirectUriMatch = (event.url).split("?")[0] === redirect_uri;
+
+        if(hasNoRedirectUri && redirectUriMatch) {
+
+          fetchingToken = true;
+          browserRef.close();
+
+          //get response url parameters
+          var callbackResponse = (event.url).split("?")[1];
+          var responseParameters = (callbackResponse).split("&");
+          var urlParameters = [];
+          for(var i = 0; i < responseParameters.length; i++) {
+            urlParameters[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
+          }
+
+          var requestToken = urlParameters.code;
+          var responseState = urlParameters.state;
+
+          if(state === responseState){
+
+            var httpOptions = {
+              method: "post", 
+              url: "https://api.netatmo.com/oauth2/token", 
+              data: 'grant_type=authorization_code&client_id='+ clientId +'&client_secret='+ clientSecret +'&code='+ requestToken +'&scope='+ appScope +'&redirect_uri='+ redirect_uri,
+              headers: {
+                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+               },
+            };
+
+            $http(httpOptions).success(requestTokenSuccess).error(requestTokenError).finally(requestTokenFinally);
+          } else {
+            deferred.reject({error: "string_missmatch"});
+          }
+        }
+        function requestTokenSuccess(success){
+          deferred.resolve(success);
+        }
+        function requestTokenError(error){
+          deferred.reject(error);
+        }
+        function requestTokenFinally(){}
+      }
+      function inapbrowserExited(event){
+
+        if(!fetchingToken){
+
+          var error = {error: "flow_canceled"};
+          deferred.reject(error);
+        }
+      }
+
+      return deferred.promise;
+    }
+  }
+
+  netatmo.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 })();
 
 (function() {
@@ -2723,6 +2832,133 @@
 (function() {
   'use strict';
 
+  angular.module('oauth.xing', ['oauth.utils'])
+    .factory('$ngCordovaXing', xing);
+
+  function xing($q, $http, $cordovaOauthUtility) {
+    return { signin: oauthXing };
+
+    /*
+     * Sign into the Xing service
+     * Note that this service requires jsSHA for generating HMAC-SHA1 Oauth 1.0 signatures
+     *
+     * @param    string clientId
+     * @param    string clientSecret
+     * @param    object options
+     * @return   promise
+     */
+    function oauthXing(clientId, clientSecret, options) {
+      var deferred = $q.defer();
+      if(window.cordova) {
+        if($cordovaOauthUtility.isInAppBrowserInstalled()) {
+          var redirect_uri = 'http://localhost/callback';
+          if(options !== undefined) {
+            if(options.hasOwnProperty('redirect_uri')) {
+              redirect_uri = options.redirect_uri;
+            }
+          }
+
+          if(typeof jsSHA !== 'undefined') {
+            var oauthObject = {
+              oauth_consumer_key: clientId,
+              oauth_nonce: $cordovaOauthUtility.createNonce(10),
+              oauth_signature_method: 'HMAC-SHA1',
+              oauth_timestamp: Math.round((new Date()).getTime() / 1000.0),
+              oauth_version: '1.0'
+            };
+            var signatureObj = $cordovaOauthUtility.createSignature('POST', 'https://api.xing.com/v1/request_token', oauthObject,  { oauth_callback: redirect_uri }, clientSecret);
+            $http({
+              method: 'post',
+              url: 'https://api.xing.com/v1/request_token',
+              headers: {
+                  'Authorization': signatureObj.authorization_header,
+                  'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              data: 'oauth_callback=' + encodeURIComponent(redirect_uri)
+            })
+              .success(function(requestTokenResult) {
+                var requestTokenParameters = (requestTokenResult).split('&');
+                var parameterMap = {};
+                for(var i = 0; i < requestTokenParameters.length; i++) {
+                  parameterMap[requestTokenParameters[i].split('=')[0]] = requestTokenParameters[i].split('=')[1];
+                }
+                if(parameterMap.hasOwnProperty('oauth_token') === false) {
+                  deferred.reject('Oauth request token was not received');
+                }
+                var oauthTokenSecret = parameterMap.oauth_token_secret;
+                var browserRef = window.cordova.InAppBrowser.open('https://api.xing.com/v1/authorize?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                browserRef.addEventListener('loadstart', function(event) {
+                  if((event.url).indexOf(redirect_uri) === 0) {
+                    var callbackResponse = (event.url).split('?')[1];
+                    var responseParameters = (callbackResponse).split('&');
+                    var parameterMap = {};
+                    for(var i = 0; i < responseParameters.length; i++) {
+                      parameterMap[responseParameters[i].split('=')[0]] = responseParameters[i].split('=')[1];
+                    }
+                    if(parameterMap.hasOwnProperty('oauth_verifier') === false) {
+                      deferred.reject('Browser authentication failed to complete.  No oauth_verifier was returned');
+                    }
+                    delete oauthObject.oauth_signature;
+                    oauthObject.oauth_token = parameterMap.oauth_token;
+                    var signatureObj = $cordovaOauthUtility.createSignature('POST', 'https://api.xing.com/v1/access_token', oauthObject,  { oauth_verifier: parameterMap.oauth_verifier }, clientSecret, oauthTokenSecret);
+                    $http({
+                      method: 'post',
+                      url: 'https://api.xing.com/v1/access_token',
+                      headers: {
+                          'Authorization': signatureObj.authorization_header
+                      },
+                      params: {
+                          'oauth_verifier': parameterMap.oauth_verifier
+                      }
+                    })
+                      .success(function(result) {
+                        var accessTokenParameters = result.split('&');
+                        var parameterMap = {};
+                        for(var i = 0; i < accessTokenParameters.length; i++) {
+                          parameterMap[accessTokenParameters[i].split('=')[0]] = accessTokenParameters[i].split('=')[1];
+                        }
+                        if(parameterMap.hasOwnProperty('oauth_token_secret') === false) {
+                          deferred.reject('Oauth access token was not received');
+                        }
+                        deferred.resolve(parameterMap);
+                      })
+                      .error(function(error) {
+                        deferred.reject(error);
+                      })
+                      .finally(function() {
+                        setTimeout(function() {
+                            browserRef.close();
+                        }, 10);
+                      });
+                  }
+                });
+                browserRef.addEventListener('exit', function(event) {
+                  deferred.reject('The sign in flow was canceled');
+                });
+              })
+              .error(function(error) {
+                deferred.reject(error);
+              });
+          } else {
+              deferred.reject('Missing jsSHA JavaScript library');
+          }
+        } else {
+            deferred.reject('Could not find InAppBrowser plugin');
+        }
+      } else {
+        deferred.reject('Cannot authenticate via a web browser');
+      }
+
+      return deferred.promise;
+    }
+  }
+
+  xing.$inject = ['$q', '$http', '$cordovaOauthUtility'];
+})();
+
+(function() {
+  'use strict';
+
   angular.module('oauth.yammer', ['oauth.utils'])
     .factory('$ngCordovaYammer', yammer);
 
@@ -2838,6 +3074,7 @@
  *    Slack
  *    Jawbone
  *    Untappd
+ *    Xing
  */
 
 angular.module("ngCordovaOauth", [

@@ -1,0 +1,2 @@
+dist/ng-cordova-oauth.js -diff
+dist/ng-cordova-oauth.min.js -diff
