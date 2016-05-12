@@ -1,3 +1,9 @@
+0.2.6 - May 12, 2016
+
+* Add Xing support
+* Add Netatmo support
+* Add 500px support
+
 0.2.5 - April 1, 2016
 
 * Fix variable definitions that are conflicting with other libraries

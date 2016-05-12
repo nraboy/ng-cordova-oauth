@@ -92,6 +92,8 @@ Each web service API acts independently in this library.  However, when configur
     $cordovaOauth.untappd(string clientId, object options);
     $cordovaOauth.pocket(string clientId, object options);
     $cordovaOauth.xing(string clientId, string clientSecret, object options);
+    $cordovaOauth.fiveHundredsPx(string sdkKey, object options);
+    $cordovaOauth.netatmo(object options);
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
@@ -106,13 +108,15 @@ $cordovaOauth.google("CLIENT_ID_HERE", ["email"]).then(function(result) {
 
 To authenticate with Twitter, Withings, Magento and Xing an additional library is required.  These services require HMAC-SHA1 signatures in their Oauth implementation.  Including the sha1.js component of jsSHA will accomplish this task.
 
-As of Apache Cordova 5.0.0, the [whitelist plugin](https://blog.nraboy.com/2015/05/whitelist-external-resources-for-use-in-ionic-framework/) must be used in order to reach external web services.
+As of Apache Cordova 5.0.0, the [whitelist plugin](https://www.thepolyglotdeveloper.com/2015/05/whitelist-external-resources-for-use-in-ionic-framework/) must be used in order to reach external web services.
 
-This library will **NOT** work with a web browser, ionic serve, or ionic view.  It **MUST** be used via installing to a device or simulator.
+### Important Note About Testing
+
+This library will **NOT** work with a web browser, ionic serve, ionic live-reload, or ionic view.  It **MUST** be used via installing to a device or simulator.
 
 ## Content-Security-Policy
 
-When using the Content-Security-Policy as mentioned in the [Apache Cordova Whitelist Plugin](https://github.com/apache/cordova-plugin-whitelist) documentation, you'll need to allow content from the OAuth Provider. For example, if using Google Login, you'll need to add `https://www.googleapis.com` to your `default-src` list. Your meta tag would look something like this for Google and Facebook: 
+When using the Content-Security-Policy as mentioned in the [Apache Cordova Whitelist Plugin](https://github.com/apache/cordova-plugin-whitelist) documentation, you'll need to allow content from the OAuth Provider. For example, if using Google Login, you'll need to add `https://www.googleapis.com` to your `default-src` list. Your meta tag would look something like this for Google and Facebook:
 ```html
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://www.googleapis.com https://graph.facebook.com">
 ```
@@ -187,4 +191,4 @@ AngularJS - [http://www.angularjs.org](http://www.angularjs.org)
 
 Apache Cordova - [http://cordova.apache.org](http://cordova.apache.org)
 
-Nic Raboy's Code Blog - [https://blog.nraboy.com](https://blog.nraboy.com)
+The Polyglot Developer - [https://www.thepolyglotdeveloper.com](https://www.thepolyglotdeveloper.com)
