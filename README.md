@@ -94,6 +94,7 @@ Each web service API acts independently in this library.  However, when configur
     $cordovaOauth.xing(string clientId, string clientSecret, object options);
     $cordovaOauth.fiveHundredsPx(string sdkKey, object options);
     $cordovaOauth.netatmo(object options);
+    $cordovaOauth.trakttv(string clientId, string clientSecret, string state);
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
@@ -174,13 +175,15 @@ $cordovaOauth.$inject = [
 ];
 ```
 
-## Have a question or found a bug (compliments work too)?
+## Support
 
-This project is maintained by **Nic Raboy** and **Matheus Rocha**.
+This project is maintained by **Nic Raboy** and **Matheus Rocha**.  This plugin is and will always be open source.  That said, support is not.  If you'd like to **purchase** paid support for this library, please contact either of us on Twitter.
 
-Tweet Nic Raboy on Twitter - [@nraboy](https://www.twitter.com/nraboy)
+Nic Raboy on Twitter - [@nraboy](https://www.twitter.com/nraboy)
 
-Tweet Matheus Rocha on Twitter - [@matheusrocha](https://www.twitter.com/matheusrocha)
+Matheus Rocha on Twitter - [@matheusrocha](https://www.twitter.com/matheusrocha)
+
+The issue tracker is to be used for bug reporting only.  We will not help you build your application, diagnose your problems, or teach you how to use the various oauth providers through the issue tracker.  Free support can be found in the forums or on Stack Overflow.
 
 
 ## Resources

@@ -1,3 +1,11 @@
+0.2.8 -
+
+* Add Trakt.tv support
+
+0.2.7 - May 17, 2016
+
+* Fix `Can't find variable: requestToken` error for various providers
+
 0.2.6 - May 12, 2016
 
 * Add Xing support
