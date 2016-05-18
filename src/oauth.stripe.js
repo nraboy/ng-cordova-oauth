@@ -29,7 +29,7 @@
           var browserRef = window.cordova.InAppBrowser.open('https://connect.stripe.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf("http://localhost/callback") === 0) {
-              requestToken = (event.url).split("code=")[1];
+              var requestToken = (event.url).split("code=")[1];
               $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
               $http({method: "post", url: "https://connect.stripe.com/oauth/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&grant_type=authorization_code" + "&code=" + requestToken })
                 .success(function(data) {

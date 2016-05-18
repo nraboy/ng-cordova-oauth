@@ -39,7 +39,7 @@
           var browserRef = window.cordova.InAppBrowser.open(flowUrl, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
-              requestToken = (event.url).split("code=")[1];
+              var requestToken = (event.url).split("code=")[1];
               $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
               $http({method: "post", url: "https://api.weibo.com/oauth2/access_token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&grant_type=authorization_code&code=" + requestToken + "&redirect_uri=" + redirect_uri})
               .success(function(data) {

@@ -26,7 +26,6 @@
           }
 
           var data = "consumer_key=" + clientId + "&redirect_uri=" + encodeURIComponent(redirect_url);
-          console.log(data);
           $http({
             method: "post",
             url: "https://getpocket.com/v3/oauth/request",
