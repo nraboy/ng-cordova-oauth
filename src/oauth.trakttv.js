@@ -31,7 +31,7 @@
             if((event.url).indexOf(redirect_uri) === 0) {
               try {
                 var requestToken = (event.url).split("code=")[1].split("&")[0];
-                $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, url: "https://trakt.tv/oauth/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&grant_type=authorization_code" + "&code=" + requestToken })
+                $http({method: "post", headers: {'Content-Type': 'application/json'}, url: "https://trakt.tv/oauth/token", data: {'code': requestToken, 'client_id': clientId, 'client_secret': clientSecret, 'redirect_uri': redirect_uri, 'grant_type': 'authorization_code'} })
                   .success(function(data) {
                     deferred.resolve(data);
                   })
