@@ -3060,10 +3060,7 @@
           var providerUrl = 'https://api.login.yahoo.com/oauth2/request_auth?client_id=' + clientId;
           providerUrl += '&redirect_uri=' + redirect_uri;
           providerUrl += '&response_type=token';
-
-          if (appScope !== undefined && appScope.length > 0) {
-            providerUrl += '&scope=' + appScope.join(" ");
-          }
+          providerUrl += '&scope=' + appScope.join(" ");
 
           var browserRef = window.cordova.InAppBrowser.open(
               providerUrl, 
