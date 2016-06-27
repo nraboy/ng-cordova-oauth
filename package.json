@@ -8,20 +8,20 @@
   },
   "homepage": "https://www.thepolyglotdeveloper.com",
   "devDependencies": {
-    "angular": "^1.4.7",
-    "angular-mocks": "^1.4.7",
-    "grunt": "~0.4.5",
-    "grunt-contrib-clean": "~0.6.0",
-    "grunt-contrib-concat": "^0.5.1",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-uglify": "~0.5.0",
-    "grunt-karma": "^0.12.1",
-    "jasmine-core": "^2.3.4",
+    "angular-mocks": "1.5.7",
+    "grunt": "1.0.1",
+    "grunt-contrib-clean": "1.0.0",
+    "grunt-contrib-concat": "1.0.1",
+    "grunt-contrib-jshint": "1.0.0",
+    "grunt-contrib-uglify": "1.0.1",
+    "grunt-karma": "2.0.0",
+    "jasmine-core": "2.4.1",
     "jssha": "1.6.0",
-    "karma": "0.13.19",
-    "karma-coverage": "^0.5.3",
-    "karma-jasmine": "0.3.6",
-    "karma-phantomjs-launcher": "^0.2.1"
+    "karma": "1.1.0",
+    "karma-coverage": "1.0.0",
+    "karma-jasmine": "1.0.2",
+    "karma-phantomjs-launcher": "1.0.1",
+    "phantomjs-prebuilt": "2.1.7"
   },
   "keywords": [
     "angularjs",
@@ -36,6 +36,6 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "phantomjs": "^2.1.7"
+    "angular": "1.5.7"
   }
 }
