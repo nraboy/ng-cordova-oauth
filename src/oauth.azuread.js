@@ -25,9 +25,8 @@
             if((event.url).indexOf('http://localhost/callback') === 0) {
               var requestToken = (event.url).split("code=")[1];
               console.log(requestToken);
-              $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-              $http({method: "post", url: "https://login.microsoftonline.com/" + tenantId + "/oauth2/token", data:
+              $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, url: "https://login.microsoftonline.com/" + tenantId + "/oauth2/token", data:
                 "client_id=" + clientId +
                 "&code=" + requestToken +
                 "&redirect_uri=http://localhost/callback&" +
