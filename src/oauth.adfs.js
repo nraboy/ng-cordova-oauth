@@ -24,8 +24,7 @@
           browserRef.addEventListener("loadstart", function(event) {
             if((event.url).indexOf('http://localhost/callback') === 0) {
               var requestToken = (event.url).split("code=")[1];
-              $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-              $http({method: "post", url: adfsServer + "/adfs/oauth2/token", data: "client_id=" + clientId + "&code=" + requestToken + "&redirect_uri=http://localhost/callback&grant_type=authorization_code"  })
+              $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, url: adfsServer + "/adfs/oauth2/token", data: "client_id=" + clientId + "&code=" + requestToken + "&redirect_uri=http://localhost/callback&grant_type=authorization_code"  })
                 .success(function(data) {
                   deferred.resolve(data);
                 })

@@ -42,9 +42,10 @@
             if ((event.url).indexOf(redirect_uri) === 0) {
               var callBackCode = (event.url).split("code=")[1];
               var code = callBackCode.split("&")[0];
-              $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
               $http({
                 method: "post",
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 url: ACCESS_TOKEN_URL,
                 data: "client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&client_secret=" + clientSecret + "&code=" + code
               })
