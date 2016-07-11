@@ -75,8 +75,7 @@
           browserRef.addEventListener("loadstart", function(event) {
             if((event.url).indexOf('http://localhost/callback') === 0) {
               var requestToken = (event.url).split("code=")[1];
-              $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-              $http({method: "post", url: adfsServer + "/adfs/oauth2/token", data: "client_id=" + clientId + "&code=" + requestToken + "&redirect_uri=http://localhost/callback&grant_type=authorization_code"  })
+              $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, url: adfsServer + "/adfs/oauth2/token", data: "client_id=" + clientId + "&code=" + requestToken + "&redirect_uri=http://localhost/callback&grant_type=authorization_code"  })
                 .success(function(data) {
                   deferred.resolve(data);
                 })
@@ -134,9 +133,8 @@
             if((event.url).indexOf('http://localhost/callback') === 0) {
               var requestToken = (event.url).split("code=")[1];
               console.log(requestToken);
-              $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-              $http({method: "post", url: "https://login.microsoftonline.com/" + tenantId + "/oauth2/token", data:
+              $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, url: "https://login.microsoftonline.com/" + tenantId + "/oauth2/token", data:
                 "client_id=" + clientId +
                 "&code=" + requestToken +
                 "&redirect_uri=http://localhost/callback&" +
@@ -203,8 +201,8 @@
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];
-              $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-              $http({method: "post", url: "https://app.box.com/api/oauth2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&grant_type=authorization_code" + "&code=" + requestToken })
+
+              $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, url: "https://app.box.com/api/oauth2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&grant_type=authorization_code" + "&code=" + requestToken })
                 .success(function(data) {
                   deferred.resolve(data);
                 })
@@ -266,8 +264,8 @@
           browserRef.addEventListener("loadstart", function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];
-              $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-              $http({method: "post", url: "https://cloud.digitalocean.com/v1/oauth/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&grant_type=authorization_code" + "&code=" + requestToken })
+
+              $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, url: "https://cloud.digitalocean.com/v1/oauth/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&grant_type=authorization_code" + "&code=" + requestToken })
                 .success(function(data) {
                   deferred.resolve(data);
                 })
@@ -341,9 +339,10 @@
             if ((event.url).indexOf(redirect_uri) === 0) {
               var callBackCode = (event.url).split("code=")[1];
               var code = callBackCode.split("&")[0];
-              $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
               $http({
                 method: "post",
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 url: ACCESS_TOKEN_URL,
                 data: "client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&client_secret=" + clientSecret + "&code=" + code
               })
@@ -597,8 +596,7 @@
           browserRef.addEventListener("loadstart", function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];
-              $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-              $http({method: "post", url: "https://ident.familysearch.org/cis-web/oauth2/v3/token", data: "client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&grant_type=authorization_code&code=" + requestToken })
+              $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, url: "https://ident.familysearch.org/cis-web/oauth2/v3/token", data: "client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&grant_type=authorization_code&code=" + requestToken })
                 .success(function(data) {
                   deferred.resolve(data);
                 })
@@ -728,9 +726,7 @@
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];
-              $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-              $http.defaults.headers.post.accept = 'application/json';
-              $http({method: "post", url: "https://github.com/login/oauth/access_token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&code=" + requestToken })
+              $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded', 'accept': 'application/json'}, url: "https://github.com/login/oauth/access_token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + redirect_uri + "&code=" + requestToken })
                 .success(function(data) {
                   deferred.resolve(data);
                 })
@@ -992,8 +988,7 @@
             if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];
 
-              $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-              $http({method: "post", url: "https://jawbone.com/auth/oauth2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&grant_type=authorization_code&code=" + requestToken })
+              $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, url: "https://jawbone.com/auth/oauth2/token", data: "client_id=" + clientId + "&client_secret=" + clientSecret + "&grant_type=authorization_code&code=" + requestToken })
                 .success(function(data) {
                   deferred.resolve(data);
                 })
