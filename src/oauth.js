@@ -8,6 +8,7 @@
     "oauth.adfs",
     'oauth.dropbox',
     'oauth.digitalOcean',
+    'oauth.eventbrite',
     'oauth.google',
     'oauth.github',
     'oauth.facebook',
@@ -48,7 +49,7 @@
     .factory("$cordovaOauth", cordovaOauth);
 
   function cordovaOauth(
-    $q, $http, $cordovaOauthUtility, $ngCordovaAzureAD, $ngCordovaAdfs, $ngCordovaDropbox, $ngCordovaDigitalOcean,
+    $q, $http, $cordovaOauthUtility, $ngCordovaAzureAD, $ngCordovaAdfs, $ngCordovaDropbox, $ngCordovaDigitalOcean,$ngCordovaEventbrite,
     $ngCordovaGoogle, $ngCordovaGithub, $ngCordovaFacebook, $ngCordovaLinkedin, $ngCordovaInstagram, $ngCordovaBox, $ngCordovaReddit, $ngCordovaSlack,
     $ngCordovaTwitter, $ngCordovaMeetup, $ngCordovaSalesforce, $ngCordovaStrava, $ngCordovaWithings, $ngCordovaFoursquare, $ngCordovaMagento,
     $ngCordovaVkontakte, $ngCordovaOdnoklassniki, $ngCordovaImgur, $ngCordovaSpotify, $ngCordovaUber, $ngCordovaWindowslive, $ngCordovaYammer,
@@ -60,6 +61,7 @@
       adfs: $ngCordovaAdfs.signin,
       dropbox: $ngCordovaDropbox.signin,
       digitalOcean: $ngCordovaDigitalOcean.signin,
+      eventbrite: $ngCordovaEventbrite.signin,
       google: $ngCordovaGoogle.signin,
       github: $ngCordovaGithub.signin,
       facebook: $ngCordovaFacebook.signin,
@@ -106,6 +108,7 @@
     "$ngCordovaAdfs",
     '$ngCordovaDropbox',
     '$ngCordovaDigitalOcean',
+    '$ngCordovaEventbrite',
     '$ngCordovaGoogle',
     '$ngCordovaGithub',
     '$ngCordovaFacebook',
