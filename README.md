@@ -61,6 +61,7 @@ Each web service API acts independently in this library.  However, when configur
     $cordovaOauth.azureAD(string clientId, string tenantId, string resourceURL);
     $cordovaOauth.dropbox(string appKey, object options);
     $cordovaOauth.digitalOcean(string clientId, string clientSecret, object options);
+    $cordovaOauth.eventbrite(string clientId);
     $cordovaOauth.google(string clientId, array appScope, object options);
     $cordovaOauth.github(string clientId, string clientSecret, array appScope, object options);
     $cordovaOauth.facebook(string clientId, array appScope, object options);
@@ -140,7 +141,7 @@ If you want to contribute please use the new architecture of files. Each provide
 //oauth.js
 
 angular.module("oauth.providers", [
-  "oauth.utils", "oauth.azuread", "oauth.adfs", 'oauth.dropbox',
+  "oauth.utils", "oauth.azuread", "oauth.adfs", 'oauth.dropbox','oauth.eventbrite',
   'oauth.digitalOcean', 'oauth.google', 'oauth.github', 'oauth.facebook',
   'oauth.linkedin', 'oauth.instagram', 'oauth.box', 'oauth.reddit', 'oauth.slack',
   'oauth.twitter', 'oauth.meetup', 'oauth.salesforce', 'oauth.strava',
@@ -151,7 +152,7 @@ angular.module("oauth.providers", [
   'oauth.dribble', '<YOUR PROVIDER MODULE HERE>']).factory("$cordovaOauth", cordovaOauth);
 
 function cordovaOauth(
-    $q, $http, $cordovaOauthUtility, $azureAD, $adfs, $dropbox, $digitalOcean,
+    $q, $http, $cordovaOauthUtility, $azureAD, $adfs, $dropbox, $digitalOcean,$eventbrite,
     $google, $github, $facebook, $linkedin, $instagram, $box, $reddit, $slack,
     $twitter, $meetup, $salesforce, $strava, $withings, $foursquare, $magento
     $vkontakte, $odnoklassniki, $imgur, $spotify, $uber, $windowslive, $yammer,
@@ -166,7 +167,7 @@ function cordovaOauth(
 
 $cordovaOauth.$inject = [
   "$q", '$http', "$cordovaOauthUtility", "$azureAD", "$adfs", '$dropbox',
-  '$digitalOcean', '$google', '$github', '$facebook', '$linkedin',
+  '$digitalOcean','$eventbrite' ,'$google', '$github', '$facebook', '$linkedin',
   '$instagram', '$box', '$reddit', '$slack', '$twitter' '$meetup', '$salesforce',
   '$strava', '$withings', '$foursquare', '$magento', '$vkontakte',
   '$odnoklassniki', '$imgur', '$spotify', '$uber', '$windowslive', '$yammer',
