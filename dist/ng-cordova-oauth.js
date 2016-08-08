@@ -24,7 +24,7 @@
                 redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://api.500px.com/v1/api/js-sdk/authorize?sdk_key=' + sdkKey + '&callback=' + redirect_uri, '_blank', 'toolbar=no,zoom=no,location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open('https://api.500px.com/v1/api/js-sdk/authorize?sdk_key=' + sdkKey + '&callback=' + redirect_uri, '_blank', 'toolbar=no,zoom=no,location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES');
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               var accessToken = (event.url).split("#token:")[1].split(',')[0];
@@ -70,7 +70,7 @@
       var deferred = $q.defer();
       if(window.cordova) {
         if($cordovaOauthUtility.isInAppBrowserInstalled()) {
-          var browserRef = window.cordova.InAppBrowser.open(adfsServer + '/adfs/oauth2/authorize?response_type=code&client_id=' + clientId +'&redirect_uri=http://localhost/callback&resource=' + relyingPartyId, '_blank', 'location=no');
+          var browserRef = window.cordova.InAppBrowser.open(adfsServer + '/adfs/oauth2/authorize?response_type=code&client_id=' + clientId +'&redirect_uri=http://localhost/callback&resource=' + relyingPartyId, '_blank', 'location=no,allowinlinemediaplayback=YES');
 
           browserRef.addEventListener("loadstart", function(event) {
             if((event.url).indexOf('http://localhost/callback') === 0) {
@@ -128,7 +128,7 @@
       if(window.cordova) {
         if($cordovaOauthUtility.isInAppBrowserInstalled()) {
 
-          var browserRef = window.cordova.InAppBrowser.open('https://login.microsoftonline.com/' + tenantId + '/oauth2/authorize?response_type=code&client_id=' + clientId + '&redirect_uri=http://localhost/callback', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open('https://login.microsoftonline.com/' + tenantId + '/oauth2/authorize?response_type=code&client_id=' + clientId + '&redirect_uri=http://localhost/callback', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES');
           browserRef.addEventListener("loadstart", function(event) {
             if((event.url).indexOf('http://localhost/callback') === 0) {
               var requestToken = (event.url).split("code=")[1];
@@ -197,7 +197,7 @@
                 redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://app.box.com/api/oauth2/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&state=' + appState + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open('https://app.box.com/api/oauth2/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&state=' + appState + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES');
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];
@@ -260,7 +260,7 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open("https://cloud.digitalocean.com/v1/oauth/authorize?client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&response_type=code&scope=read%20write", "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
+          var browserRef = window.cordova.InAppBrowser.open("https://cloud.digitalocean.com/v1/oauth/authorize?client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&response_type=code&scope=read%20write", "_blank", "location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES");
           browserRef.addEventListener("loadstart", function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];
@@ -334,7 +334,7 @@
 
           var scope = appScope.join(",").replace(/,/g, '+');  //dribble scopes are passed with +
           var browserRef = window.cordova.InAppBrowser.open(OAUTH_URL + '?client_id=' + clientId + '&redirect_uri=' + redirect_uri +
-          '&scope=' + scope + '&state=' + state, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          '&scope=' + scope + '&state=' + state, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES');
           browserRef.addEventListener('loadstart', function (event) {
             if ((event.url).indexOf(redirect_uri) === 0) {
               var callBackCode = (event.url).split("code=")[1];
@@ -400,7 +400,7 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open("https://www.dropbox.com/1/oauth2/authorize?client_id=" + appKey + "&redirect_uri=" + redirect_uri + "&response_type=token", "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
+          var browserRef = window.cordova.InAppBrowser.open("https://www.dropbox.com/1/oauth2/authorize?client_id=" + appKey + "&redirect_uri=" + redirect_uri + "&response_type=token", "_blank", "location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES");
           browserRef.addEventListener("loadstart", function(event) {
             if ((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});
@@ -460,7 +460,7 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://api.envato.com/authorization?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open('https://api.envato.com/authorization?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES');
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});
@@ -528,7 +528,7 @@
           if(options !== undefined && options.hasOwnProperty("auth_type")) {
             flowUrl += "&auth_type=" + options.auth_type;
           }
-          var browserRef = window.cordova.InAppBrowser.open(flowUrl, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open(flowUrl, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES');
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});
@@ -592,7 +592,7 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open("https://ident.familysearch.org/cis-web/oauth2/v3/authorization?client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&response_type=code&state=" + state, "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
+          var browserRef = window.cordova.InAppBrowser.open("https://ident.familysearch.org/cis-web/oauth2/v3/authorization?client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&response_type=code&state=" + state, "_blank", "location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES");
           browserRef.addEventListener("loadstart", function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];
@@ -653,7 +653,7 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://foursquare.com/oauth2/authenticate?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open('https://foursquare.com/oauth2/authenticate?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES');
           browserRef.addEventListener('loadstart', function (event) {
             if ((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});
@@ -722,7 +722,7 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://github.com/login/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(","), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open('https://github.com/login/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(","), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES');
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];
@@ -784,7 +784,7 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://accounts.google.com/o/oauth2/auth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&approval_prompt=force&response_type=token id_token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open('https://accounts.google.com/o/oauth2/auth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&approval_prompt=force&response_type=token id_token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES');
           browserRef.addEventListener("loadstart", function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});
@@ -844,7 +844,7 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://api.imgur.com/oauth2/authorize?client_id=' + clientId + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open('https://api.imgur.com/oauth2/authorize?client_id=' + clientId + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES');
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});
@@ -987,7 +987,12 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://jawbone.com/auth/oauth2/auth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=code&scope=' + appScope.join(" "), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://jawbone.com/auth/oauth2/auth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=code&scope=' + appScope.join(" "),
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
 
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
@@ -1202,7 +1207,12 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://www.linkedin.com/uas/oauth2/authorization?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&response_type=code&state=' + state, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://www.linkedin.com/uas/oauth2/authorization?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(" ") + '&response_type=code&state=' + state,
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
+
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               try {
@@ -1290,7 +1300,12 @@
               }
 
               var tokenSecret = parameterMap.oauth_token_secret;
-              var browserRef = window.cordova.InAppBrowser.open(baseUrl + '/oauth/authorize?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+              var browserRef = window.cordova.InAppBrowser.open(
+                  baseUrl + '/oauth/authorize?oauth_token=' + parameterMap.oauth_token,
+                  '_blank',
+                  'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+              );
 
               browserRef.addEventListener('loadstart', function(event) {
                 if ((event.url).indexOf("http://localhost/callback") === 0) {
@@ -1385,7 +1400,13 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://secure.meetup.com/oauth2/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://secure.meetup.com/oauth2/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token',
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
+
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});
@@ -1445,7 +1466,13 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open("http://auth.mercadolibre.com.ar/authorization?client_id=" + appId + "&redirect_uri=" + redirect_uri + "&response_type=token", "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
+
+          var browserRef = window.cordova.InAppBrowser.open(
+              "http://auth.mercadolibre.com.ar/authorization?client_id=" + appId + "&redirect_uri=" + redirect_uri + "&response_type=token",
+              "_blank",
+              "location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES"
+          );
+
           browserRef.addEventListener("loadstart", function(event) {
             if ((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});
@@ -1504,7 +1531,7 @@
       var clientSecret = (options.clientSecret)? options.clientSecret: null;
       var appScope = (options.appScope)? options.appScope: null;
       var state = (options.state)? options.state: Math.random().toString(36).substr(2, 5);
-      var inappbrowserOptions = (options.inappbrowserOptions)? options.inappbrowserOptions: 'location=no,clearsessioncache=yes,clearcache=yes';
+      var inappbrowserOptions = (options.inappbrowserOptions)? options.inappbrowserOptions: 'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES';
 
       if(window.cordova) {        
         if($cordovaOauthUtility.isInAppBrowserInstalled()) {
@@ -1603,7 +1630,13 @@
       var deferred = $q.defer();
       if (window.cordova) {
         if ($cordovaOauthUtility.isInAppBrowserInstalled()) {
-            var browserRef = window.cordova.InAppBrowser.open('http://www.odnoklassniki.ru/oauth/authorize?client_id=' + clientId + '&scope=' + appScope.join(",") + '&response_type=token&redirect_uri=http://localhost/callback' + '&layout=m', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+            var browserRef = window.cordova.InAppBrowser.open(
+                'http://www.odnoklassniki.ru/oauth/authorize?client_id=' + clientId + '&scope=' + appScope.join(",") + '&response_type=token&redirect_uri=http://localhost/callback' + '&layout=m',
+                '_blank',
+                'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+            );
+
             browserRef.addEventListener('loadstart', function (event) {
               if ((event.url).indexOf("http://localhost/callback") === 0) {
                 var callbackResponse = (event.url).split("#")[1];
@@ -1678,7 +1711,13 @@
           })
             .success(function(data) {
               var code = data.split("code=")[1];
-              var browserRef = window.cordova.InAppBrowser.open('https://getpocket.com/auth/authorize?request_token=' + code + '&redirect_uri=' + redirect_url, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+              var browserRef = window.cordova.InAppBrowser.open(
+                  'https://getpocket.com/auth/authorize?request_token=' + code + '&redirect_uri=' + redirect_url,
+                  '_blank',
+                  'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+              );
+
               browserRef.addEventListener('loadstart', function(event) {
                 if((event.url).indexOf(redirect_url) === 0) {
                   browserRef.removeEventListener("exit",function(event){});
@@ -1754,7 +1793,13 @@
                 redirect_uri = options.redirect_uri;
               }
             }
-            var browserRef = window.cordova.InAppBrowser.open('https://rally1.rallydev.com/login/oauth2/auth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+            var browserRef = window.cordova.InAppBrowser.open(
+                'https://rally1.rallydev.com/login/oauth2/auth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope + '&response_type=code',
+                '_blank',
+                'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+            );
+
             browserRef.addEventListener('loadstart', function(event) {
               if((event.url).indexOf("http://localhost/callback") === 0) {
                 var requestToken = (event.url).split("code=")[1];
@@ -1818,7 +1863,13 @@
                 redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://ssl.reddit.com/api/v1/authorize' + (compact ? '.compact' : '') + '?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&duration=permanent&state=ngcordovaoauth&scope=' + appScope.join(",") + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://ssl.reddit.com/api/v1/authorize' + (compact ? '.compact' : '') + '?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&duration=permanent&state=ngcordovaoauth&scope=' + appScope.join(",") + '&response_type=code',
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
+
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];
@@ -1887,7 +1938,13 @@
       var deferred = $q.defer();
       if(window.cordova) {
         if($cordovaOauthUtility.isInAppBrowserInstalled()) {
-          var browserRef = window.cordova.InAppBrowser.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
+
+          var browserRef = window.cordova.InAppBrowser.open(
+              getAuthorizeUrl(loginUrl, clientId, redirectUri),
+              "_blank",
+              "location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES"
+          );
+
           browserRef.addEventListener("loadstart", function(event) {
             if(startWith(event.url, redirectUri)) {
                 var oauthResponse = {};
@@ -1958,7 +2015,12 @@
             }
           }
 
-          var browserRef = window.cordova.InAppBrowser.open('https://slack.com/oauth/authorize' + '?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&state=ngcordovaoauth&scope=' + appScope.join(","), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://slack.com/oauth/authorize' + '?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&state=ngcordovaoauth&scope=' + appScope.join(","),
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
+
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];
@@ -2032,7 +2094,13 @@
               show_dialog = "&show_dialog=" + options.show_dialog;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://accounts.spotify.com/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=' + response_type + state + '&scope=' + appScope.join(" ") + show_dialog, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://accounts.spotify.com/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=' + response_type + state + '&scope=' + appScope.join(" ") + show_dialog,
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
+
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});
@@ -2098,7 +2166,13 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://www.strava.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(",") + '&response_type=code&approval_prompt=force', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://www.strava.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope.join(",") + '&response_type=code&approval_prompt=force',
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
+
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];
@@ -2162,7 +2236,13 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://connect.stripe.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope + '&response_type=code', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://connect.stripe.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&scope=' + appScope + '&response_type=code',
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
+
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf("http://localhost/callback") === 0) {
               var requestToken = (event.url).split("code=")[1];
@@ -2226,7 +2306,12 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://trakt.tv/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=code&state=' + state, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://trakt.tv/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=code&state=' + state,
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
+
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               try {
@@ -2321,8 +2406,14 @@
                 if(parameterMap.hasOwnProperty("oauth_token") === false) {
                   deferred.reject("Oauth request token was not received");
                 }
-                var browserRef = window.cordova.InAppBrowser.open('https://api.twitter.com/oauth/authenticate?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
-                browserRef.addEventListener('loadstart', function(event) {
+
+                var browserRef = window.cordova.InAppBrowser.open(
+                    'https://api.twitter.com/oauth/authenticate?oauth_token=' + parameterMap.oauth_token,
+                    '_blank',
+                    'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+                );
+
+                  browserRef.addEventListener('loadstart', function(event) {
                   if((event.url).indexOf(redirect_uri) === 0) {
                     var callbackResponse = (event.url).split("?")[1];
                     var responseParameters = (callbackResponse).split("&");
@@ -2420,7 +2511,12 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://login.uber.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(" "), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://login.uber.com/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(" "),
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
+
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});
@@ -2483,7 +2579,13 @@
               redirect_url = options.redirect_url;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://untappd.com/oauth/authenticate/?client_id=' + clientId + '&redirect_url=' + redirect_url + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://untappd.com/oauth/authenticate/?client_id=' + clientId + '&redirect_url=' + redirect_url + '&response_type=token',
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes'
+          );
+
           browserRef.addEventListener('loadstart', function (event) {
             if ((event.url).indexOf(redirect_url) === 0) {
               browserRef.removeEventListener("exit",function(event){});
@@ -2550,7 +2652,13 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://api.venmo.com/v1/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(" "), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://api.venmo.com/v1/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token&scope=' + appScope.join(" "),
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes'
+          );
+
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});
@@ -2609,7 +2717,13 @@
       var deferred = $q.defer();
       if(window.cordova) {
         if($cordovaOauthUtility.isInAppBrowserInstalled()) {
-          var browserRef = window.cordova.InAppBrowser.open('https://oauth.vk.com/authorize?client_id=' + clientId + '&redirect_uri=http://oauth.vk.com/blank.html&response_type=token&scope=' + appScope.join(",") + '&display=touch&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://oauth.vk.com/authorize?client_id=' + clientId + '&redirect_uri=http://oauth.vk.com/blank.html&response_type=token&scope=' + appScope.join(",") + '&display=touch&response_type=token',
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
+
           browserRef.addEventListener('loadstart', function(event) {
             var tmp = (event.url).split("#");
             if (tmp[0] == 'https://oauth.vk.com/blank.html' || tmp[0] == 'http://oauth.vk.com/blank.html') {
@@ -2687,7 +2801,12 @@
             }
           }
 
-          var browserRef = window.cordova.InAppBrowser.open(flowUrl, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open(
+              flowUrl,
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
+
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];
@@ -2750,7 +2869,13 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://login.live.com/oauth20_authorize.srf?client_id=' + clientId + "&scope=" + appScope.join(",") + '&response_type=token&display=touch' + '&redirect_uri=' + redirect_uri, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://login.live.com/oauth20_authorize.srf?client_id=' + clientId + "&scope=" + appScope.join(",") + '&response_type=token&display=touch' + '&redirect_uri=' + redirect_uri,
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
+
           browserRef.addEventListener('loadstart', function (event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit", function (event) { });
@@ -2839,7 +2964,12 @@
                 oauthObject.oauth_signature = signatureObj.signature;
 
                 var authorizeParameters = $cordovaOauthUtility.generateUrlParameters(oauthObject);
-                var browserRef = window.cordova.InAppBrowser.open(authorizeUrlBase + '?' + authorizeParameters, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+                var browserRef = window.cordova.InAppBrowser.open(
+                    authorizeUrlBase + '?' + authorizeParameters,
+                    '_blank',
+                    'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+                );
 
                 // STEP 3: User Data Access token
                 browserRef.addEventListener('loadstart', function(event) {
@@ -2958,8 +3088,14 @@
                   deferred.reject('Oauth request token was not received');
                 }
                 var oauthTokenSecret = parameterMap.oauth_token_secret;
-                var browserRef = window.cordova.InAppBrowser.open('https://api.xing.com/v1/authorize?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
-                browserRef.addEventListener('loadstart', function(event) {
+
+                var browserRef = window.cordova.InAppBrowser.open(
+                    'https://api.xing.com/v1/authorize?oauth_token=' + parameterMap.oauth_token,
+                    '_blank',
+                    'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+                );
+
+                  browserRef.addEventListener('loadstart', function(event) {
                   if((event.url).indexOf(redirect_uri) === 0) {
                     var callbackResponse = (event.url).split('?')[1];
                     var responseParameters = (callbackResponse).split('&');
@@ -3065,7 +3201,7 @@
           var browserRef = window.cordova.InAppBrowser.open(
               providerUrl, 
               '_blank', 
-              'location=no,clearsessioncache=yes,clearcache=yes'
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
           );
 
           browserRef.addEventListener("loadstart", function(event) {
@@ -3134,7 +3270,13 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://www.yammer.com/dialog/oauth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://www.yammer.com/dialog/oauth?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token',
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
+
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});
