@@ -18,7 +18,13 @@
       var deferred = $q.defer();
       if(window.cordova) {
         if($cordovaOauthUtility.isInAppBrowserInstalled()) {
-          var browserRef = window.cordova.InAppBrowser.open('https://oauth.vk.com/authorize?client_id=' + clientId + '&redirect_uri=http://oauth.vk.com/blank.html&response_type=token&scope=' + appScope.join(",") + '&display=touch&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://oauth.vk.com/authorize?client_id=' + clientId + '&redirect_uri=http://oauth.vk.com/blank.html&response_type=token&scope=' + appScope.join(",") + '&display=touch&response_type=token',
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
+
           browserRef.addEventListener('loadstart', function(event) {
             var tmp = (event.url).split("#");
             if (tmp[0] == 'https://oauth.vk.com/blank.html' || tmp[0] == 'http://oauth.vk.com/blank.html') {

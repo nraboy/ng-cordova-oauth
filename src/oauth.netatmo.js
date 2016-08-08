@@ -23,7 +23,7 @@
       var clientSecret = (options.clientSecret)? options.clientSecret: null;
       var appScope = (options.appScope)? options.appScope: null;
       var state = (options.state)? options.state: Math.random().toString(36).substr(2, 5);
-      var inappbrowserOptions = (options.inappbrowserOptions)? options.inappbrowserOptions: 'location=no,clearsessioncache=yes,clearcache=yes';
+      var inappbrowserOptions = (options.inappbrowserOptions)? options.inappbrowserOptions: 'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES';
 
       if(window.cordova) {        
         if($cordovaOauthUtility.isInAppBrowserInstalled()) {

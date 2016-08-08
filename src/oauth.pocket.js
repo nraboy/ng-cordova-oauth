@@ -37,7 +37,13 @@
           })
             .success(function(data) {
               var code = data.split("code=")[1];
-              var browserRef = window.cordova.InAppBrowser.open('https://getpocket.com/auth/authorize?request_token=' + code + '&redirect_uri=' + redirect_url, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+              var browserRef = window.cordova.InAppBrowser.open(
+                  'https://getpocket.com/auth/authorize?request_token=' + code + '&redirect_uri=' + redirect_url,
+                  '_blank',
+                  'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+              );
+
               browserRef.addEventListener('loadstart', function(event) {
                 if((event.url).indexOf(redirect_url) === 0) {
                   browserRef.removeEventListener("exit",function(event){});
