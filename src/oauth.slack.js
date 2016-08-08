@@ -27,7 +27,12 @@
             }
           }
 
-          var browserRef = window.cordova.InAppBrowser.open('https://slack.com/oauth/authorize' + '?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&state=ngcordovaoauth&scope=' + appScope.join(","), '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open(
+              'https://slack.com/oauth/authorize' + '?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&state=ngcordovaoauth&scope=' + appScope.join(","),
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
+
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];

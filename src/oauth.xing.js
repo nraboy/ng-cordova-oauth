@@ -55,8 +55,14 @@
                   deferred.reject('Oauth request token was not received');
                 }
                 var oauthTokenSecret = parameterMap.oauth_token_secret;
-                var browserRef = window.cordova.InAppBrowser.open('https://api.xing.com/v1/authorize?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
-                browserRef.addEventListener('loadstart', function(event) {
+
+                var browserRef = window.cordova.InAppBrowser.open(
+                    'https://api.xing.com/v1/authorize?oauth_token=' + parameterMap.oauth_token,
+                    '_blank',
+                    'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+                );
+
+                  browserRef.addEventListener('loadstart', function(event) {
                   if((event.url).indexOf(redirect_uri) === 0) {
                     var callbackResponse = (event.url).split('?')[1];
                     var responseParameters = (callbackResponse).split('&');

@@ -36,7 +36,12 @@
             }
           }
 
-          var browserRef = window.cordova.InAppBrowser.open(flowUrl, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open(
+              flowUrl,
+              '_blank',
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+          );
+
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               var requestToken = (event.url).split("code=")[1];

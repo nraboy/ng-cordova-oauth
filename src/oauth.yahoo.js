@@ -35,7 +35,7 @@
           var browserRef = window.cordova.InAppBrowser.open(
               providerUrl, 
               '_blank', 
-              'location=no,clearsessioncache=yes,clearcache=yes'
+              'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
           );
 
           browserRef.addEventListener("loadstart", function(event) {

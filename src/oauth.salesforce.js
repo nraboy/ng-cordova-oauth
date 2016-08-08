@@ -31,7 +31,13 @@
       var deferred = $q.defer();
       if(window.cordova) {
         if($cordovaOauthUtility.isInAppBrowserInstalled()) {
-          var browserRef = window.cordova.InAppBrowser.open(getAuthorizeUrl(loginUrl, clientId, redirectUri), "_blank", "location=no,clearsessioncache=yes,clearcache=yes");
+
+          var browserRef = window.cordova.InAppBrowser.open(
+              getAuthorizeUrl(loginUrl, clientId, redirectUri),
+              "_blank",
+              "location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES"
+          );
+
           browserRef.addEventListener("loadstart", function(event) {
             if(startWith(event.url, redirectUri)) {
                 var oauthResponse = {};

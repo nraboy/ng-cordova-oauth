@@ -24,7 +24,7 @@
               redirect_uri = options.redirect_uri;
             }
           }
-          var browserRef = window.cordova.InAppBrowser.open('https://api.envato.com/authorization?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var browserRef = window.cordova.InAppBrowser.open('https://api.envato.com/authorization?client_id=' + clientId + '&redirect_uri=' + redirect_uri + '&response_type=token', '_blank', 'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES');
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
               browserRef.removeEventListener("exit",function(event){});

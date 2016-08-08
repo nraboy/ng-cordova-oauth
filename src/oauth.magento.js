@@ -46,7 +46,12 @@
               }
 
               var tokenSecret = parameterMap.oauth_token_secret;
-              var browserRef = window.cordova.InAppBrowser.open(baseUrl + '/oauth/authorize?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+
+              var browserRef = window.cordova.InAppBrowser.open(
+                  baseUrl + '/oauth/authorize?oauth_token=' + parameterMap.oauth_token,
+                  '_blank',
+                  'location=no,clearsessioncache=yes,clearcache=yes,allowinlinemediaplayback=YES'
+              );
 
               browserRef.addEventListener('loadstart', function(event) {
                 if ((event.url).indexOf("http://localhost/callback") === 0) {
