@@ -52,6 +52,7 @@
  *    Envato
  *    Slack
  *    Jawbone
+ *    Fitbit
  *    Untappd
  *    Xing
  *    Trakt.tv
