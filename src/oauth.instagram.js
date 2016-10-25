@@ -26,6 +26,7 @@
         if($cordovaOauthUtility.isInAppBrowserInstalled()) {
           var redirect_uri = "http://localhost/callback";
           var response_type = "token";
+          var instagramUrl = 'https://www.instagram.com/';
           if(options !== undefined) {
             if(options.hasOwnProperty("redirect_uri")) {
               redirect_uri = options.redirect_uri;
@@ -37,10 +38,11 @@
 
           var scope = '';
           if (appScope && appScope.length > 0) {
-            scope = '&scope' + appScope.join('+');
+            scope = '&scope=' + appScope.join('+');
           }
 
-          var browserRef = window.cordova.InAppBrowser.open('https://api.instagram.com/oauth/authorize/?client_id=' + clientId + '&redirect_uri=' + redirect_uri + scope + '&response_type='+response_type, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+          var url='https://api.instagram.com/oauth/authorize/?client_id=' + clientId + scope + '&response_type=' + response_type + '&redirect_uri=' + redirect_uri;
+          var browserRef = window.cordova.InAppBrowser.open(url, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
           browserRef.addEventListener('loadstart', function(event) {
             if((event.url).indexOf(redirect_uri) === 0) {
                 browserRef.removeEventListener("exit",function(event){});
@@ -54,7 +56,11 @@
                 } else {
                   deferred.reject("Problem authenticating");
                 }
-            }
+            } else if ((event.url)===instagramUrl) {
+                browserRef.executeScript({
+                    code: "window.location = '"+url+"';"
+                });
+             }
           });
           browserRef.addEventListener('exit', function(event) {
               deferred.reject("The sign in flow was canceled");
