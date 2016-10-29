@@ -25,6 +25,7 @@
     'oauth.magento',
     'oauth.vkontakte',
     'oauth.odnoklassniki',
+    "oauth.yandex",
     'oauth.imgur',
     'oauth.spotify',
     'oauth.uber',
@@ -51,7 +52,7 @@
     $q, $http, $cordovaOauthUtility, $ngCordovaAzureAD, $ngCordovaAdfs, $ngCordovaDropbox, $ngCordovaDigitalOcean,
     $ngCordovaGoogle, $ngCordovaGithub, $ngCordovaFacebook, $ngCordovaLinkedin, $ngCordovaInstagram, $ngCordovaBox, $ngCordovaReddit, $ngCordovaSlack,
     $ngCordovaTwitter, $ngCordovaMeetup, $ngCordovaSalesforce, $ngCordovaStrava, $ngCordovaWithings, $ngCordovaFoursquare, $ngCordovaMagento,
-    $ngCordovaVkontakte, $ngCordovaOdnoklassniki, $ngCordovaImgur, $ngCordovaSpotify, $ngCordovaUber, $ngCordovaWindowslive, $ngCordovaYammer,
+    $ngCordovaVkontakte, $ngCordovaOdnoklassniki, $ngCordovaYandex, $ngCordovaImgur, $ngCordovaSpotify, $ngCordovaUber, $ngCordovaWindowslive, $ngCordovaYammer,
     $ngCordovaVenmo, $ngCordovaStripe, $ngCordovaRally, $ngCordovaFamilySearch, $ngCordovaEnvato, $ngCordovaWeibo, $ngCordovaJawbone, $ngCordovaUntappd,
     $ngCordovaDribble, $ngCordovaPocket, $ngCordovaMercadolibre, $ngCordovaXing, $ngCordovaNetatmo, $ngCordovaTraktTv, $ngCordovaYahoo) {
 
@@ -77,6 +78,7 @@
       magento: $ngCordovaMagento.signin,
       vkontakte: $ngCordovaVkontakte.signin,
       odnoklassniki: $ngCordovaOdnoklassniki.signin,
+      yandex: $ngCordovaYandex.signin,
       imgur: $ngCordovaImgur.signin,
       spotify: $ngCordovaSpotify.signin,
       uber: $ngCordovaUber.signin,
@@ -123,6 +125,7 @@
     '$ngCordovaMagento',
     '$ngCordovaVkontakte',
     '$ngCordovaOdnoklassniki',
+    '$ngCordovaYandex',
     '$ngCordovaImgur',
     '$ngCordovaSpotify',
     '$ngCordovaUber',
