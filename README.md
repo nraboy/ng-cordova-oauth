@@ -76,6 +76,9 @@ Each web service API acts independently in this library.  However, when configur
     $cordovaOauth.foursquare(string clientId, object options);
     $cordovaOauth.magento(string baseUrl, string clientId, string clientSecret)
     $cordovaOauth.vkontakte(string clientId, array appScope)
+    $cordovaOauth.odnoklassniki(string clientId, array appScope)
+    $cordovaOauth.yandex(string clientId, object options) // defaults options={force_confirm: 'yes', browserWindow: 'location=no'}; error is a object, see below
+    $cordovaOauth.mailru(string clientId, array appScope, object options) // defaults options={display: 'mobile', browserWindow: 'location=no'}; error is a object, see below
     $cordovaOauth.adfs(string clientId, string adfsServer, string relyingPartyId)
     $cordovaOauth.imgur(string clientId, object options)
     $cordovaOauth.spotify(string clientId, array appScope, object options)
@@ -145,7 +148,7 @@ angular.module("oauth.providers", [
   'oauth.linkedin', 'oauth.instagram', 'oauth.box', 'oauth.reddit', 'oauth.slack',
   'oauth.twitter', 'oauth.meetup', 'oauth.salesforce', 'oauth.strava',
   'oauth.withings', 'oauth.foursquare', 'oauth.magento', 'oauth.vkontakte',
-  'oauth.odnoklassniki', 'oauth.imgur', 'oauth.spotify', 'oauth.uber',
+  'oauth.odnoklassniki', 'oauth.yandex', 'oauth.mailru', 'oauth.imgur', 'oauth.spotify', 'oauth.uber',
   'oauth.windowslive', 'oauth.yammer', 'oauth.venmo', 'oauth.stripe', 'oauth.rally',
   'oauth.familySearch', 'oauth.envato', 'oauth.weibo', 'oauth.jawbone', 'oauth.untappd',
   'oauth.dribble', '<YOUR PROVIDER MODULE HERE>']).factory("$cordovaOauth", cordovaOauth);
@@ -154,7 +157,7 @@ function cordovaOauth(
     $q, $http, $cordovaOauthUtility, $azureAD, $adfs, $dropbox, $digitalOcean,
     $google, $github, $facebook, $linkedin, $instagram, $box, $reddit, $slack,
     $twitter, $meetup, $salesforce, $strava, $withings, $foursquare, $magento
-    $vkontakte, $odnoklassniki, $imgur, $spotify, $uber, $windowslive, $yammer,
+    $vkontakte, $odnoklassniki, $yandex, $mailru, $imgur, $spotify, $uber, $windowslive, $yammer,
     $venmo, $stripe, $rally, $familySearch, $envato, $weibo, $jawbone, $untappd,
     $dribble, <YOUR FACTORY NAME>) {
 
@@ -169,7 +172,7 @@ $cordovaOauth.$inject = [
   '$digitalOcean', '$google', '$github', '$facebook', '$linkedin',
   '$instagram', '$box', '$reddit', '$slack', '$twitter' '$meetup', '$salesforce',
   '$strava', '$withings', '$foursquare', '$magento', '$vkontakte',
-  '$odnoklassniki', '$imgur', '$spotify', '$uber', '$windowslive', '$yammer',
+  '$odnoklassniki', '$yandex', '$mailru', '$imgur', '$spotify', '$uber', '$windowslive', '$yammer',
   '$venmo', '$stripe', '$rally', '$familySearch', '$envato', '$weibo',
   '$jawbone', '$untappd', '$dribble', '<YOUR FACTORY NAME>'
 ];
