@@ -61,7 +61,6 @@ Each web service API acts independently in this library.  However, when configur
     $cordovaOauth.azureAD(string clientId, string tenantId, string resourceURL);
     $cordovaOauth.dropbox(string appKey, object options);
     $cordovaOauth.digitalOcean(string clientId, string clientSecret, object options);
-    $cordovaOauth.google(string clientId, array appScope, object options);
     $cordovaOauth.github(string clientId, string clientSecret, array appScope, object options);
     $cordovaOauth.facebook(string clientId, array appScope, object options);
     $cordovaOauth.linkedin(string clientId, string clientSecret, array appScope, string state);
@@ -114,6 +113,14 @@ As of Apache Cordova 5.0.0, the [whitelist plugin](https://www.thepolyglotdevelo
 ### Important Note About Testing
 
 This library will **NOT** work with a web browser, ionic serve, ionic live-reload, or ionic view.  It **MUST** be used via installing to a device or simulator.
+
+### Important Note About Google
+
+Google, as of October 2016, has started blocking requests from web views commonly found in hybrid applications.  For this reason, support for Google has been removed from this library.
+
+More information can be found at:
+
+[https://developers.googleblog.com/2016/08/modernizing-oauth-interactions-in-native-apps.html](https://developers.googleblog.com/2016/08/modernizing-oauth-interactions-in-native-apps.html)
 
 ## Content-Security-Policy
 
