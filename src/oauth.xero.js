@@ -29,46 +29,52 @@
                         }
 
                         if(typeof jsSHA !== "undefined") {
-
+                            
                             var oauthObject = {
                                 oauth_consumer_key: clientId,
                                 oauth_nonce: $cordovaOauthUtility.createNonce(10),
-                                oauth_signature_method: "HMAC-SHA1",
+                                oauth_signature_method: 'HMAC-SHA1',
                                 oauth_timestamp: Math.round((new Date()).getTime() / 1000.0),
-                                oauth_version: "1.0"
+                                oauth_version: '1.0'
                             };
-
-                            var signatureObj = $cordovaOauthUtility.createSignature("GET", "https://api.xero.com/oauth/RequestToken", oauthObject,  { oauth_callback: redirect_uri }, clientSecret);
-
+                            
+                            // Generate Signature
+                            var signatureObj = $cordovaOauthUtility.createSignature('GET', 'https://api.xero.com/oauth/RequestToken', oauthObject,  { oauth_callback: redirect_uri }, clientSecret);
+                            
+                            // RequestToken Request
                             $http({
-                                method: "get",
-                                url: 'https://api.xero.com/oauth/RequestToken?oauth_consumer_key=' + clientId + '&oauth_nonce=' + oauthObject.oauth_nonce + '&oauth_signature_method=HMAC-SHA1&oauth_timestamp=' + oauthObject.oauth_timestamp + '&oauth_version=1.0&oauth_signature=' + signatureObj.signature + '&oauth_callback=' + encodeURIComponent(redirect_uri)
+                                method: 'get',
+                                url: 'https://api.xero.com/oauth/RequestToken?oauth_consumer_key=' + clientId + '&oauth_nonce=' + oauthObject.oauth_nonce + '&oauth_signature_method=HMAC-SHA1&oauth_timestamp=' + oauthObject.oauth_timestamp + '&oauth_version=1.0&oauth_signature=' + signatureObj.signature + '&oauth_callback=' + encodeURIComponent(redirect_uri),
                             }).then(function(requestTokenResult) {
-                                var requestTokenParameters = (requestTokenResult.data).split("&");
-                                var parameterMap = {};
 
+                                var parameterMap = {};
+                                var requestTokenParameters = (requestTokenResult.data).split('&');
+                                
                                 for(var i = 0; i < requestTokenParameters.length; i++) {
-                                    parameterMap[requestTokenParameters[i].split("=")[0]] = requestTokenParameters[i].split("=")[1];
+                                    parameterMap[requestTokenParameters[i].split('=')[0]] = requestTokenParameters[i].split('=')[1];
                                 }
 
                                 if(parameterMap.hasOwnProperty("oauth_token") === false) {
                                     deferred.reject("Oauth request token was not received");
                                 }
 
-                                var browserRef = window.cordova.InAppBrowser.open('https://api.xero.com/oauth/Authorize?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                                var oauthTokenSecret = parameterMap.oauth_token_secret;
 
+                                // Open browser 
+                                var browserRef = window.cordova.InAppBrowser.open('https://api.xero.com/oauth/Authorize?oauth_token=' + parameterMap.oauth_token, '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
+                                
                                 browserRef.addEventListener('loadstart', function(event) {
                                     if((event.url).indexOf(redirect_uri) === 0) {
                                         var callbackResponse = (event.url).split("?")[1];
                                         var responseParameters = (callbackResponse).split("&");
-                                        var parameterMap = {};
+                                        var parameterMap = {}; 
 
                                         for(var i = 0; i < responseParameters.length; i++) {
-                                            parameterMap[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
+                                            parameterMap[responseParameters[i].split('=')[0]] = responseParameters[i].split('=')[1];
                                         }
 
-                                        if(parameterMap.hasOwnProperty("oauth_verifier") === false) {
-                                            deferred.reject("Browser authentication failed to complete.  No oauth_verifier was returned");
+                                        if(parameterMap.hasOwnProperty('oauth_verifier') === false) {
+                                            deferred.reject('Browser authentication failed to complete.  No oauth_verifier was returned');
                                         }
 
                                         delete oauthObject.oauth_signature;
@@ -76,40 +82,49 @@
                                         oauthObject.oauth_verifier = parameterMap.oauth_verifier;
                                         oauthObject.oauth_nonce = $cordovaOauthUtility.createNonce(10);
 
-console.log('Response Params: ', parameterMap);
-console.log('Access Token Request oauthObject: ', oauthObject);
-
-                                        var signatureObj = $cordovaOauthUtility.createSignature("GET", "https://api.xero.com/oauth/AccessToken", oauthObject,  { "oauth_verifier": oauthObject.oauth_verifier }, clientSecret);
-
-console.log('Signature: ', signatureObj);
+                                        var signatureObj = $cordovaOauthUtility.createSignature('GET', 'https://api.xero.com/oauth/AccessToken', oauthObject,  { }, clientSecret, oauthTokenSecret);
+                                        oauthObject.oauth_signature = signatureObj.signature;
+                                        
 
                                         $http({
                                             method: "get",
-                                            url: "https://api.xero.com/oauth/AccessToken?oauth_consumer_key=" + clientId + "&oauth_nonce=" + oauthObject.oauth_nonce + "&oauth_signature_method=HMAC-SHA1&oauth_timestamp=" + oauthObject.oauth_timestamp + "&oauth_version=1.0&oauth_token=" + oauthObject.oauth_token + "&oauth_verifier=" + oauthObject.oauth_verifier + "&oauth_signature=" + signatureObj.signature
-                                        }).then(function(response) {
-                                            console.log('Response: ', response);
-                                        }).catch(function(error) {
-                                            console.log('Error: ', error);
-                                        });
+                                            url: 'https://api.xero.com/oauth/AccessToken?oauth_consumer_key=' + oauthObject.oauth_consumer_key + '&oauth_nonce=' + oauthObject.oauth_nonce + '&oauth_signature_method=' + oauthObject.oauth_signature_method + '&oauth_timestamp=' + oauthObject.oauth_timestamp + '&oauth_token=' + oauthObject.oauth_token + '&oauth_verifier=' + oauthObject.oauth_verifier + '&oauth_version=' + oauthObject.oauth_version + '&oauth_signature=' + oauthObject.oauth_signature,
+                                        }).then(function(result) {
+                                            var accessTokenParameters = result.split('&');
+                                            var parameterMap = {};
 
+                                            for(var i = 0; i < accessTokenParameters.length; i++) {
+                                                parameterMap[accessTokenParameters[i].split('=')[0]] = accessTokenParameters[i].split('=')[1];
+                                            }
+
+                                            if(parameterMap.hasOwnProperty('oauth_token_secret') === false) {
+                                                deferred.reject('Oauth access token was not received');
+                                            }
+
+                                            deferred.resolve(parameterMap);
+
+                                        }).catch(function(err) {
+                                            deferred.reject(error);
+                                        }).finally(function() {
+                                            setTimeout(function() {
+                                                browserRef.close();
+                                            }, 10);
+                                        });
                                     }
                                 });
 
-                            }).catch(function(error) {
-                                console.log('REQUEST TOKEN REQUEST ERROR', error);
-                                deferred.reject(error);
+                                browserRef.addEventListener('exit', function(event) {
+                                    deferred.reject('The sign in flow was canceled');
+                                });
+
+                            }).catch(function(err) {
+                                deferred.reject(err);
                             });
+
                         } else {
                             deferred.reject("Missing jsSHA JavaScript library");
                         }
 
-                        //var browserRef = window.cordova.InAppBrowser.open('https://api.xero.com/oauth/RequestToken?oauth_consumer_key=' + clientId + '&oauth_callback=' + redirect_uri + '_blank', 'location=no,clearsessioncache=yes,clearcache=yes');
-
-
-                        //
-                        // browserRef.addEventListener('exit', function(event) {
-                        //     deferred.reject("The sign in flow was canceled");
-                        // });
                     } else {
                         deferred.reject("Could not find InAppBrowser plugin");
                     }
