@@ -90,7 +90,7 @@
                                             method: "get",
                                             url: 'https://api.xero.com/oauth/AccessToken?oauth_consumer_key=' + oauthObject.oauth_consumer_key + '&oauth_nonce=' + oauthObject.oauth_nonce + '&oauth_signature_method=' + oauthObject.oauth_signature_method + '&oauth_timestamp=' + oauthObject.oauth_timestamp + '&oauth_token=' + oauthObject.oauth_token + '&oauth_verifier=' + oauthObject.oauth_verifier + '&oauth_version=' + oauthObject.oauth_version + '&oauth_signature=' + oauthObject.oauth_signature,
                                         }).then(function(result) {
-                                            var accessTokenParameters = result.split('&');
+                                            var accessTokenParameters = result.data.split('&');
                                             var parameterMap = {};
 
                                             for(var i = 0; i < accessTokenParameters.length; i++) {
