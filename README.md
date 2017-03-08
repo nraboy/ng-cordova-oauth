@@ -101,6 +101,7 @@ Each web service API acts independently in this library.  However, when configur
     $cordovaOauth.fiveHundredsPx(string sdkKey, object options);
     $cordovaOauth.netatmo(object options);
     $cordovaOauth.trakttv(string clientId, string clientSecret, string state);
+    $cordovaOauth.xero(string clientId, string clientSecret, object options)
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
