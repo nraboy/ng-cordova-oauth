@@ -8,6 +8,13 @@ ngCordovaOauth is an AngularJS Apache Cordova Oauth library.  The purpose of thi
 If you are using Angular 2, you should check out [ng2-cordova-oauth](https://github.com/nraboy/ng2-cordova-oauth) instead.
 
 
+## Donations
+
+If you found this project useful, please consider donating some Bitcoin to the following address:
+
+[1M8SKTepmgA2KAUSZc7LpXN1owaky1DjNM](bitcoin:1M8SKTepmgA2KAUSZc7LpXN1owaky1DjNM?amount=0.008)
+
+
 ## Requirements
 
 * Apache Cordova 3.5+
