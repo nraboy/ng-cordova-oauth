@@ -39,6 +39,8 @@
  *    Magento
  *    vkontakte
  *    Odnoklassniki
+ *    Yandex
+ *    Mail.ru
  *    ADFS
  *    Imgur
  *    Spotify
