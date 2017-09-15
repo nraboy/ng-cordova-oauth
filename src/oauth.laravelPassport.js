@@ -1,11 +1,11 @@
 (function() {
   'use strict';
 
-  angular.module('oauth.passport', ['oauth.utils'])
-    .factory('$ngCordovaPassport', passport);
+  angular.module('oauth.laravelPassport', ['oauth.utils'])
+    .factory('$ngCordovaLaravelPassport', laravelPassport);
 
-  function passport($q, $http, $cordovaOauthUtility) {
-    return { signin: oauthPassport };
+  function laravelPassport($q, $http, $cordovaOauthUtility) {
+    return { signin: oauthLaravelPassport };
 
     /*
      * Sign into the Laravel Passport service
@@ -15,7 +15,7 @@
      * @param    object options
      * @return   promise
      */
-    function oauthPassport(clientId, appScope, options) {
+    function oauthLaravelPassport(clientId, appScope, options) {
       var deferred = $q.defer();
       if(window.cordova) {
         if($cordovaOauthUtility.isInAppBrowserInstalled()) {
@@ -65,5 +65,5 @@
       return deferred.promise;
     }
   }
-  passport.$inject = ['$q', '$http', '$cordovaOauthUtility'];
+  laravelPassport.$inject = ['$q', '$http', '$cordovaOauthUtility'];
 })();
