@@ -101,6 +101,7 @@ Each web service API acts independently in this library.  However, when configur
     $cordovaOauth.fiveHundredsPx(string sdkKey, object options);
     $cordovaOauth.netatmo(object options);
     $cordovaOauth.trakttv(string clientId, string clientSecret, string state);
+    $cordovaOauth.passport(clientId, appScope, options);
 
 Each API call returns a promise.  The success callback will provide a response object and the error
 callback will return a string.
@@ -116,6 +117,17 @@ $cordovaOauth.google("CLIENT_ID_HERE", ["email"]).then(function(result) {
 To authenticate with Twitter, Withings, Magento and Xing an additional library is required.  These services require HMAC-SHA1 signatures in their Oauth implementation.  Including the sha1.js component of jsSHA will accomplish this task.
 
 As of Apache Cordova 5.0.0, the [whitelist plugin](https://www.thepolyglotdeveloper.com/2015/05/whitelist-external-resources-for-use-in-ionic-framework/) must be used in order to reach external web services.
+
+To Authenticate with the Passport plugin using your own Auth server with [Laravel Passport](https://laravel.com/docs/master/passport) you must pass in your site url and client secret for the client you are using
+
+```javascript
+// Notice in the target_url there is no trailing slash
+$cordovaOauth.passport('CLIENT_ID_HERE',['YOUR_SCOPES_HERE'], {client_secret: 'YOU_CLIENT_SECRET',target_url: 'http(s)://your-site.com'}).then(function(result) {
+  // Handle your auth here
+}, function(error) {
+  // Handle your error here
+});
+```
 
 ### Important Note About Testing
 
