@@ -519,12 +519,16 @@
       if(window.cordova) {
         if($cordovaOauthUtility.isInAppBrowserInstalled()) {
           var redirect_uri = "http://localhost/callback";
+          var api_version = "3.0";
           if(options !== undefined) {
             if(options.hasOwnProperty("redirect_uri")) {
               redirect_uri = options.redirect_uri;
             }
+            if(options.hasOwnProperty("api_version")) {
+              api_version = options.api_version;
+            }
           }
-          var flowUrl = "https://www.facebook.com/v2.6/dialog/oauth?client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&response_type=token&scope=" + appScope.join(",");
+          var flowUrl = "https://www.facebook.com/v" + api_version + "/dialog/oauth?client_id=" + clientId + "&redirect_uri=" + redirect_uri + "&response_type=token&scope=" + appScope.join(",");
           if(options !== undefined && options.hasOwnProperty("auth_type")) {
             flowUrl += "&auth_type=" + options.auth_type;
           }
