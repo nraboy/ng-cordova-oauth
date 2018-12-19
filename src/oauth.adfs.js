@@ -13,9 +13,10 @@
      * @param    string clientId (client registered in ADFS, with redirect_uri configured to: http://localhost/callback)
      * @param  string adfsServer (url of the ADFS Server)
      * @param  string relyingPartyId (url of the Relying Party (resource relying on ADFS for authentication) configured in ADFS)
+     * @param  string clientSecret (Optional. For ADFS4, a client secret may be needed. This parameter is not ued for ADFS3)
      * @return   promise
     */
-    function oauthAdfs(clientId, adfsServer, relyingPartyId) {
+    function oauthAdfs(clientId, adfsServer, relyingPartyId, clientSecret) {
       var deferred = $q.defer();
       if(window.cordova) {
         if($cordovaOauthUtility.isInAppBrowserInstalled()) {
@@ -24,7 +25,8 @@
           browserRef.addEventListener("loadstart", function(event) {
             if((event.url).indexOf('http://localhost/callback') === 0) {
               var requestToken = (event.url).split("code=")[1];
-              $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, url: adfsServer + "/adfs/oauth2/token", data: "client_id=" + clientId + "&code=" + requestToken + "&redirect_uri=http://localhost/callback&grant_type=authorization_code"  })
+              var clientSecretData = clientSecret ? "&client_secret=" + clientSecret : "";
+              $http({method: "post", headers: {'Content-Type': 'application/x-www-form-urlencoded'}, url: adfsServer + "/adfs/oauth2/token", data: "client_id=" + clientId + clientSecretData + "&code=" + requestToken + "&redirect_uri=http://localhost/callback&grant_type=authorization_code"  })
                 .success(function(data) {
                   deferred.resolve(data);
                 })
